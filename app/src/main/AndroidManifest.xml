@@ -8,13 +8,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SeoulWalk">
-        <activity
-            android:name=".ActivityCharts"/>
-        <activity
-            android:name=".ActivityMypage"/>
-        <activity
-            android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".ActivityLogin"></activity>
+        <activity android:name=".ActivityJoin" />
+        <activity android:name=".ActivityCharts" />
+        <activity android:name=".ActivityMypage" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
