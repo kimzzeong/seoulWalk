@@ -7,24 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityCharts extends AppCompatActivity {
 
-    Button charts_btn, btn, home_btn;
+    Button home_btn, btn, charts_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_charts);
 
         charts_btn = findViewById(R.id.charts_btn);
         home_btn = findViewById(R.id.home_btn);
         btn = findViewById(R.id.btn);
 
-        //차트 버튼 클릭 시 차트 액티비티로 이동
-        charts_btn.setOnClickListener(new View.OnClickListener() {
+
+        //홈 버튼 클릭 시 차트 액티비티로 이동
+        home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityCharts.class);
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -40,12 +41,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        home_btn.setOnClickListener(new View.OnClickListener() {
+        charts_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-
     }
 }
