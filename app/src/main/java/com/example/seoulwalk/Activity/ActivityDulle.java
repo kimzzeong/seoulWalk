@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.adapter.Dulle1Adapter;
@@ -45,6 +46,25 @@ public class ActivityDulle extends AppCompatActivity {
         dulle1.setAdapter(dulle1Adapter);
         Dulle2Adapter dulle2Adapter = new Dulle2Adapter(list2);
         dulle2.setAdapter(dulle2Adapter);
+
+        dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                startActivity(intent);
+            }
+        });
+
+
+        dulle2Adapter.setOnItemClickListener(new Dulle2Adapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                //Toast.makeText(getApplicationContext(),"click2 : "+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                startActivity(intent);
+            }
+        });
 
 
         dulle_btn = findViewById(R.id.dulle_btn);

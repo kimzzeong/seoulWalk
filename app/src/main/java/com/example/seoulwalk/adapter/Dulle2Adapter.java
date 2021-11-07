@@ -14,7 +14,14 @@ import com.example.seoulwalk.R;
 import java.util.ArrayList;
 
 public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder> {
+    public interface OnItemClickListener{
+        void onItemClick(View v, int position);
+    }
 
+    private Dulle2Adapter.OnItemClickListener mListener = null ;
+    public void setOnItemClickListener(Dulle2Adapter.OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
     private ArrayList<String> mData = null;
 
     @NonNull
@@ -48,6 +55,18 @@ public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.text);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(pos != RecyclerView.NO_POSITION){
+                        if (mListener != null) {
+                            mListener.onItemClick(v, pos) ;
+                        }
+                    }
+                }
+            });
         }
     }
 }
