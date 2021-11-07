@@ -33,7 +33,7 @@ public class ActivityMap extends AppCompatActivity implements OnMapReadyCallback
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(SEOUL);
-        markerOptions.title("부산");
+        markerOptions.title("인천");
         markerOptions.snippet("한국의 수도");
         mMap.addMarker(markerOptions);
 
