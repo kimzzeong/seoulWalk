@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBNVbhp39_02RSt81GNw3lcJ_c6xGtIQaw"
+            />
         <activity android:name=".Activity.ActivityMap"></activity>
         <activity android:name=".Activity.ActivityLogin" />
         <activity android:name=".Activity.ActivityJoin" />
