@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     Button course_btn, mypage_btn, home_btn, community_btn;
-    TextView test;
+    //TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
-        test = findViewById(R.id.test);
+        //test = findViewById(R.id.test);
 
 
         course_btn = findViewById(R.id.course_btn);
@@ -87,38 +87,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //차트 하드코딩 한거
-        BarChart barChart = findViewById(R.id.bar_charts);
+//        //차트 하드코딩 한거
+//        BarChart barChart = findViewById(R.id.bar_charts);
+//
+//        ArrayList<BarEntry> visitor = new ArrayList<>();
+//        visitor.add(new BarEntry(2014,420));
+//        visitor.add(new BarEntry(2015,475));
+//        visitor.add(new BarEntry(2016,508));
+//        visitor.add(new BarEntry(2017,660));
+//        visitor.add(new BarEntry(2018,550));
+//        visitor.add(new BarEntry(2019,630));
+//        visitor.add(new BarEntry(2020,470));
+//
+//        BarDataSet barDataSet = new BarDataSet(visitor,"Visitor");
+//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//        barDataSet.setValueTextColor(Color.BLACK);
+//        barDataSet.setValueTextSize(10f);
+//
+//        BarData barData = new BarData(barDataSet);
+//
+//        barChart.setFitBars(true);
+//        barChart.setData(barData);
+//        barChart.getDescription().setText(" ");
+//        barChart.animateY(1000);
 
-        ArrayList<BarEntry> visitor = new ArrayList<>();
-        visitor.add(new BarEntry(2014,420));
-        visitor.add(new BarEntry(2015,475));
-        visitor.add(new BarEntry(2016,508));
-        visitor.add(new BarEntry(2017,660));
-        visitor.add(new BarEntry(2018,550));
-        visitor.add(new BarEntry(2019,630));
-        visitor.add(new BarEntry(2020,470));
 
-        BarDataSet barDataSet = new BarDataSet(visitor,"Visitor");
-        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(10f);
-
-        BarData barData = new BarData(barDataSet);
-
-        barChart.setFitBars(true);
-        barChart.setData(barData);
-        barChart.getDescription().setText(" ");
-        barChart.animateY(1000);
-
-
-        test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), StepDiaryActivity.class);
-                startActivity(intent);
-            }
-        });
+//        test.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), StepDiaryActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
     }
 

@@ -13,102 +13,142 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:elevation="2dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30sp"
-            android:text="메인(분석??)"
-            android:textColor="#000000">
-
-        </TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/diaryInfo_profile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginLeft="5dp"
+                app:civ_border_width="1dp"
+                app:civ_border_color="@color/gray"
+                android:src="@drawable/basic_profile"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/diaryInfo_nickname"
+                android:text="닉네임"
+                app:layout_constraintLeft_toRightOf="@+id/diaryInfo_profile"
+                app:layout_constraintTop_toTopOf="@+id/diaryInfo_profile"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/diaryInfo_intro"
+                android:text="소개글"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintLeft_toRightOf="@+id/diaryInfo_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/diaryInfo_profile"
+                android:layout_marginLeft="5dp"
+                />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/diaryInfo_more_menu"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                app:layout_constraintTop_toTopOf="@+id/diaryInfo_profile"
+                app:layout_constraintBottom_toBottomOf="@+id/diaryInfo_profile"
+                app:layout_constraintRight_toRightOf="parent"
+                android:tint="@color/gray"
+                tools:ignore="UseAppTint" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="걸음걸음"
-        app:layout_constraintTop_toBottomOf="@+id/bar_charts"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="30dp"
-        />
+<!--    <TextView-->
+<!--        android:id="@+id/test"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="걸음걸음"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/bar_charts"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        android:textSize="30dp"-->
+<!--        />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"
-        android:background="@color/main"
-        android:gravity="center_horizontal"
-        android:id="@+id/main_profile_layout"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="닉네임 등 프로필 정보"
-            android:textSize="30dp"
-            android:layout_weight="1"
-            />
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"-->
+<!--        android:background="@color/main"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:id="@+id/main_profile_layout"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="닉네임 등 프로필 정보"-->
+<!--            android:textSize="30dp"-->
+<!--            android:layout_weight="1"-->
+<!--            />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/main_profile_layout"
-        android:gravity="center_vertical"
-        android:id="@+id/exercise_info_layout"
-        android:layout_marginTop="30dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="걸음수 : 3000 걸음"
-            android:textSize="20dp"
-            android:paddingRight="20dp"
-            android:paddingLeft="20dp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="30dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingRight="10dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="거리 : 30km"
-                android:textSize="20dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="시간 : 3시간"
-                android:textSize="20dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="칼로리 : 100 kcal"
-                android:textSize="20dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/main_profile_layout"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:id="@+id/exercise_info_layout"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="걸음수 : 3000 걸음"-->
+<!--            android:textSize="20dp"-->
+<!--            android:paddingRight="20dp"-->
+<!--            android:paddingLeft="20dp"-->
+<!--            />-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:paddingLeft="30dp"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:paddingBottom="10dp"-->
+<!--            android:paddingRight="10dp"-->
+<!--            >-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="거리 : 30km"-->
+<!--                android:textSize="20dp"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="시간 : 3시간"-->
+<!--                android:textSize="20dp"-->
+<!--                />-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="칼로리 : 100 kcal"-->
+<!--                android:textSize="20dp"-->
+<!--                />-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/exercise_info_layout"
-        android:id="@+id/bar_charts"
-        android:layout_marginTop="20dp"
-        />
+<!--    <com.github.mikephil.charting.charts.BarChart-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="300dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/exercise_info_layout"-->
+<!--        android:id="@+id/bar_charts"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        />-->
 
     <LinearLayout
         android:id="@+id/bottom_bar"
