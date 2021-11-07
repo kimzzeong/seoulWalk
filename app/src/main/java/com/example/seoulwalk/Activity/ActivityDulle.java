@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.seoulwalk.R;
@@ -26,21 +27,25 @@ public class ActivityDulle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dulle);
 
-        ArrayList<String> list = new ArrayList<>();
-        RecyclerView dulle1 = findViewById(R.id.dulle_list_1);
-        RecyclerView dulle2 = findViewById(R.id.dulle_list_2);
-        dulle1.setLayoutManager(new LinearLayoutManager(this));
-        dulle2.setLayoutManager(new LinearLayoutManager(this));
-
-        Dulle1Adapter dulle1Adapter = new Dulle1Adapter(list);
-        dulle1.setAdapter(dulle1Adapter);
-       // Dulle2Adapter dulle2Adapter = new Dulle2Adapter(list);
-      //  dulle2.setAdapter(dulle2Adapter);
+        ArrayList<String> list1 = new ArrayList<>();
+        ArrayList<String> list2 = new ArrayList<>();
 
 
         for (int i = 1; i <= 10; i++){
-                    list.add("LIST1 : "+i);
+            list1.add("LIST1 : "+i);
+            list2.add("LIST2 : "+i);
         }
+
+        RecyclerView dulle1 = findViewById(R.id.dulle_list_1);
+        RecyclerView dulle2 = findViewById(R.id.dulle_list_2);
+        dulle1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+        dulle2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+
+        Dulle1Adapter dulle1Adapter = new Dulle1Adapter(list1);
+        dulle1.setAdapter(dulle1Adapter);
+        Dulle2Adapter dulle2Adapter = new Dulle2Adapter(list2);
+        dulle2.setAdapter(dulle2Adapter);
+
 
         dulle_btn = findViewById(R.id.dulle_btn);
         home_btn = findViewById(R.id.home_btn);
