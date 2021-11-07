@@ -1,8 +1,10 @@
-package com.example.seoulwalk;
+package com.example.seoulwalk.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.seoulwalk.R;
 
 public class ActivityLogin extends AppCompatActivity {
 

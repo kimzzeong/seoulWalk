@@ -1,6 +1,8 @@
-package com.example.seoulwalk;
+package com.example.seoulwalk.Activity;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.seoulwalk.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -16,25 +19,35 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
-public class ActivityCharts extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    Button home_btn, btn, charts_btn;
+    Button dulle_btn, btn, home_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_charts);
+        setContentView(R.layout.activity_main);
 
-        charts_btn = findViewById(R.id.charts_btn);
+        //커스텀 액션바 세팅
+        Toolbar toolbar;
+        ActionBar actionBar;
+        toolbar = findViewById(R.id.main_actionbar);
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
+
+
+        dulle_btn = findViewById(R.id.dulle_btn);
         home_btn = findViewById(R.id.home_btn);
         btn = findViewById(R.id.btn);
 
-//여기부터 바텀 네비게이션 역할하는 버튼들 모음-----------------------------------------------------------
-        //홈 버튼 클릭 시 차트 액티비티로 이동
-        home_btn.setOnClickListener(new View.OnClickListener() {
+        //둘레길 버튼 클릭 시 차트 액티비티로 이동
+        dulle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                Intent intent = new Intent(v.getContext(), ActivityDulle.class);
                 startActivity(intent);
                 finish();
             }
@@ -50,14 +63,15 @@ public class ActivityCharts extends AppCompatActivity {
             }
         });
 
-        charts_btn.setOnClickListener(new View.OnClickListener() {
+        home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
-//여기까지-------------------------------------------------------------------------------------------
 
+
+        //차트 하드코딩 한거
         BarChart barChart = findViewById(R.id.bar_charts);
 
         ArrayList<BarEntry> visitor = new ArrayList<>();
@@ -72,13 +86,16 @@ public class ActivityCharts extends AppCompatActivity {
         BarDataSet barDataSet = new BarDataSet(visitor,"Visitor");
         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
+        barDataSet.setValueTextSize(10f);
 
         BarData barData = new BarData(barDataSet);
 
         barChart.setFitBars(true);
         barChart.setData(barData);
-        barChart.getDescription().setText("Bar Charts Example");
-        barChart.animateY(2000);
+        barChart.getDescription().setText(" ");
+        barChart.animateY(1000);
+
+
+
     }
 }

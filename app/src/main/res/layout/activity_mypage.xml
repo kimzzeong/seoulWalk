@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMypage">
+    tools:context=".Activity.ActivityMypage">
 
     <LinearLayout
         android:id="@+id/bottom_bar"
@@ -26,12 +26,12 @@
             app:backgroundTint="@null"/>
 
         <Button
-            android:id="@+id/charts_btn"
+            android:id="@+id/dulle_btn"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="2"
             android:background="@color/white"
-            android:text="차트"
+            android:text="둘레길"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:backgroundTint="@null"/>

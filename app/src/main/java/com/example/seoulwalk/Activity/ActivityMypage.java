@@ -1,4 +1,4 @@
-package com.example.seoulwalk;
+package com.example.seoulwalk.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,24 +7,26 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.seoulwalk.R;
+
 public class ActivityMypage extends AppCompatActivity {
 
-    Button home_btn, charts_btn,btn;
+    Button home_btn, dulle_btn,btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        charts_btn = findViewById(R.id.charts_btn);
+        dulle_btn = findViewById(R.id.dulle_btn);
         home_btn = findViewById(R.id.home_btn);
         btn = findViewById(R.id.btn);
 
-        //차트 버튼 클릭 시 차트 액티비티로 이동
-        charts_btn.setOnClickListener(new View.OnClickListener() {
+        //둘레길 버튼 클릭 시 차트 액티비티로 이동
+        dulle_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityCharts.class);
+                Intent intent = new Intent(v.getContext(), ActivityDulle.class);
                 startActivity(intent);
                 finish();
             }
