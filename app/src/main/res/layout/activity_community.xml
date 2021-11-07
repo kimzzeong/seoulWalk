@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ActivityMypage">
+    tools:context=".Activity.ActivityCommunity">
 
     <LinearLayout
         android:id="@+id/bottom_bar"
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="2"
-            android:background="@color/white"
+            android:background="@color/main"
             android:text="커뮤니티"
             android:textColor="@color/black"
             android:textSize="18dp"
@@ -52,22 +52,10 @@
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="2"
-            android:background="@color/main"
+            android:background="@color/white"
             android:text="MY"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:backgroundTint="@null"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="50dp"
-        android:text="암거나"
-        />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

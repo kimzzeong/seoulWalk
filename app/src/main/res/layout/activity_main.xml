@@ -26,6 +26,16 @@
         </TextView>
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="걸음걸음"
+        app:layout_constraintTop_toBottomOf="@+id/bar_charts"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textSize="30dp"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,23 +130,34 @@
             app:backgroundTint="@null"/>
 
         <Button
-            android:id="@+id/dulle_btn"
+            android:id="@+id/course_btn"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="2"
             android:background="@color/white"
-            android:text="둘레길"
+            android:text="코스"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:backgroundTint="@null"/>
 
         <Button
-            android:id="@+id/btn"
+            android:id="@+id/community_btn"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_weight="2"
             android:background="@color/white"
-            android:text="암거나"
+            android:text="커뮤니티"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            app:backgroundTint="@null"/>
+
+        <Button
+            android:id="@+id/mypage_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:text="MY"
             android:textColor="@color/black"
             android:textSize="18dp"
             app:backgroundTint="@null"/>

@@ -20,13 +20,15 @@ import java.util.ArrayList;
 
 public class ActivityDulle extends AppCompatActivity {
 
-    Button home_btn, btn, dulle_btn;
+    Button course_btn, mypage_btn, home_btn, community_btn;
     TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dulle);
+
+        test_text_btn = findViewById(R.id.test_text_btn);
 
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<String> list2 = new ArrayList<>();
@@ -67,13 +69,11 @@ public class ActivityDulle extends AppCompatActivity {
         });
 
 
-        dulle_btn = findViewById(R.id.dulle_btn);
+        course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
-        btn = findViewById(R.id.btn);
-        test_text_btn = findViewById(R.id.test_text_btn);
+        community_btn = findViewById(R.id.community_btn);
+        mypage_btn = findViewById(R.id.mypage_btn);
 
-
-        //바텀 네비게이션 역할하는 버튼들 모음
 
         //홈 버튼 클릭 시 차트 액티비티로 이동
         home_btn.setOnClickListener(new View.OnClickListener() {
@@ -85,8 +85,8 @@ public class ActivityDulle extends AppCompatActivity {
             }
         });
 
-        //암거나 버튼 클릭 시 다른 액티비티 이동(어떤 메뉴 넣을지에 따라 이름 바꿔야함)
-        btn.setOnClickListener(new View.OnClickListener() {
+        //마이페이지
+        mypage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ActivityMypage.class);
@@ -95,7 +95,18 @@ public class ActivityDulle extends AppCompatActivity {
             }
         });
 
-        dulle_btn.setOnClickListener(new View.OnClickListener() {
+        //커뮤니티
+        community_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ActivityCommunity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        //코스
+        course_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -113,4 +124,12 @@ public class ActivityDulle extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //액티비티를 종료할 때 애니메이션 없애기
+        overridePendingTransition(0,0);
+    }
+
 }

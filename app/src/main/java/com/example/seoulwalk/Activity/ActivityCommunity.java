@@ -1,29 +1,29 @@
 package com.example.seoulwalk.Activity;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.seoulwalk.R;
 
-public class ActivityMypage extends AppCompatActivity {
+public class ActivityCommunity extends AppCompatActivity {
 
     Button course_btn, mypage_btn, home_btn, community_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage);
+        setContentView(R.layout.activity_community);
 
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
         community_btn = findViewById(R.id.community_btn);
         mypage_btn = findViewById(R.id.mypage_btn);
 
-        //홈
+        //홈 버튼 클릭 시 차트 액티비티로 이동
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,7 +47,9 @@ public class ActivityMypage extends AppCompatActivity {
         mypage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(v.getContext(), ActivityMypage.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -55,13 +57,11 @@ public class ActivityMypage extends AppCompatActivity {
         community_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityCommunity.class);
-                startActivity(intent);
-                finish();
+
             }
         });
-
     }
+
 
     @Override
     protected void onPause() {

@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.seoulwalk.R;
 import com.github.mikephil.charting.charts.BarChart;
@@ -21,7 +22,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button dulle_btn, btn, home_btn;
+    Button course_btn, mypage_btn, home_btn, community_btn;
+    TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +40,16 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
+        test = findViewById(R.id.test);
 
-        dulle_btn = findViewById(R.id.dulle_btn);
+
+        course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
-        btn = findViewById(R.id.btn);
+        community_btn = findViewById(R.id.community_btn);
+        mypage_btn = findViewById(R.id.mypage_btn);
 
-        //둘레길 버튼 클릭 시 차트 액티비티로 이동
-        dulle_btn.setOnClickListener(new View.OnClickListener() {
+        //코스
+        course_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ActivityDulle.class);
@@ -53,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //암거나 버튼 클릭 시 다른 액티비티 이동(어떤 메뉴 넣을지에 따라 이름 바꿔야함)
-        btn.setOnClickListener(new View.OnClickListener() {
+        //마이페이지
+        mypage_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ActivityMypage.class);
@@ -63,10 +68,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //홈
         home_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        //커뮤니티
+        community_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ActivityCommunity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -96,6 +112,21 @@ public class MainActivity extends AppCompatActivity {
         barChart.animateY(1000);
 
 
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), StepDiaryActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //액티비티를 종료할 때 애니메이션 없애기
+        overridePendingTransition(0,0);
+    }
+
 }

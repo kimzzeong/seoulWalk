@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.seoulwalk">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <package android:name="com.sec.android.app.shealth" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,11 +15,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Activity.ActivityCommunity"></activity>
+        <activity android:name=".Activity.MainActivity2" />
+        <activity android:name=".Activity.StepDiaryActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"></action>
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.samsung.android.health.permission.read"
+            android:value="com.samsung.health.step_count;com.samsung.shealth.step_daily_trend" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBNVbhp39_02RSt81GNw3lcJ_c6xGtIQaw"
-            />
-        <activity android:name=".Activity.ActivityMap"></activity>
+            android:value="AIzaSyBNVbhp39_02RSt81GNw3lcJ_c6xGtIQaw" />
+
+        <activity android:name=".Activity.ActivityMap" />
         <activity android:name=".Activity.ActivityLogin" />
         <activity android:name=".Activity.ActivityJoin" />
         <activity android:name=".Activity.ActivityDulle" />

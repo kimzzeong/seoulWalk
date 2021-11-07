@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 30
@@ -16,6 +19,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        dataBinding true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,6 +39,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -47,4 +62,12 @@ dependencies {
     //google map
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+
+    implementation files('src/main/libs/samsung-health-data-1.5.0.aar')
+
+    implementation "com.google.code.gson:gson:2.8.6" // This library is required to use HealthDataUtil.getStructuredDataList()
+
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10"
+
 }
