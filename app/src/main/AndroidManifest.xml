@@ -15,12 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activity.ActivityCommunity"></activity>
-        <activity android:name=".Activity.StepDiaryActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"></action>
-            </intent-filter>
-        </activity>
+        <activity android:name=".Activity.ActivityCommunity"/>
 
         <meta-data
             android:name="com.samsung.android.health.permission.read"
