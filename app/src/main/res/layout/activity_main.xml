@@ -20,17 +20,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:text="둘레돌래"
             android:textColor="#000000"/>
     </androidx.appcompat.widget.Toolbar>
+
+
     <ScrollView
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"
         app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="-16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -53,11 +56,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lv.2"
-                android:textSize="15sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
+                android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="@+id/main_profile_photo"
                 app:layout_constraintRight_toRightOf="@+id/main_profile_photo"
-                app:layout_constraintTop_toBottomOf="@+id/main_profile_photo" />
+                app:layout_constraintTop_toBottomOf="@+id/main_profile_photo"
+                android:layout_marginRight="5dp"/>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintTop_toTopOf="@id/main_level"
+                app:layout_constraintBottom_toBottomOf="@+id/main_level"
+                app:layout_constraintLeft_toRightOf="@+id/main_level"
+                android:src="@drawable/ic_baseline_info_24"
+                android:id="@+id/level_info"
+                android:layout_marginLeft="5dp"
+                />
 
             <TextView
                 android:id="@+id/main_level_title"
@@ -120,9 +136,9 @@
                 android:text="이번주 목표 : "
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_line1"
-                android:textStyle="bold" />
+                app:layout_constraintTop_toBottomOf="@+id/main_line1" />
 
             <TextView
                 android:id="@+id/main_week_goal"
@@ -131,66 +147,73 @@
                 android:text="Lv.2 유지"
                 android:textColor="@color/main"
                 android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="@+id/main_week_goal_title"
-                app:layout_constraintLeft_toRightOf="@+id/main_week_goal_title"
                 android:textStyle="bold"
-                />
+                app:layout_constraintLeft_toRightOf="@+id/main_week_goal_title"
+                app:layout_constraintTop_toTopOf="@+id/main_week_goal_title" />
 
             <ProgressBar
                 android:id="@+id/main_week_step_progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:progressDrawable="@drawable/test"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/main_week_goal"
+                android:layout_marginTop="20dp"
+                android:progressDrawable="@drawable/test"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="20dp"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/main_week_goal" />
 
             <TextView
+                android:id="@+id/sssss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_goal_step_count"
-                android:text="56000"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
-                app:layout_constraintRight_toLeftOf="@+id/main_goal_step_count_title"
+                android:text="40%"
                 android:textColor="@color/black"
-                />
+                android:textSize="18sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintRight_toRightOf="@+id/main_week_step_progressBar"
+                app:layout_constraintBottom_toTopOf="@+id/main_week_step_progressBar"/>
+
             <TextView
+                android:id="@+id/main_goal_step_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="56000"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintRight_toLeftOf="@+id/main_goal_step_count_title"
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title" />
+
+            <TextView
                 android:id="@+id/main_goal_step_count_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text=" 걸음"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/main_week_step_progressBar"
                 app:layout_constraintRight_toRightOf="@+id/main_week_step_progressBar"
-                android:layout_marginTop="10dp"
-                
+                app:layout_constraintTop_toBottomOf="@+id/main_week_step_progressBar"
+
                 />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/main_week_step_count"
-                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
-                app:layout_constraintRight_toLeftOf="@+id/main_week_step_count_slash"
-                android:text="16800"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="16800"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toLeftOf="@+id/main_week_step_count_slash"
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title" />
+
+            <TextView
                 android:id="@+id/main_week_step_count_slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text=" / "
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
                 app:layout_constraintRight_toLeftOf="@+id/main_goal_step_count"
-                />
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title" />
 
             <TextView
                 android:id="@+id/main_goal_info"
@@ -211,74 +234,70 @@
                 app:layout_constraintTop_toBottomOf="@+id/main_goal_info" />
 
             <TextView
+                android:id="@+id/main_today_step_count_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_today_step_count_title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:text="오늘의 걸음수"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintTop_toBottomOf="@+id/main_line2"
                 app:layout_constraintLeft_toLeftOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/main_line2" />
 
             <ProgressBar
                 android:id="@+id/main_today_step_progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:progressDrawable="@drawable/test"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
-                app:layout_constraintTop_toBottomOf="@+id/main_today_step_count_title"
+                android:layout_marginTop="20dp"
+                android:progressDrawable="@drawable/test"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="20dp"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/main_today_step_count_title" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/main_today_goal_step_count"
-                android:text="8000"
-                android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
-                app:layout_constraintRight_toLeftOf="@+id/main_today_goal_step_count_title"
-                android:textColor="@color/black"
-                />
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="8000"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintRight_toLeftOf="@+id/main_today_goal_step_count_title"
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title" />
+
+            <TextView
                 android:id="@+id/main_today_goal_step_count_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text=" 걸음"
                 android:textSize="18sp"
-                app:layout_constraintTop_toBottomOf="@+id/main_today_step_progressBar"
                 app:layout_constraintRight_toRightOf="@+id/main_today_step_progressBar"
-                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/main_today_step_progressBar"
 
                 />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/main_today_step_count"
-                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
-                app:layout_constraintRight_toLeftOf="@+id/main_today_step_count_slash"
-                android:text="2600"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                />
-
-            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="2600"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintRight_toLeftOf="@+id/main_today_step_count_slash"
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title" />
+
+            <TextView
                 android:id="@+id/main_today_step_count_slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text=" / "
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
                 app:layout_constraintRight_toLeftOf="@+id/main_today_goal_step_count"
-                />
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title" />
 
             <View
                 android:id="@+id/main_line3"
@@ -288,44 +307,181 @@
                 android:background="#E2EAE2"
                 app:layout_constraintTop_toBottomOf="@+id/main_today_step_count_slash" />
 
+
+            <TextView
+                android:id="@+id/main_today_course_good_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="오늘의 코스 추천"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_line3" />
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/main_today_course_good"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_today_course_good"
-                app:layout_constraintTop_toBottomOf="@+id/main_line3"
+                android:layout_marginLeft="2dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                card_view:cardCornerRadius="5dp"
-                android:elevation = "10dp"
+                android:layout_marginRight="2dp"
+                android:elevation="10dp"
                 app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/main_today_course_good_title"
                 card_view:cardBackgroundColor="#FAFAFA"
-                >
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
+                card_view:cardCornerRadius="5dp">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/main_today_course_good_title"
-                        android:text="오늘의 코스 추천"
-                        android:textSize="20sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        android:layout_weight="20"
+                        android:paddingRight="5dp"
+                        android:paddingTop="20dp"
+                        android:paddingLeft="5dp"
+                        android:paddingBottom="20dp">
+
+                        <ImageView
+                            android:id="@+id/location_icon"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_baseline_location_on_24"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/main_distance_from_me"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="나와의 거리 : 3km"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toRightOf="@+id/location_icon"
+                            app:layout_constraintTop_toTopOf="@+id/location_icon" />
+
+                        <TextView
+                            android:id="@+id/main_course_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="난이도 상"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="30dp"
+                            app:layout_constraintLeft_toRightOf="@+id/main_distance_from_me"
+                            app:layout_constraintTop_toTopOf="@+id/main_distance_from_me"
+                            app:layout_constraintBottom_toBottomOf="@+id/main_distance_from_me"/>
+
+                        <ImageView
+                            android:id="@+id/main_course_img"
+                            android:layout_width="160dp"
+                            android:layout_height="120dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/course"
+                            app:layout_constraintLeft_toLeftOf="@+id/location_icon"
+                            app:layout_constraintTop_toBottomOf="@+id/main_distance_from_me" />
+
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:layout_marginRight="10dp"
+                            android:src="@drawable/stamp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="30dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/main_course_title"
+                            app:layout_constraintLeft_toRightOf="@+id/main_course_img"
+                            app:layout_constraintTop_toTopOf="@+id/main_course_img"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:text="서울 둘레길 2-2 코스"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/main_course_address"
+                            app:layout_constraintLeft_toLeftOf="@+id/main_course_title"
+                            app:layout_constraintTop_toTopOf="@+id/main_course_img"
+                            app:layout_constraintBottom_toBottomOf="@+id/main_course_img"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:text="서울 중랑구"
+                            />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            card_view:layout_constraintBottom_toBottomOf="@+id/main_course_img"
+                            app:layout_constraintLeft_toLeftOf="@+id/main_course_title"
+                            android:background="@drawable/round_layout"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:id="@+id/content_layout"
+                            >
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:src="@drawable/ic_baseline_access_time_24"
+                                android:layout_marginRight="3dp"
+                                android:id="@+id/time_icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/time_text"
+                                android:text="90분"
+                                android:textSize="15sp"
+                                android:layout_marginRight="5dp"
+                                />
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:src="@drawable/distance"
+                                android:layout_marginRight="3dp"
+                                android:id="@+id/distance_icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/distance_text"
+                                android:text="5.5km"
+                                android:textSize="15dp"
+                                android:layout_marginRight="5dp"
+                                />
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:layout_height="17dp"
+                                android:src="@drawable/footprints"
+                                android:layout_marginRight="3dp"
+                                android:id="@+id/step_icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/step_text"
+                                android:text="6000 걸음"
+                                android:textSize="15dp"
+                                />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-
-
-
 
     <LinearLayout
         android:id="@+id/bottom_bar"
