@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.seoulwalk">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <queries>
         <package android:name="com.sec.android.app.shealth" />
@@ -15,14 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activity.ActivityLevelInfo"></activity>
+        <activity android:name=".Activity.ActivityCourseInfo"></activity>
+        <activity android:name=".Activity.ActivityGoal" />
+        <activity android:name=".Activity.ActivityLevelInfo" />
         <activity android:name=".Activity.ActivityCommunity" />
-        <activity android:name=".Activity.StepDiaryActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
         <meta-data
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count;com.samsung.shealth.step_daily_trend" />

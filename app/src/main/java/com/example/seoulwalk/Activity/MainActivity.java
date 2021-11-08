@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Button course_btn, mypage_btn, home_btn, community_btn; //바텀 네비게이션 버튼
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
+    ImageView level_info;
+    TextView main_goal_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
+
+        main_goal_info = findViewById(R.id.main_goal_info);
 
         week_goal_step = 56000; // 이번주 목표 걸음수
         week_now_goal_step = 16800; // 이번주 걸음수
@@ -67,8 +72,23 @@ public class MainActivity extends AppCompatActivity {
         main_today_step_progressBar.setMax(today_goal_step);
         main_today_step_progressBar.setProgress(today_step);
 
-       // progressBar.animate();
+        level_info = findViewById(R.id.level_info);
 
+        level_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ActivityLevelInfo.class);
+                startActivity(intent);
+            }
+        });
+
+        main_goal_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ActivityGoal.class);
+                startActivity(intent);
+            }
+        });
 
         //코스
         course_btn.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
 
