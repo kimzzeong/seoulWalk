@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity">
@@ -15,131 +16,316 @@
         app:layout_constraintRight_toRightOf="parent"
         android:background="@color/white"
         android:elevation="2dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30sp"
+            android:text="둘레돌래"
+            android:textColor="#000000"/>
+    </androidx.appcompat.widget.Toolbar>
+    <ScrollView
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/diaryInfo_profile"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginLeft="5dp"
-                app:civ_border_width="1dp"
-                app:civ_border_color="@color/gray"
+                android:id="@+id/main_profile_photo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/basic_profile"
+                app:civ_border_color="@color/gray"
+                app:civ_border_width="1dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/main_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lv.2"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@+id/main_profile_photo"
+                app:layout_constraintRight_toRightOf="@+id/main_profile_photo"
+                app:layout_constraintTop_toBottomOf="@+id/main_profile_photo" />
+
+            <TextView
+                android:id="@+id/main_level_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="수식어 길때 처리 어케할까용"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintLeft_toRightOf="@+id/main_profile_photo"
+                app:layout_constraintTop_toTopOf="@+id/main_profile_photo" />
+
+            <TextView
+                android:id="@+id/main_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="닉네임"
+                android:textColor="@color/main"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/main_profile_photo"
+                app:layout_constraintLeft_toRightOf="@+id/main_profile_photo" />
+
+            <TextView
+                android:id="@+id/main_nickname_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="님"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintBottom_toBottomOf="@+id/main_profile_photo"
+                app:layout_constraintLeft_toRightOf="@+id/main_nickname" />
+
+            <TextView
+                android:id="@+id/main_my_exercise_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="나의 활동 분석 >"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_level" />
+
+            <View
+                android:id="@+id/main_line1"
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="20dp"
+                android:background="#E2EAE2"
+                app:layout_constraintTop_toBottomOf="@+id/main_my_exercise_info" />
+
+            <TextView
+                android:id="@+id/main_week_goal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="이번주 목표 : "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_line1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/main_week_goal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lv.2 유지"
+                android:textColor="@color/main"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="@+id/main_week_goal_title"
+                app:layout_constraintLeft_toRightOf="@+id/main_week_goal_title"
+                android:textStyle="bold"
+                />
+
+            <ProgressBar
+                android:id="@+id/main_week_step_progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressDrawable="@drawable/test"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@+id/main_week_goal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_goal_step_count"
+                android:text="56000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_goal_step_count_title"
+                android:textColor="@color/black"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/diaryInfo_nickname"
-                android:text="닉네임"
-                app:layout_constraintLeft_toRightOf="@+id/diaryInfo_profile"
-                app:layout_constraintTop_toTopOf="@+id/diaryInfo_profile"
-                android:layout_marginLeft="5dp"
+                android:id="@+id/main_goal_step_count_title"
+                android:text=" 걸음"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/main_week_step_progressBar"
+                app:layout_constraintRight_toRightOf="@+id/main_week_step_progressBar"
+                android:layout_marginTop="10dp"
+                
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_week_step_count"
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_week_step_count_slash"
+                android:text="16800"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 />
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:id="@+id/diaryInfo_more_menu"
-                android:src="@drawable/ic_baseline_more_vert_24"
-                app:layout_constraintTop_toTopOf="@+id/diaryInfo_profile"
-                app:layout_constraintBottom_toBottomOf="@+id/diaryInfo_profile"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_week_step_count_slash"
+                android:text=" / "
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@+id/main_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_goal_step_count"
+                />
+
+            <TextView
+                android:id="@+id/main_goal_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:text="목표 설정 >"
                 app:layout_constraintRight_toRightOf="parent"
-                android:tint="@color/gray"
-                tools:ignore="UseAppTint" />
+                app:layout_constraintTop_toBottomOf="@+id/main_week_step_count_slash" />
+
+            <View
+                android:id="@+id/main_line2"
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="20dp"
+                android:background="#E2EAE2"
+                app:layout_constraintTop_toBottomOf="@+id/main_goal_info" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_step_count_title"
+                android:text="오늘의 걸음수"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/main_line2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                />
+
+            <ProgressBar
+                android:id="@+id/main_today_step_progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:progressDrawable="@drawable/test"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@+id/main_today_step_count_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_goal_step_count"
+                android:text="8000"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_today_goal_step_count_title"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_goal_step_count_title"
+                android:text=" 걸음"
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/main_today_step_progressBar"
+                app:layout_constraintRight_toRightOf="@+id/main_today_step_progressBar"
+                android:layout_marginTop="10dp"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_step_count"
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_today_step_count_slash"
+                android:text="2600"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_step_count_slash"
+                android:text=" / "
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@+id/main_today_goal_step_count_title"
+                app:layout_constraintRight_toLeftOf="@+id/main_today_goal_step_count"
+                />
+
+            <View
+                android:id="@+id/main_line3"
+                android:layout_width="match_parent"
+                android:layout_height="3px"
+                android:layout_marginTop="20dp"
+                android:background="#E2EAE2"
+                app:layout_constraintTop_toBottomOf="@+id/main_today_step_count_slash" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_today_course_good"
+                app:layout_constraintTop_toBottomOf="@+id/main_line3"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                card_view:cardCornerRadius="5dp"
+                android:elevation = "10dp"
+                app:cardUseCompatPadding="true"
+                card_view:cardBackgroundColor="#FAFAFA"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/main_today_course_good_title"
+                        android:text="오늘의 코스 추천"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
+    </ScrollView>
 
 
 
-<!--    <TextView-->
-<!--        android:id="@+id/test"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="걸음걸음"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/bar_charts"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        android:textSize="30dp"-->
-<!--        />-->
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/main_actionbar"-->
-<!--        android:background="@color/main"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:id="@+id/main_profile_layout"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="닉네임 등 프로필 정보"-->
-<!--            android:textSize="30dp"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/main_profile_layout"-->
-<!--        android:gravity="center_vertical"-->
-<!--        android:id="@+id/exercise_info_layout"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        >-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="걸음수 : 3000 걸음"-->
-<!--            android:textSize="20dp"-->
-<!--            android:paddingRight="20dp"-->
-<!--            android:paddingLeft="20dp"-->
-<!--            />-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="vertical"-->
-<!--            android:paddingLeft="30dp"-->
-<!--            android:paddingTop="10dp"-->
-<!--            android:paddingBottom="10dp"-->
-<!--            android:paddingRight="10dp"-->
-<!--            >-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="거리 : 30km"-->
-<!--                android:textSize="20dp"-->
-<!--                />-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="시간 : 3시간"-->
-<!--                android:textSize="20dp"-->
-<!--                />-->
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="칼로리 : 100 kcal"-->
-<!--                android:textSize="20dp"-->
-<!--                />-->
-<!--        </LinearLayout>-->
-<!--    </LinearLayout>-->
-
-<!--    <com.github.mikephil.charting.charts.BarChart-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="300dp"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/exercise_info_layout"-->
-<!--        android:id="@+id/bar_charts"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        />-->
 
     <LinearLayout
         android:id="@+id/bottom_bar"

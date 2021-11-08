@@ -9,21 +9,27 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.seoulwalk.R;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button course_btn, mypage_btn, home_btn, community_btn;
-    //TextView test;
+    Button course_btn, mypage_btn, home_btn, community_btn; //바텀 네비게이션 버튼
+    ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
+    int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +46,29 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
-        //test = findViewById(R.id.test);
+        week_goal_step = 56000; // 이번주 목표 걸음수
+        week_now_goal_step = 16800; // 이번주 걸음수
+        today_goal_step = 8000; // 오늘 목표 걸음수
+        today_step = 2600; // 오늘 걸음수
+
 
 
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
         community_btn = findViewById(R.id.community_btn);
         mypage_btn = findViewById(R.id.mypage_btn);
+
+        main_week_step_progressBar = findViewById(R.id.main_week_step_progressBar);
+        main_today_step_progressBar = findViewById(R.id.main_today_step_progressBar);
+
+        main_week_step_progressBar.setMax(week_goal_step);
+        main_week_step_progressBar.setProgress(week_now_goal_step);
+
+        main_today_step_progressBar.setMax(today_goal_step);
+        main_today_step_progressBar.setProgress(today_step);
+
+       // progressBar.animate();
+
 
         //코스
         course_btn.setOnClickListener(new View.OnClickListener() {
@@ -87,38 +109,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        //차트 하드코딩 한거
-//        BarChart barChart = findViewById(R.id.bar_charts);
-//
-//        ArrayList<BarEntry> visitor = new ArrayList<>();
-//        visitor.add(new BarEntry(2014,420));
-//        visitor.add(new BarEntry(2015,475));
-//        visitor.add(new BarEntry(2016,508));
-//        visitor.add(new BarEntry(2017,660));
-//        visitor.add(new BarEntry(2018,550));
-//        visitor.add(new BarEntry(2019,630));
-//        visitor.add(new BarEntry(2020,470));
-//
-//        BarDataSet barDataSet = new BarDataSet(visitor,"Visitor");
-//        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-//        barDataSet.setValueTextColor(Color.BLACK);
-//        barDataSet.setValueTextSize(10f);
-//
-//        BarData barData = new BarData(barDataSet);
-//
-//        barChart.setFitBars(true);
-//        barChart.setData(barData);
-//        barChart.getDescription().setText(" ");
-//        barChart.animateY(1000);
-
-
-//        test.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), StepDiaryActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
     }
 
