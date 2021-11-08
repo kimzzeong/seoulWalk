@@ -57,7 +57,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
-
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
@@ -69,7 +68,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
     Location mCurrentLocatiion;
     LatLng currentPosition;
-
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
@@ -96,26 +94,19 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         mLayout = findViewById(R.id.layout_main);
 
-
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
-
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
 
         builder.addLocationRequest(locationRequest);
-
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.course_map);
         mapFragment.getMapAsync(this);
-
     }
 
     @Override
@@ -128,8 +119,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
 
-
-
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -137,17 +126,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
 
             // 2. 이미 퍼미션을 가지고 있다면
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
 
-
             startLocationUpdates(); // 3. 위치 업데이트 시작
-
 
         }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
@@ -167,14 +152,12 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     }
                 }).show();
 
-
             } else {
                 // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
                 // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
                 ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
-
         }
 
 
@@ -207,20 +190,17 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
-
                 String markerTitle = getCurrentAddress(currentPosition);
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
-
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
                 mCurrentLocatiion = location;
             }
-
 
         }
 
@@ -238,8 +218,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
-
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
                     hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
 
@@ -247,18 +225,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 return;
             }
 
-
             Log.d(TAG, "startLocationUpdates : call mFusedLocationClient.requestLocationUpdates");
 
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
 
             if (checkPermission())
                 mMap.setMyLocationEnabled(true);
-
         }
-
     }
-
 
     @Override
     protected void onStart() {
@@ -273,10 +247,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             if (mMap!=null)
                 mMap.setMyLocationEnabled(true);
-
         }
-
-
     }
 
 
@@ -292,16 +263,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         }
     }
 
-
-
-
     public String getCurrentAddress(LatLng latlng) {
 
         //지오코더... GPS를 주소로 변환
         Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-
         List<Address> addresses;
-
         try {
 
             addresses = geocoder.getFromLocation(
@@ -315,14 +281,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
-
         }
-
 
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
-
         } else {
             Address address = addresses.get(0);
             return address.getAddressLine(0).toString();
@@ -340,10 +303,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-
-
         if (currentMarker != null) currentMarker.remove();
-
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -353,23 +313,19 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
 
-
         currentMarker = mMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
         mMap.moveCamera(cameraUpdate);
-
     }
 
 
     public void setDefaultLocation() {
 
-
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
-
 
         if (currentMarker != null) currentMarker.remove();
 
@@ -395,15 +351,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
-
-
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
                 hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
             return true;
         }
-
         return false;
-
     }
 
 
@@ -423,7 +375,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             boolean check_result = true;
 
-
             // 모든 퍼미션을 허용했는지 체크합니다.
 
             for (int result : grandResults) {
@@ -432,7 +383,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     break;
                 }
             }
-
 
             if (check_result) {
 
@@ -443,7 +393,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
-
 
                     // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요. ",
@@ -457,7 +406,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     }).show();
 
                 } else {
-
 
                     // "다시 묻지 않음"을 사용자가 체크하고 거부를 선택한 경우에는 설정(앱 정보)에서 퍼미션을 허용해야 앱을 사용할 수 있습니다.
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 설정(앱 정보)에서 퍼미션을 허용해야 합니다. ",
@@ -515,8 +463,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     if (checkLocationServicesStatus()) {
 
                         Log.d(TAG, "onActivityResult : GPS 활성화 되있음");
-
-
                         needRequest = true;
 
                         return;
