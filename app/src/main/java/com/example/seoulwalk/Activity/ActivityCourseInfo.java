@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
@@ -23,6 +24,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -54,6 +56,11 @@ import java.util.Locale;
 public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
 
+
+    //탭 레이아웃을 레이아웃 보여줬다 안보여줬다로 만듦
+    ConstraintLayout course_review_layout, course_info_layout;
+    boolean course_layout_flag = false;
+    Button course_info_btn, course_review_btn;
 
     //뷰페이저
     private ViewPager2 sliderViewPager;
@@ -96,6 +103,26 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_course_info);
+
+        course_review_layout = findViewById(R.id.course_review_layout);
+        course_info_layout = findViewById(R.id.course_info_layout);
+
+        course_info_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                course_layout_flag = false;
+                layoutChange(course_layout_flag);
+
+            }
+        });
+
+        course_review_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                course_layout_flag = true;
+                layoutChange(course_layout_flag);
+            }
+        });
 
         //커스텀 액션바 세팅
         Toolbar toolbar;
@@ -149,6 +176,18 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         });
 
         setupIndicators(images.length);
+    }
+
+    //레이아웃 변환(탭 레이아웃처럼)
+    private void layoutChange(boolean course_layout_flag) {
+
+        if(!course_layout_flag){
+            course_info_layout.setVisibility(View.VISIBLE);
+            course_review_layout.setVisibility(View.INVISIBLE);
+        }else{
+            course_info_layout.setVisibility(View.INVISIBLE);
+            course_review_layout.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setupIndicators(int count) {
