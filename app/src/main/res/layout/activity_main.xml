@@ -391,7 +391,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
                             android:layout_marginRight="10dp"
-                            android:src="@drawable/stamp"
+                            android:src="@drawable/stamp_color"
                             android:layout_weight="1"
                             android:layout_marginTop="30dp"/>
 

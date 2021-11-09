@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:text="체력 유지"
             android:layout_weight="1"
+            android:id="@+id/goal_maintenance_btn"
 
             />
         <Button
@@ -51,6 +52,7 @@
             android:layout_height="wrap_content"
             android:text="체력 증진"
             android:layout_weight="1"
+            android:id="@+id/goal_step_up_btn"
             />
     </LinearLayout>
 
@@ -63,7 +65,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:visibility="invisible"
+        android:id="@+id/goal_maintenance_layout"
+        android:visibility="gone"
         >
         <TextView
             android:layout_width="match_parent"
@@ -105,15 +108,28 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:id="@+id/goal_step_up_layout"
         >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/choice_level_title"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:text="도전(?)할 레벨을 선택해주세요"
+            android:padding="5dp"
+            />
 
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="50dp"
             android:id="@+id/spinner_level"
-            app:layout_constraintTop_toBottomOf="@+id/diary_title"
-            android:spinnerMode="dialog"
             android:gravity="center"
+            android:background="#EFF8E4"
+            android:spinnerMode="dialog"
+            style="@style/Widget.AppCompat.Spinner"
             />
 
         <TextView
