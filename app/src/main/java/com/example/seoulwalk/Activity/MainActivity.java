@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), ActivityDulle.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), ActivityMypage.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), ActivityCommunity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -134,11 +137,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //액티비티를 종료할 때 애니메이션 없애기
-        overridePendingTransition(0,0);
-    }
 
 }

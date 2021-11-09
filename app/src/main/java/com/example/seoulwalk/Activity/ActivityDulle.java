@@ -114,6 +114,7 @@ public class ActivityDulle extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -124,6 +125,7 @@ public class ActivityDulle extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), ActivityMypage.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -134,6 +136,7 @@ public class ActivityDulle extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), ActivityCommunity.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(0,0);
             }
         });
 
@@ -155,13 +158,6 @@ public class ActivityDulle extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //액티비티를 종료할 때 애니메이션 없애기
-        overridePendingTransition(0,0);
     }
 
     // TODO: 11/8/21 레트로핏

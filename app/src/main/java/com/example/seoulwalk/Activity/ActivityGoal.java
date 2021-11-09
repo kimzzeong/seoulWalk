@@ -9,18 +9,26 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.seoulwalk.R;
 
+import java.util.ArrayList;
+
 public class ActivityGoal extends AppCompatActivity {
+
+    LinearLayout goal_maintenance_layout, goal_step_up_layout;
+    boolean goal_layout_flag = false;
+    Button goal_maintenance_btn, goal_step_up_btn;
+    int user_level = 3; //현재 유저의 레벨
+    ArrayList<String> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal);
-
-        String[] items = {"Lv 1", "Lv 2", "Lv 3", "Lv 4", "Lv 5"};
 
         //커스텀 액션바 세팅
         Toolbar toolbar;
@@ -32,7 +40,43 @@ public class ActivityGoal extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
+        //탭 레이아웃처럼 변환 위한 정의
+        goal_maintenance_layout = findViewById(R.id.goal_maintenance_layout);
+        goal_step_up_layout = findViewById(R.id.goal_step_up_layout);
+        goal_maintenance_btn = findViewById(R.id.goal_maintenance_btn);
+        goal_step_up_btn = findViewById(R.id.goal_step_up_btn);
+
+        goal_maintenance_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goal_layout_flag = false;
+                layoutChange(goal_layout_flag);
+            }
+        });
+
+        goal_step_up_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goal_layout_flag = true;
+                layoutChange(goal_layout_flag);
+            }
+        });
+
+        items.add("Lv 1"); //0 포지션값임
+        items.add("Lv 2"); //1
+        items.add("Lv 3"); //2
+        items.add("Lv 4"); //3
+        items.add("Lv 5"); //4
+
+
+        for (int i = 0; i < user_level; i++){
+
+            Log.e("items"+i, items.get(i));
+            items.remove(0);
+        }
+
         Spinner spinner_level = findViewById(R.id.spinner_level);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 //API에 만들어져 있는 R.layout.simple_spinner...를 씀
                 this,android.R.layout.simple_spinner_item, items
@@ -45,7 +89,7 @@ public class ActivityGoal extends AppCompatActivity {
             // 선택되면
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("Log",items[position]);
+              //  Log.e("Log",items.get(position));
             }
 
             // 아무것도 선택되지 않은 상태일 때
@@ -57,5 +101,17 @@ public class ActivityGoal extends AppCompatActivity {
 
 
 
+    }
+
+    //레이아웃 변환(탭 레이아웃처럼)
+    private void layoutChange(boolean goal_layout_flag) {
+
+        if(!goal_layout_flag){
+            goal_maintenance_layout.setVisibility(View.VISIBLE);
+            goal_step_up_layout.setVisibility(View.GONE);
+        }else{
+            goal_maintenance_layout.setVisibility(View.GONE);
+            goal_step_up_layout.setVisibility(View.VISIBLE);
+        }
     }
 }
