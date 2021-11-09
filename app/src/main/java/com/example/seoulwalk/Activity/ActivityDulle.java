@@ -30,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ActivityDulle extends AppCompatActivity {
@@ -165,28 +166,28 @@ public class ActivityDulle extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Dulle_Name.REGIST_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         Dulle_Name api = retrofit.create(Dulle_Name.class);
-        Call<String> call = api.getDulleRegist(username);
-        call.enqueue(new Callback<String>()
+        Call<ArrayList<Dulle_Data>> call = api.getDulleRegist("aaa","bbb",username);
+        call.enqueue(new Callback<ArrayList<Dulle_Data>>()
         {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response)
+            public void onResponse(@NonNull Call<ArrayList<Dulle_Data>> call, @NonNull Response<ArrayList<Dulle_Data>> response)
             {
                 if (response.isSuccessful() && response.body() != null)
                 {
-                    Log.e("onSuccess", response.body());
+                   // Log.e("onSuccess", response.body());
 
-                    String jsonResponse = response.body();
+                    ArrayList<Dulle_Data> jsonResponse = response.body();
                     parseLoginData(jsonResponse);
 
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t)
+            public void onFailure(@NonNull Call<ArrayList<Dulle_Data>> call, @NonNull Throwable t)
             {
                 Log.e("ERROR", "에러 = " + t.getMessage());
             }
@@ -194,24 +195,26 @@ public class ActivityDulle extends AppCompatActivity {
 
     }
 
-    private void parseLoginData(String response)
+    private void parseLoginData(ArrayList<Dulle_Data> response)
     {
-        try
-        {
-            JSONObject jsonObject = new JSONObject(response);
-            if (jsonObject.getString("status").equals("true"))
-            {
-                JSONArray dataArray = jsonObject.getJSONArray("data");
-                Log.e("데이터",dataArray.toString());
 
-            }
-
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-            Log.e("error",e.getMessage());
-        }
+        Log.e("리스트",""+response.size());
+//        try
+//        {
+//            JSONObject jsonObject = new JSONObject(response);
+//            if (jsonObject.getString("status").equals("true"))
+//            {
+//                JSONArray dataArray = jsonObject.getJSONArray("data");
+//                Log.e("데이터",dataArray.toString());
+//
+//            }
+//
+//        }
+//        catch (JSONException e)
+//        {
+//            e.printStackTrace();
+//            Log.e("error",e.getMessage());
+//        }
 
     }
 

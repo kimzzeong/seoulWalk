@@ -72,7 +72,6 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
             android:id="@+id/course_info_layout"
-            android:visibility="invisible"
             >
 
             <fragment
@@ -248,6 +247,7 @@
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
             android:id="@+id/course_review_layout"
+            android:visibility="gone"
             >
             <TextView
                 android:layout_width="match_parent"

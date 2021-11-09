@@ -107,6 +107,9 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         course_review_layout = findViewById(R.id.course_review_layout);
         course_info_layout = findViewById(R.id.course_info_layout);
 
+        course_info_btn = findViewById(R.id.course_info_btn);
+        course_review_btn = findViewById(R.id.course_review_btn);
+
         course_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,9 +186,9 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         if(!course_layout_flag){
             course_info_layout.setVisibility(View.VISIBLE);
-            course_review_layout.setVisibility(View.INVISIBLE);
+            course_review_layout.setVisibility(View.GONE);
         }else{
-            course_info_layout.setVisibility(View.INVISIBLE);
+            course_info_layout.setVisibility(View.GONE);
             course_review_layout.setVisibility(View.VISIBLE);
         }
     }
