@@ -5,11 +5,11 @@ public class Dulle_Data {
     String dulle_time;
     String dulle_name_end;
 
-    public Dulle_Data(String dulle_name_start, String dulle_time, String dulle_name_end) {
-        this.dulle_name_start = dulle_name_start;
-        this.dulle_time = dulle_time;
-        this.dulle_name_end = dulle_name_end;
-    }
+//    public Dulle_Data(String dulle_name_start, String dulle_time, String dulle_name_end) {
+//        this.dulle_name_start = dulle_name_start;
+//        this.dulle_time = dulle_time;
+//        this.dulle_name_end = dulle_name_end;
+//    }
 
     public String getDulle_name_start() {
         return dulle_name_start;
