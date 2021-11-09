@@ -1,8 +1,8 @@
 plugins {
     id 'com.android.application'
 }
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-kapt'
 
 
 android {
@@ -18,10 +18,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    repositories {
-        google()
-        mavenCentral()
-    }
+//    repositories {
+//        google()
+//        mavenCentral()
+//    }
 
     buildTypes {
         release {
@@ -34,9 +34,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
 }
 
 dependencies {

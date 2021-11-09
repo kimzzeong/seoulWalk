@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.seoulwalk.GlideApp;
 import com.example.seoulwalk.MyAppGlideModule;
 import com.example.seoulwalk.R;
 
@@ -56,9 +57,10 @@ public class ImageSliderAdapter extends RecyclerView.Adapter<ImageSliderAdapter.
 
         public void bindSliderImage(String imageURL) {
             Log.e("ddddsdahfdofhi",imageURL);
-//            GlideApp.with(context)
-//                    .load(imageURL)
-//                    .into(mImageView);
+
+            GlideApp.with(context)
+                    .load(imageURL)
+                    .into(mImageView);
 
 
 

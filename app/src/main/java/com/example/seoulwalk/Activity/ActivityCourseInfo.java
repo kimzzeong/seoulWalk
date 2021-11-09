@@ -44,6 +44,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -54,17 +55,17 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         ActivityCompat.OnRequestPermissionsResultCallback{
 
 
+    //뷰페이저
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     ImageView[] indicators;
     private String[] images = new String[]{
-            "https://www.clien.net/service/api/ori/imgView?imgUrl=https://cdn.clien.net/web/api/file/F01/11590817/525be3c1f6e684.jpg&subject=PC%2520%25EA%25B3%25A0%25ED%2599%2594%25EC%25A7%2588%2520%25EB%25B0%25B0%25EA%25B2%25BD%25ED%2599%2594%25EB%25A9%25B4_157",
-            "https://www.clien.net/service/api/ori/imgView?imgUrl=https://cdn.clien.net/web/api/file/F01/11590818/a4233ec0e46cd4.jpg&subject=PC%2520%25EA%25B3%25A0%25ED%2599%2594%25EC%25A7%2588%2520%25EB%25B0%25B0%25EA%25B2%25BD%25ED%2599%2594%25EB%25A9%25B4_157"
+            "https://i.imgur.com/36Bivob.jpeg" , "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
     };
 
+    //구글 맵
     private GoogleMap mMap;
     private Marker currentMarker = null;
-
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
@@ -86,6 +87,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private LocationRequest locationRequest;
     private Location location;
     private View mLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +107,16 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
+        FloatingActionButton dulle_gil_walk = findViewById(R.id.dulle_gil_walk);
+
         mLayout = findViewById(R.id.layout_main);
+
+        dulle_gil_walk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"따라걷기",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
