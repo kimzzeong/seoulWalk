@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
@@ -30,7 +32,10 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
+import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
+import com.example.seoulwalk.adapter.ReviewAdapter;
+import com.example.seoulwalk.data.Review_Data;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -50,6 +55,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -69,6 +75,9 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private String[] images = new String[]{
             "https://i.imgur.com/36Bivob.jpeg" , "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
     };
+
+    //후기 리스트
+    ArrayList<Review_Data> review_list = new ArrayList<Review_Data>();
 
     //구글 맵
     private GoogleMap mMap;
@@ -147,6 +156,18 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 Toast.makeText(getApplicationContext(),"따라걷기",Toast.LENGTH_SHORT).show();
             }
         });
+
+        for (int i = 1; i <= 5; i++){
+
+            Review_Data review_data = new Review_Data("aaaa"+i);
+            review_list.add(review_data);
+        }
+
+        RecyclerView review = findViewById(R.id.course_review_list);
+        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+
+        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list);
+        review.setAdapter(reviewAdapter);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
