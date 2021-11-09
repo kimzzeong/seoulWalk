@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.data.Dulle_Data;
 import com.example.seoulwalk.data.Review_Data;
 
 import java.util.ArrayList;
