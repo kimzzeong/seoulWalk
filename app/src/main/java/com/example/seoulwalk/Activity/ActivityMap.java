@@ -62,8 +62,8 @@ public class ActivityMap extends AppCompatActivity
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 60000;  // 10초
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 5000; //5초
 
 
     // onRequestPermissionsResult에서 수신된 결과에서
@@ -89,8 +89,12 @@ public class ActivityMap extends AppCompatActivity
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
+    /**여기다가 싹다 넣어 줘야 한다 */
+    private ArrayList<LatLng> arrayPoints;
+    //private PolylineOptions polylineOptions = new PolylineOptions();
 
     private void drawPath(){        //polyline을 그려주는 메소드
+        //EXAM exam = new EXAM();
         PolylineOptions options = new PolylineOptions().add(START_LOCATION).add(END_LOCATION).width(15).color(Color.BLACK).geodesic(true);
         polylines.add(mMap.addPolyline(options));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
@@ -120,8 +124,8 @@ public class ActivityMap extends AppCompatActivity
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+                .setInterval(UPDATE_INTERVAL_MS);
+//                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
 
         LocationSettingsRequest.Builder builder =

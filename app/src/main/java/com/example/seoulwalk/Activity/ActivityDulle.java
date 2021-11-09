@@ -19,7 +19,9 @@ import com.example.seoulwalk.R;
 import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.Dulle2Adapter;
 import com.example.seoulwalk.data.Dulle_Data;
+import com.example.seoulwalk.data.Exam_data;
 import com.example.seoulwalk.retrofit.Dulle_Name;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -54,7 +56,8 @@ public class ActivityDulle extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        retrofit_dulle();
+        // TODO: 11/9/21 좀있다가 열어 줘라
+        //retrofit_dulle();
     }
 
     @Override
@@ -65,7 +68,10 @@ public class ActivityDulle extends AppCompatActivity {
         test_text_btn = findViewById(R.id.test_text_btn);
 
 
-
+        Exam_data exam_data = new Exam_data();
+        String a = exam_data.getVv();
+        Log.e("CREATE!!!!",a);
+        parde_Location(a);
 
 
         shared = new PreferenceHelper(this);
@@ -319,5 +325,44 @@ public class ActivityDulle extends AppCompatActivity {
     }
 
 
+    ///데이터 파싱
+    private void parde_Location(String response)
+    {
+
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i=0; i<filt1.length; i++){
+
+            System.out.println(filt1[i]+"확인중"+i);
+            arrayList.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 "+arrayList.size());
+
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        ArrayList<String> arrayList3 = new ArrayList<>();
+        for (int i=0; i<arrayList.size(); i++){
+            System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList.get(i).split(",");
+
+            System.out.println("filt2" + filt2.length);
+
+            System.out.println(filt2[0]);
+            System.out.println(filt2[1]);
+            arrayList2.add(filt2[0]);
+            arrayList3.add(filt2[1]);
+
+
+
+        }
+
+        System.out.println("x값 리스트" + arrayList2.size());
+        System.out.println("y값 리스트" + arrayList3.size());
+
+
+
+
+
+    }
 
 }
