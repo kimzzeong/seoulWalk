@@ -40,6 +40,7 @@ public class ActivityDulle extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
+
     Button course_btn, mypage_btn, home_btn, community_btn;
     TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
     PreferenceHelper shared;
@@ -62,6 +63,10 @@ public class ActivityDulle extends AppCompatActivity {
         setContentView(R.layout.activity_dulle);
 
         test_text_btn = findViewById(R.id.test_text_btn);
+
+
+
+
 
         shared = new PreferenceHelper(this);
 //        dulle_data= new Dulle_Data("도봉산역","2시간 50분","당고개공원 갈림길");
@@ -91,30 +96,13 @@ public class ActivityDulle extends AppCompatActivity {
         dulle1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         dulle2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
-        dulle1Adapter = new Dulle1Adapter(list1);
-        dulle1.setAdapter(dulle1Adapter);
-
-        dulle2Adapter = new Dulle2Adapter(list2);
-        dulle2.setAdapter(dulle2Adapter);
-
-        dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
-                startActivity(intent);
-            }
-        });
+//        dulle1Adapter = new Dulle1Adapter(list1);
+//        dulle1.setAdapter(dulle1Adapter);
+//
+//        dulle2Adapter = new Dulle2Adapter(list2);
+//        dulle2.setAdapter(dulle2Adapter);
 
 
-        dulle2Adapter.setOnItemClickListener(new Dulle2Adapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                //Toast.makeText(getApplicationContext(),"click2 : "+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
-                startActivity(intent);
-            }
-        });
 
         //홈 버튼 클릭 시 차트 액티비티로 이동
         home_btn.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +226,7 @@ public class ActivityDulle extends AppCompatActivity {
                     dulle_data.setDulle_name_start(dataobj.getString("dulle_start"));
                     dulle_data.setDulle_name_end(dataobj.getString("dulle_end"));
                     dulle_data.setDulle_time(dataobj.getString("dulle_time"));
-                    System.out.println(dataobj.getString("dulle_start")+i+"번쨰");
+                   // System.out.println(dataobj.getString("dulle_start")+i+"번쨰");
                     list1.add(dulle_data);
                     ///saveInfo(list1);
 
@@ -251,6 +239,28 @@ public class ActivityDulle extends AppCompatActivity {
 //
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle1Adapter);
+
+                dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                        intent.putExtra("dulle",list1.get(position).getDulle_name_start());
+                        startActivity(intent);
+                    }
+                });
+
+
+                dulle2Adapter.setOnItemClickListener(new Dulle2Adapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        //Toast.makeText(getApplicationContext(),"click2 : "+position,Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                        startActivity(intent);
+                    }
+                });
+
+
             }
 
         }
