@@ -56,7 +56,7 @@ public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        Log.e("aaaa",String.valueOf(mData.size()));
+        //Log.e("aaaa",String.valueOf(mData.size()));
         return mData.size();
 
     }
