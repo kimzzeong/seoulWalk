@@ -10,6 +10,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -19,6 +20,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
@@ -37,9 +39,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,6 +56,9 @@ public class ActivityMap extends AppCompatActivity
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
+    List<Polyline>polylines =new ArrayList<>();
+    LatLng START_LOCATION;
+    LatLng END_LOCATION;
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -76,14 +84,32 @@ public class ActivityMap extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-
+    TextView dullegil_name;
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
+
+    private void drawPath(){        //polyline을 그려주는 메소드
+        PolylineOptions options = new PolylineOptions().add(START_LOCATION).add(END_LOCATION).width(15).color(Color.BLACK).geodesic(true);
+        polylines.add(mMap.addPolyline(options));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        dullegil_name = findViewById(R.id.dullegil_name);
+        Intent intent = getIntent();
+
+        String confirm = intent.getStringExtra("dulle");
+        System.out.println(confirm+"값 확인");
+        //dullegil_name.setText("asdasdasdasdasdasdas");
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -110,6 +136,8 @@ public class ActivityMap extends AppCompatActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
 
@@ -124,10 +152,11 @@ public class ActivityMap extends AppCompatActivity
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
 
 
-
+        setStartLocation();
+        setEndLocation();
+        drawPath();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -147,12 +176,14 @@ public class ActivityMap extends AppCompatActivity
             startLocationUpdates(); // 3. 위치 업데이트 시작
 
 
+
+
         }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
             Log.e("Persion_Check","Else");
             // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
-
+                setDefaultLocation();
                 // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
                 Snackbar.make(mLayout, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.",
                         Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
@@ -344,7 +375,7 @@ public class ActivityMap extends AppCompatActivity
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
 
-        if (currentMarker != null) currentMarker.remove();
+        //if (currentMarker != null) currentMarker.remove();
 
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -389,6 +420,55 @@ public class ActivityMap extends AppCompatActivity
 
     }
 
+    // TODO: 11/9/21 시작 지점
+    public void setStartLocation() {
+
+
+        //디폴트 위치, Seoul
+        START_LOCATION = new LatLng(37.68917268817206, 127.0468070568162);
+        String markerTitle = "도봉산역 ";
+        String markerSnippet = "여기는 시작 지점입니다.";
+
+
+        //if (currentMarker != null) currentMarker.remove();
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(START_LOCATION);
+        markerOptions.title(markerTitle);
+        markerOptions.snippet(markerSnippet);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        currentMarker = mMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
+        mMap.moveCamera(cameraUpdate);
+
+    }
+
+    // TODO: 11/9/21 시작 지점
+    public void setEndLocation() {
+
+
+        //디폴트 위치, Seoul
+        END_LOCATION = new LatLng(37.62058395602092,127.0845057476389);
+        String markerTitle = "당고개공원 갈림길";
+        String markerSnippet = "여기는 도착 지점입니다.";
+
+
+       // if (currentMarker != null) currentMarker.remove();
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(END_LOCATION);
+        markerOptions.title(markerTitle);
+        markerOptions.snippet(markerSnippet);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        currentMarker = mMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(END_LOCATION, 15);
+        mMap.moveCamera(cameraUpdate);
+
+    }
 
     //여기부터는 런타임 퍼미션 처리을 위한 메소드들
     private boolean checkPermission() {
