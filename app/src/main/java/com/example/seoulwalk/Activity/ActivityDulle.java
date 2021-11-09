@@ -77,7 +77,7 @@ public class ActivityDulle extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
                 startActivity(intent);
             }
         });
@@ -87,7 +87,7 @@ public class ActivityDulle extends AppCompatActivity {
             @Override
             public void onItemClick(View v, int position) {
                 //Toast.makeText(getApplicationContext(),"click2 : "+position,Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
                 startActivity(intent);
             }
         });

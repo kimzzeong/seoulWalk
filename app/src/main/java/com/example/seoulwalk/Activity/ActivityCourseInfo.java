@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -20,10 +21,14 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
+import com.example.seoulwalk.adapter.ImageSliderAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -48,6 +53,14 @@ import java.util.Locale;
 public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback{
 
+
+    private ViewPager2 sliderViewPager;
+    private LinearLayout layoutIndicator;
+    ImageView[] indicators;
+    private String[] images = new String[]{
+            "https://www.clien.net/service/api/ori/imgView?imgUrl=https://cdn.clien.net/web/api/file/F01/11590817/525be3c1f6e684.jpg&subject=PC%2520%25EA%25B3%25A0%25ED%2599%2594%25EC%25A7%2588%2520%25EB%25B0%25B0%25EA%25B2%25BD%25ED%2599%2594%25EB%25A9%25B4_157",
+            "https://www.clien.net/service/api/ori/imgView?imgUrl=https://cdn.clien.net/web/api/file/F01/11590818/a4233ec0e46cd4.jpg&subject=PC%2520%25EA%25B3%25A0%25ED%2599%2594%25EC%25A7%2588%2520%25EB%25B0%25B0%25EA%25B2%25BD%25ED%2599%2594%25EB%25A9%25B4_157"
+    };
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -107,6 +120,59 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.course_map);
         mapFragment.getMapAsync(this);
+
+        //저장되어있는 데이터들(구장정보, 이미지들) 불러올 것
+
+        sliderViewPager = findViewById(R.id.sliderViewPager);
+        layoutIndicator = findViewById(R.id.layoutIndicators);
+
+        sliderViewPager.setOffscreenPageLimit(1);
+        sliderViewPager.setAdapter(new ImageSliderAdapter(getApplicationContext(), images));
+
+        sliderViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                setCurrentIndicator(position);
+            }
+        });
+
+        setupIndicators(images.length);
+    }
+
+    private void setupIndicators(int count) {
+        indicators = new ImageView[count];
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+        params.setMargins(16, 8, 16, 8);
+
+        for (int i = 0; i < indicators.length; i++) {
+            indicators[i] = new ImageView(this);
+            indicators[i].setImageDrawable(ContextCompat.getDrawable(this,
+                    R.drawable.bg_indicator_inactive));
+            indicators[i].setLayoutParams(params);
+            layoutIndicator.addView(indicators[i]);
+        }
+        setCurrentIndicator(0);
+    }
+
+    private void setCurrentIndicator(int position) {
+        int childCount = layoutIndicator.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            ImageView imageView = (ImageView) layoutIndicator.getChildAt(i);
+            if (i == position) {
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                        this,
+                        R.drawable.bg_indicator_active
+                ));
+            } else {
+                imageView.setImageDrawable(ContextCompat.getDrawable(
+                        this,
+                        R.drawable.bg_indicator_inactive
+                ));
+            }
+        }
     }
 
     @Override
