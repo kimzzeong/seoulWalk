@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
+import com.example.seoulwalk.data.Exam_data;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -59,6 +60,7 @@ public class ActivityMap extends AppCompatActivity
     List<Polyline>polylines =new ArrayList<>();
     LatLng START_LOCATION;
     LatLng END_LOCATION;
+    ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
@@ -95,8 +97,22 @@ public class ActivityMap extends AppCompatActivity
 
     private void drawPath(){        //polyline을 그려주는 메소드
         //EXAM exam = new EXAM();
-        PolylineOptions options = new PolylineOptions().add(START_LOCATION).add(END_LOCATION).width(15).color(Color.BLACK).geodesic(true);
+        Exam_data exam_data = new Exam_data();
+        String a = exam_data.getVv();
+        Log.e("CREATE!!!!",a);
+        parde_Location(a);
+        PolylineOptions options = new PolylineOptions();
+//        for (int i =0; i<latLngArrayList.size(); i++){
+//            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
+//            polylines.add(mMap.addPolyline(options));
+//        }
+
+        options.addAll(latLngArrayList);
+        options.width(15);
+        options.color(Color.BLACK);
+
         polylines.add(mMap.addPolyline(options));
+        Log.e("폴리라인","그려지나요?");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
     }
 
@@ -616,6 +632,39 @@ public class ActivityMap extends AppCompatActivity
         }
     }
 
+    private void parde_Location(String response)
+    {
 
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i=0; i<filt1.length; i++){
+
+            System.out.println(filt1[i]+"확인중"+i);
+            arrayList.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 "+arrayList.size());
+
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        ArrayList<String> arrayList3 = new ArrayList<>();
+
+        for (int i=0; i<arrayList.size(); i++){
+            System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList.get(i).split(",");
+
+            System.out.println("filt2" + filt2.length);
+
+            System.out.println(filt2[0]);
+            System.out.println(filt2[1]);
+            arrayList2.add(filt2[0]);
+            arrayList3.add(filt2[1]);
+            double longitude = Double.parseDouble(arrayList2.get(i).toString());
+            double latitude = Double.parseDouble(arrayList3.get(i).toString());
+            latLngArrayList.add(new LatLng(latitude, longitude));
+
+        }
+
+
+    }
 
 }
