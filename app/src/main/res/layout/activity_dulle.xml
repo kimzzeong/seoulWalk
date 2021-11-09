@@ -68,13 +68,12 @@
 
     <TextView
         android:id="@+id/test_text_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="25dp"
+        android:layout_width="31dp"
+        android:layout_height="27dp"
         android:text="회원"
-        />
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_bar"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <LinearLayout
         android:id="@+id/bottom_bar"

@@ -148,7 +148,7 @@ public class ActivityDulle extends AppCompatActivity {
         test_text_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityJoin.class);
+                Intent intent = new Intent(v.getContext(), ActivityMap.class);
                 startActivity(intent);
             }
         });

@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
@@ -64,9 +65,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
     //탭 레이아웃을 레이아웃 보여줬다 안보여줬다로 만듦
-    ConstraintLayout course_review_layout, course_info_layout;
+    ConstraintLayout course_review_layout;
+    ScrollView course_info_layout;
     boolean course_layout_flag = false;
     Button course_info_btn, course_review_btn;
+    FloatingActionButton dulle_gil_walk; // 따라가기 플로팅버튼
 
     //뷰페이저
     private ViewPager2 sliderViewPager;
@@ -77,7 +80,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     };
 
     //후기 리스트
-    ArrayList<Review_Data> review_list = new ArrayList<Review_Data>();
+    ArrayList<Review_Data> review_list = new ArrayList<>();
 
     //구글 맵
     private GoogleMap mMap;
@@ -118,6 +121,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         course_info_btn = findViewById(R.id.course_info_btn);
         course_review_btn = findViewById(R.id.course_review_btn);
+
+        dulle_gil_walk = findViewById(R.id.dulle_gil_walk);
 
         course_info_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +171,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         RecyclerView review = findViewById(R.id.course_review_list);
         review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
-        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list);
+        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list,this);
         review.setAdapter(reviewAdapter);
 
         locationRequest = new LocationRequest()
@@ -208,9 +213,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         if(!course_layout_flag){
             course_info_layout.setVisibility(View.VISIBLE);
             course_review_layout.setVisibility(View.GONE);
+            dulle_gil_walk.setVisibility(View.VISIBLE);
         }else{
             course_info_layout.setVisibility(View.GONE);
             course_review_layout.setVisibility(View.VISIBLE);
+            dulle_gil_walk.setVisibility(View.GONE);
         }
     }
 
