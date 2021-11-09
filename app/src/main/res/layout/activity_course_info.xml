@@ -31,7 +31,6 @@
         app:layout_constraintTop_toBottomOf="@+id/course_info_actionbar"
         app:layout_constraintBottom_toBottomOf="parent"
         >
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="코스 정보"
                 android:layout_weight="1"
+                android:id="@+id/course_info_btn"
 
                 />
             <Button
@@ -63,175 +63,199 @@
                 android:layout_height="wrap_content"
                 android:text="후기"
                 android:layout_weight="1"
+                android:id="@+id/course_review_btn"
                 />
         </LinearLayout>
-
-        <fragment
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:id="@+id/course_map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
-            android:layout_marginTop="20dp"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/course_map"
-            android:background="@drawable/round_layout"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:id="@+id/course_smallinfo_layout"
-            >
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:src="@drawable/ic_baseline_access_time_24"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="3dp"
-                android:id="@+id/time_icon" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/time_text"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="90분"
-                android:textSize="15sp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/black"
-                />
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:src="@drawable/distance"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="3dp"
-                android:id="@+id/distance_icon" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:id="@+id/distance_text"
-                android:text="5.5km"
-                android:textSize="15dp"
-                android:layout_marginRight="5dp"
-                android:textColor="@color/black"
-                />
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:src="@drawable/footprints"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:layout_marginRight="3dp"
-                android:id="@+id/step_icon" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:id="@+id/step_text"
-                android:text="걸음수"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:id="@+id/course_level"
-                android:gravity="center"
-                android:text="난이도 중"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/course_smallinfo_layout"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:paddingLeft="10dp"
-            android:text="위치 : 서울 서초구"
-            android:id="@+id/course_address"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/course_address"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:paddingLeft="10dp"
-            android:text="코스개요 : ~~~~"
-            android:id="@+id/course_content"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/course_content"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:paddingLeft="10dp"
-            android:text="세부코스 : A - B - C"
-            android:id="@+id/course_detail"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/course_detail"
-            android:textSize="20sp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black"
-            android:paddingLeft="10dp"
-            android:text="교통편 : 출발지에서 가장 가까운 역"
-            android:id="@+id/course_traffic"
-            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/course_traffic"
-            android:layout_height="300dp"
-            android:layout_marginTop="15dp">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
+            android:id="@+id/course_info_layout"
+            android:visibility="invisible"
+            >
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/sliderViewPager"
+            <fragment
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="300dp"
+                android:id="@+id/course_map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <View
-                android:id="@+id/viewFadingEdge"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@drawable/bg_fading_edge"
-                app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
-
+                android:layout_marginTop="20dp"
+                />
             <LinearLayout
-                android:id="@+id/layoutIndicators"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 android:orientation="horizontal"
-                android:paddingBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/course_map"
+                android:background="@drawable/round_layout"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:id="@+id/course_smallinfo_layout"
+                >
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:src="@drawable/ic_baseline_access_time_24"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/time_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/time_text"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="90분"
+                    android:textSize="15sp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/black"
+                    />
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:src="@drawable/distance"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/distance_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/distance_text"
+                    android:text="5.5km"
+                    android:textSize="15dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="@color/black"
+                    />
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:src="@drawable/footprints"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginRight="3dp"
+                    android:id="@+id/step_icon" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/step_text"
+                    android:text="걸음수"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/course_level"
+                    android:gravity="center"
+                    android:text="난이도 중"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/course_smallinfo_layout"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:text="위치 : 서울 서초구"
+                android:id="@+id/course_address"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/course_address"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:text="코스개요 : ~~~~"
+                android:id="@+id/course_content"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/course_content"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:text="세부코스 : A - B - C"
+                android:id="@+id/course_detail"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/course_detail"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:text="교통편 : 출발지에서 가장 가까운 역"
+                android:id="@+id/course_traffic"
+                />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/course_traffic"
+                android:layout_height="300dp"
+                android:layout_marginTop="15dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/sliderViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <View
+                    android:id="@+id/viewFadingEdge"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="@drawable/bg_fading_edge"
+                    app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
+
+                <LinearLayout
+                    android:id="@+id/layoutIndicators"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/viewFadingEdge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
+            android:id="@+id/course_review_layout"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="리뷰"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="30sp"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -245,4 +269,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@color/main"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
