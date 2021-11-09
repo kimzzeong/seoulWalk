@@ -52,7 +52,7 @@
         android:layout_marginTop="15dp">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/sliderViewPager"
+            android:id="@+id/sliderViewPager_review"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,10 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@drawable/bg_fading_edge"
-            app:layout_constraintBottom_toBottomOf="@id/sliderViewPager" />
+            app:layout_constraintBottom_toBottomOf="@id/sliderViewPager_review" />
 
         <LinearLayout
-            android:id="@+id/layoutIndicators"
+            android:id="@+id/layoutIndicators_review"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -151,6 +151,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="5시간 전"
         />
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="3px"
+        android:layout_marginTop="5sp"
+        android:background="#E2EAE2"
+        app:layout_constraintTop_toBottomOf="@+id/review_item_ago" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
