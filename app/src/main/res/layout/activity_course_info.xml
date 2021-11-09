@@ -249,12 +249,11 @@
             android:id="@+id/course_review_layout"
             android:visibility="gone"
             >
-            <TextView
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/course_review_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="리뷰"
                 app:layout_constraintTop_toTopOf="parent"
-                android:textSize="30sp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

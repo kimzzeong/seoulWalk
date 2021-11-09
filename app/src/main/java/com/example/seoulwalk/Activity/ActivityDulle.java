@@ -170,7 +170,7 @@ public class ActivityDulle extends AppCompatActivity {
                 .build();
 
         Dulle_Name api = retrofit.create(Dulle_Name.class);
-        Call<ArrayList<Dulle_Data>> call = api.getDulleRegist("aaa","bbb",username);
+        Call<ArrayList<Dulle_Data>> call = api.getDulleRegist("bbb",username);
         call.enqueue(new Callback<ArrayList<Dulle_Data>>()
         {
             @Override

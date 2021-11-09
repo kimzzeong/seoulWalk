@@ -16,7 +16,7 @@ public interface Dulle_Name {
     @FormUrlEncoded
     @POST("tim_php/dulle_Name.php")
     Call<ArrayList<Dulle_Data>> getDulleRegist(
-            @Field("dulle_start") String dulle_start1,
+        //    @Field("dulle_start") String dulle_start1,
             @Field("dulle_end") String dulle_end,
             @Field("dulle_start") String dulle_start   ///서버랑 통신하기 용
 
