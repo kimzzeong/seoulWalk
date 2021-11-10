@@ -81,6 +81,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     List<Polyline> polylines = new ArrayList<>();
     LatLng START_LOCATION;
     LatLng END_LOCATION;
+    PolylineOptions options = new PolylineOptions();
     ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
     //뷰페이저
     private ViewPager2 sliderViewPager;
@@ -645,36 +646,52 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         Exam_data exam_data = new Exam_data();
         if (dulle_start.equals("도봉산역")) {
             path = exam_data.getDulle_1_1();
+            options.color(Color.BLUE);
         } else if (dulle_start.equals("당고개공원 갈림길")) {
             path = exam_data.getDulle_1_2();
+            options.color(Color.BLUE);
         } else if (dulle_start.equals("철쭉동산")) {
             path = exam_data.getDulle_1_3();
+            options.color(Color.BLUE);
         } else if (dulle_start.equals("화랑대역")) {
             path = exam_data.getDulle_2_1();
+            options.color(Color.RED);
         } else if (dulle_start.equals("깔딱고개 쉼터(사가정 역)")) {
             path = exam_data.getDulle_2_2();
+            options.color(Color.RED);
         } else if (dulle_start.equals("광나루역")) {
             path = exam_data.getDulle_3_1();
+            options.color(Color.BLACK);
         } else if (dulle_start.equals("명일근린공원 입구")) {
             path = exam_data.getDulle_3_2();
+            options.color(Color.BLACK);
         } else if (dulle_start.equals("오금 1교")) {
             path = exam_data.getDulle_3_3();
+            options.color(Color.BLACK);
         } else if (dulle_start.equals("수서역")) {
             path = exam_data.getDulle_4_1();
+            options.color(Color.YELLOW);
         } else if (dulle_start.equals("양재시민숲")) {
             path = exam_data.getDulle_4_2();
+            options.color(Color.YELLOW);
         } else if (dulle_start.equals("사당역 갈림길")) {
             path = exam_data.getDulle_5_1();
+            options.color(Color.LTGRAY);
         } else if (dulle_start.equals("관악산 공원 입구")) {
             path = exam_data.getDulle_5_2();
+            options.color(Color.LTGRAY);
         } else if (dulle_start.equals("석수역")) {
             path = exam_data.getDulle_6_1();
+            options.color(Color.GREEN);
         } else if (dulle_start.equals("구일역")) {
             path = exam_data.getDulle_6_2();
+            options.color(Color.GREEN);
         } else if (dulle_start.equals("가양대교 남단")) {
             path = exam_data.getDulle_7_1();
+            options.color(Color.CYAN);
         } else if (dulle_start.equals("증산역 갈림길")) {
             path = exam_data.getDulle_7_2();
+            options.color(Color.CYAN);
         }else {
             path = exam_data.getDulle_7_2();
         }
@@ -687,7 +704,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
         parse_Location(path);
-        PolylineOptions options = new PolylineOptions();
+
 //        for (int i =0; i<latLngArrayList.size(); i++){
 //            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
 //            polylines.add(mMap.addPolyline(options));
@@ -695,7 +712,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         options.addAll(latLngArrayList);
         options.width(15);
-        options.color(Color.BLACK);
+        //options.color(Color.BLACK);
 
         polylines.add(mMap.addPolyline(options));
         Log.e("폴리라인", "그려지나요?");
@@ -797,7 +814,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     }
                 });
                 Button btn_end  =( (Button)infoWindow.findViewById(R.id.btn_end));
-                
+
 
 
 
