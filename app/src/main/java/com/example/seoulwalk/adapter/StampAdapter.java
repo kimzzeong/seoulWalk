@@ -1,46 +1,49 @@
 package com.example.seoulwalk.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.data.History_Data;
+import com.example.seoulwalk.data.Stamp_Data;
 
 import java.util.ArrayList;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+public class StampAdapter extends RecyclerView.Adapter<StampAdapter.ViewHolder> {
 
-    private ArrayList<History_Data> mData = null;
+    private ArrayList<Stamp_Data> mData = null;
+    Context context;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.history_item, parent,false);
-        HistoryAdapter.ViewHolder vh = new HistoryAdapter.ViewHolder(view);
+        View view = inflater.inflate(R.layout.stamp_item, parent,false);
+        StampAdapter.ViewHolder vh = new StampAdapter.ViewHolder(view);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        History_Data history_data = mData.get(position);
+        Stamp_Data stamp_data = mData.get(position);
 
-        holder.history_time.setText(history_data.getHistory_time());
-        holder.history_name.setText(history_data.getHistory_name());
-        holder.history_history_review.setText(history_data.getHistory_review());
+        Glide.with(context)
+                .load(stamp_data.getStmap_img())
+                .into(holder.stamp_image);
 
-    }
+        holder.stamp_title.setText(stamp_data.getStamp_name());
 
-    public HistoryAdapter(ArrayList<History_Data> list) {
-        mData = list;
     }
 
     @Override
@@ -48,16 +51,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return mData.size();
     }
 
+    public StampAdapter(ArrayList<Stamp_Data> list) {
+        mData = list;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView history_time, history_name, history_history_review;
+        ImageView stamp_image;
+        TextView stamp_title;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            history_time = itemView.findViewById(R.id.history_time);
-            history_name = itemView.findViewById(R.id.history_name);
-            history_history_review = itemView.findViewById(R.id.history_review);
+            stamp_image = itemView.findViewById(R.id.stamp_image);
+            stamp_title = itemView.findViewById(R.id.stamp_title);
         }
     }
 }
