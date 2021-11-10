@@ -3,13 +3,11 @@ package com.example.seoulwalk.data;
 public class Stamp_Data {
     int stmap_img;
     String stamp_name;
-    boolean stamp_it;
 
 
-    public Stamp_Data(int stmap_img, String stamp_name, boolean stamp_it){
+    public Stamp_Data(int stmap_img, String stamp_name){
         this.stmap_img = stmap_img;
         this.stamp_name = stamp_name;
-        this.stamp_it = stamp_it;
 
     }
 
@@ -27,14 +25,6 @@ public class Stamp_Data {
 
     public void setStamp_name(String stamp_name) {
         this.stamp_name = stamp_name;
-    }
-
-    public boolean isStamp_it() {
-        return stamp_it;
-    }
-
-    public void setStamp_it(boolean stamp_it) {
-        this.stamp_it = stamp_it;
     }
 
 

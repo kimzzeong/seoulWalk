@@ -42,17 +42,9 @@ public class StampAdapter extends RecyclerView.Adapter<StampAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Stamp_Data stamp_data = mData.get(position);
 
-        if(stamp_data.isStamp_it()){ // true면 컬러스탬프
-            Glide.with(context)
-                    .load(stamp_data.getStmap_img())
-                    .into(holder.stamp_image);
-        }else{ // false면 흑백스탬프
-            Glide.with(context)
-                    .load(stamp_data.getStmap_img())
-                    .apply(RequestOptions.bitmapTransform(new GrayscaleTransformation())) //흑백으로 만들어줌;; glide 대박
-                    .into(holder.stamp_image);
-        }
-
+        Glide.with(context)
+                .load(stamp_data.getStmap_img())
+                .into(holder.stamp_image);
 
 
         holder.stamp_title.setText(stamp_data.getStamp_name());
