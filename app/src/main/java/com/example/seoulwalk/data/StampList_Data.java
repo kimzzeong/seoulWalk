@@ -5,8 +5,16 @@ import java.util.ArrayList;
 public class StampList_Data {
 
     String stampTitle;
-    ArrayList<Stamp_Data> stampList;
+    String course_title;
 
+    public String getCourse_title() {
+        return course_title;
+    }
+
+    public void setCourse_title(String course_title) {
+        this.course_title = course_title;
+    }
+;
     public String getStampTitle() {
         return stampTitle;
     }
@@ -15,17 +23,9 @@ public class StampList_Data {
         this.stampTitle = stampTitle;
     }
 
-    public ArrayList<Stamp_Data> getStampList() {
-        return stampList;
-    }
 
-    public void setStampList(ArrayList<Stamp_Data> stampList) {
-        this.stampList = stampList;
-    }
-
-
-    public StampList_Data(String stampTitle){ //   , ArrayList<Stamp_Data> stampList
+    public StampList_Data(String stampTitle, String course_title){
         this.stampTitle = stampTitle;
-      //  this.stampList = stampList;
+        this.course_title = course_title;
     }
 }
