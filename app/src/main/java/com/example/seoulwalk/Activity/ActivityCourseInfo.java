@@ -66,7 +66,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback{
+        ActivityCompat.OnRequestPermissionsResultCallback , GoogleMap.OnMarkerClickListener {
 
 
     //탭 레이아웃을 레이아웃 보여줬다 안보여줬다로 만듦
@@ -75,7 +75,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     boolean course_layout_flag = false;
     Button course_info_btn, course_review_btn;
     FloatingActionButton dulle_gil_walk; // 따라가기 플로팅버튼
-    List<Polyline>polylines =new ArrayList<>();
+    List<Polyline> polylines = new ArrayList<>();
     LatLng START_LOCATION;
     LatLng END_LOCATION;
     ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
@@ -84,7 +84,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private LinearLayout layoutIndicator;
     ImageView[] indicators;
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg" , "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
+            "https://i.imgur.com/36Bivob.jpeg", "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
     };
 
     //후기 리스트
@@ -104,7 +104,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
     // 앱을 실행하기 위해 필요한 퍼미션을 정의합니다.
-    String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
+    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
     Location mCurrentLocatiion;
@@ -119,8 +119,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     String dulle_end; //둘레길 도착점 이름
     String Lat_start; //둘레길 도착점 이름
     String Lat_end; //둘레길 도착점 이름
-
-
 
 
     @Override
@@ -138,12 +136,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         dulle_end = intent.getStringExtra("dulle_end");
         Lat_start = intent.getStringExtra("LanLng");
         Lat_end = intent.getStringExtra("LatLng_end");
-        System.out.println(dulle_start+"-- : 시작점 값 확인");
-        System.out.println(dulle_end+"-- : 도착점 값 확인");
-        System.out.println(Lat_start+"-- : 시작점 좌표 값 확인");
-        System.out.println(Lat_end+"-- : 도착점 좌표 값 확인");
-
-
+        System.out.println(dulle_start + "-- : 시작점 값 확인");
+        System.out.println(dulle_end + "-- : 도착점 값 확인");
+        System.out.println(Lat_start + "-- : 시작점 좌표 값 확인");
+        System.out.println(Lat_end + "-- : 도착점 좌표 값 확인");
 
 
         course_review_layout = findViewById(R.id.course_review_layout);
@@ -200,7 +196,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         });
 
 
-
         //커스텀 액션바 세팅
         Toolbar toolbar;
         ActionBar actionBar;
@@ -218,20 +213,20 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         dulle_gil_walk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"따라걷기",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "따라걷기", Toast.LENGTH_SHORT).show();
             }
         });
 
-        for (int i = 1; i <= 5; i++){
+        for (int i = 1; i <= 5; i++) {
 
-            Review_Data review_data = new Review_Data("aaaa"+i);
+            Review_Data review_data = new Review_Data("aaaa" + i);
             review_list.add(review_data);
         }
 
         RecyclerView review = findViewById(R.id.course_review_list);
-        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list,this);
+        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list, this);
         review.setAdapter(reviewAdapter);
 
         locationRequest = new LocationRequest()
@@ -270,11 +265,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     //레이아웃 변환(탭 레이아웃처럼)
     private void layoutChange(boolean course_layout_flag) {
 
-        if(!course_layout_flag){
+        if (!course_layout_flag) {
             course_info_layout.setVisibility(View.VISIBLE);
             course_review_layout.setVisibility(View.GONE);
             dulle_gil_walk.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             course_info_layout.setVisibility(View.GONE);
             course_review_layout.setVisibility(View.VISIBLE);
             dulle_gil_walk.setVisibility(View.GONE);
@@ -297,6 +292,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         }
         setCurrentIndicator(0);
     }
+
 
     private void setCurrentIndicator(int position) {
         int childCount = layoutIndicator.getChildCount();
@@ -326,8 +322,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         //지도의 초기위치를 서울로 이동
         //setDefaultLocation();
 
+        //마커 표시 && 폴리라인 그리기
         setStartLocation();
         setEndLocation();
+        drawPath();
+
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -336,14 +335,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
 
             // 2. 이미 퍼미션을 가지고 있다면
             // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
 
             startLocationUpdates(); // 3. 위치 업데이트 시작
 
-        }else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
+        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
 
             // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])) {
@@ -356,7 +355,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     public void onClick(View view) {
 
                         // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                        ActivityCompat.requestPermissions( ActivityCourseInfo.this, REQUIRED_PERMISSIONS,
+                        ActivityCompat.requestPermissions(ActivityCourseInfo.this, REQUIRED_PERMISSIONS,
                                 PERMISSIONS_REQUEST_CODE);
                     }
                 }).show();
@@ -364,11 +363,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             } else {
                 // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
                 // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS,
+                ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS,
                         PERMISSIONS_REQUEST_CODE);
             }
         }
-
 
 
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
@@ -380,7 +378,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d( TAG, "onMapClick :");
+                Log.d(TAG, "onMapClick :");
             }
         });
     }
@@ -392,6 +390,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             List<Location> locationList = locationResult.getLocations();
 
+            Log.e("최영완 로그", String.valueOf(locationList.size()));
             if (locationList.size() > 0) {
                 location = locationList.get(locationList.size() - 1);
                 //location = locationList.get(0);
@@ -399,7 +398,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
-                String markerTitle = getCurrentAddress(currentPosition);
+                String markerTitle = "현 위치 : "+getCurrentAddress(currentPosition);
+                /** 필요 없을 거 같은데 --> 나중에 길찾기 넣은면 될 듯  */
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());
 
@@ -414,13 +414,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         }
 
     };
+
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
 
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        }else {
+        } else {
 
             int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
@@ -428,7 +429,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                     Manifest.permission.ACCESS_COARSE_LOCATION);
 
             if (hasFineLocationPermission != PackageManager.PERMISSION_GRANTED ||
-                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED   ) {
+                    hasCoarseLocationPermission != PackageManager.PERMISSION_GRANTED) {
 
                 Log.d(TAG, "startLocationUpdates : 퍼미션 안가지고 있음");
                 return;
@@ -454,7 +455,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             Log.d(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
             mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-            if (mMap!=null)
+            if (mMap != null)
                 mMap.setMyLocationEnabled(true);
         }
     }
@@ -524,7 +525,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION,15);
         mMap.moveCamera(cameraUpdate);
     }
 
@@ -561,12 +562,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED &&
-                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED   ) {
+                hasCoarseLocationPermission == PackageManager.PERMISSION_GRANTED) {
             return true;
         }
         return false;
     }
-
 
 
     /*
@@ -633,13 +633,54 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     }
 
     // TODO: 11/9/21 //Poly_Line_Draw
-    private void drawPath(){
+    String path;
 
-
+    public void path_data() {
         Exam_data exam_data = new Exam_data();
-        String a = exam_data.getDulle_1_1();
-        Log.e("CREATE!!!!",a);
-        parse_Location(a);
+        if (dulle_start.equals("도봉산역")) {
+            path = exam_data.getDulle_1_1();
+        } else if (dulle_start.equals("당고개공원 갈림길")) {
+            path = exam_data.getDulle_1_2();
+        } else if (dulle_start.equals("철쭉동산")) {
+            path = exam_data.getDulle_1_3();
+        } else if (dulle_start.equals("화랑대역")) {
+            path = exam_data.getDulle_2_1();
+        } else if (dulle_start.equals("깔딱고개 쉼터(사가정 역)")) {
+            path = exam_data.getDulle_2_2();
+        } else if (dulle_start.equals("광나루역")) {
+            path = exam_data.getDulle_3_1();
+        } else if (dulle_start.equals("명일근린공원 입구")) {
+            path = exam_data.getDulle_3_2();
+        } else if (dulle_start.equals("오금 1교")) {
+            path = exam_data.getDulle_3_3();
+        } else if (dulle_start.equals("수서역")) {
+            path = exam_data.getDulle_4_1();
+        } else if (dulle_start.equals("양재시민숲")) {
+            path = exam_data.getDulle_4_2();
+        } else if (dulle_start.equals("사당역 갈림길")) {
+            path = exam_data.getDulle_5_1();
+        } else if (dulle_start.equals("관악산 공원 입구")) {
+            path = exam_data.getDulle_5_2();
+        } else if (dulle_start.equals("석수역")) {
+            path = exam_data.getDulle_6_1();
+        } else if (dulle_start.equals("구일역")) {
+            path = exam_data.getDulle_6_2();
+        } else if (dulle_start.equals("가양대교 남단")) {
+            path = exam_data.getDulle_7_1();
+        } else if (dulle_start.equals("증산역 갈림길")) {
+            path = exam_data.getDulle_7_2();
+        }else {
+            path = exam_data.getDulle_7_2();
+        }
+
+    }
+
+    private void drawPath() {
+
+        path_data();
+
+
+        parse_Location(path);
         PolylineOptions options = new PolylineOptions();
 //        for (int i =0; i<latLngArrayList.size(); i++){
 //            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
@@ -651,35 +692,34 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         options.color(Color.BLACK);
 
         polylines.add(mMap.addPolyline(options));
-        Log.e("폴리라인","그려지나요?");
+        Log.e("폴리라인", "그려지나요?");
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
     }
 
     // TODO: 11/9/21 위치 데이터 파싱
-    private void parse_Location(String response)
-    {
+    private void parse_Location(String response) {
 
         String[] filt1 = response.split(",0");
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i=0; i<filt1.length; i++){
+        for (int i = 0; i < filt1.length; i++) {
 
-            System.out.println(filt1[i]+"확인중"+i);
+            //System.out.println(filt1[i]+"확인중"+i);
             arrayList.add(filt1[i]);
 
         }
-        System.out.println("확인합니다 "+arrayList.size());
+        System.out.println("확인합니다 " + arrayList.size());
 
         ArrayList<String> arrayList2 = new ArrayList<>();
         ArrayList<String> arrayList3 = new ArrayList<>();
 
-        for (int i=0; i<arrayList.size(); i++){
+        for (int i = 0; i < arrayList.size(); i++) {
             System.out.println("array get i" + arrayList.get(i));
             String[] filt2 = arrayList.get(i).split(",");
 
             System.out.println("filt2" + filt2.length);
-
-            System.out.println(filt2[0]);
-            System.out.println(filt2[1]);
+//
+//            System.out.println(filt2[0]);
+//            System.out.println(filt2[1]);
             arrayList2.add(filt2[0]);
             arrayList3.add(filt2[1]);
             double longitude = Double.parseDouble(arrayList2.get(i).toString());
@@ -690,6 +730,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
     }
+
     // TODO: 11/9/21 시작 지점
     public void setStartLocation() {
 
@@ -721,8 +762,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         String[] spil_t2 = Lat_end.split(",");
         //디폴트 위치, Seoul
-//        END_LOCATION = new LatLng(Double.parseDouble(spil_t2[0]), Double.parseDouble(spil_t2[1]));
-        END_LOCATION = new LatLng(37.66800060666563, 127.083568905654);
+        END_LOCATION = new LatLng(Double.parseDouble(spil_t2[0]), Double.parseDouble(spil_t2[1]));
+//        END_LOCATION = new LatLng(37.66800060666563, 127.083568905654);
         //String markerTitle = "당고개공원 갈림길";
         String markerSnippet = "여기는 도착 지점입니다.";
 
@@ -741,6 +782,21 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         mMap.moveCamera(cameraUpdate);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        // 기존 뒤로 가기 버튼의 기능을 막기 위해 주석 처리 또는 삭제
+
+        // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
+        // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지났으면 Toast 출력
+        // 2500 milliseconds = 2.5 seconds
+        Intent intent = new Intent(ActivityCourseInfo.this, ActivityDulle.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
+        startActivity(intent);  //인텐트 이동
+        finish();   //현재 액티비티 종료
+    }
+
 
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
@@ -789,5 +845,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
                 break;
         }
+    }
+
+
+    // TODO: 11/10/21 마커 클릭 이벤트
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+
+        Toast.makeText(this, "클릭 이벤트 실험중 ", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }
