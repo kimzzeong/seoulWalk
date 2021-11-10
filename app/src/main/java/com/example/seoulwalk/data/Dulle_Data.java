@@ -4,6 +4,25 @@ public class Dulle_Data {
     String dulle_name_start;
     String dulle_time;
     String dulle_name_end;
+    String Latlng;
+
+    public String getLatlng() {
+        return Latlng;
+    }
+
+    public void setLatlng(String latlng) {
+        Latlng = latlng;
+    }
+
+    public String getLatlng_end() {
+        return Latlng_end;
+    }
+
+    public void setLatlng_end(String latlng_end) {
+        Latlng_end = latlng_end;
+    }
+
+    String Latlng_end;
 
 //    public Dulle_Data(String dulle_name_start, String dulle_time, String dulle_name_end) {
 //        this.dulle_name_start = dulle_name_start;

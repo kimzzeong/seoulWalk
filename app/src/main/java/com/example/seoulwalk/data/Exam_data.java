@@ -54,7 +54,89 @@ public class Exam_data {
     String dulle_8_5 ="";
 
 
-    public String getVv() {
+
+
+    public String getDulle_1_1() {
         return dulle_1_1;
+    }
+
+    public String getDulle_1_2() {
+        return dulle_1_2;
+    }
+
+    public String getDulle_1_3() {
+        return dulle_1_3;
+    }
+
+    public String getDulle_2_1() {
+        return dulle_2_1;
+    }
+
+    public String getDulle_2_2() {
+        return dulle_2_2;
+    }
+
+    public String getDulle_3_1() {
+        return dulle_3_1;
+    }
+
+    public String getDulle_3_2() {
+        return dulle_3_2;
+    }
+
+    public String getDulle_3_3() {
+        return dulle_3_3;
+    }
+
+    public String getDulle_4_1() {
+        return dulle_4_1;
+    }
+
+    public String getDulle_4_2() {
+        return dulle_4_2;
+    }
+
+    public String getDulle_5_1() {
+        return dulle_5_1;
+    }
+
+    public String getDulle_5_2() {
+        return dulle_5_2;
+    }
+
+    public String getDulle_6_1() {
+        return dulle_6_1;
+    }
+
+    public String getDulle_6_2() {
+        return dulle_6_2;
+    }
+
+    public String getDulle_7_1() {
+        return dulle_7_1;
+    }
+
+    public String getDulle_7_2() {
+        return dulle_7_2;
+    }
+
+    public String getDulle_8_1() {
+        return dulle_8_1;
+    }
+
+    public String getDulle_8_2() {
+        return dulle_8_2;
+    }
+
+    public String getDulle_8_3() {
+        return dulle_8_3;
+    }
+
+    public String getDulle_8_4() {
+        return dulle_8_4;
+    }
+
+    public String getDulle_8_5() {
+        return dulle_8_5;
     }
 }

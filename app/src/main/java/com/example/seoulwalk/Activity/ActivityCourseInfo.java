@@ -16,6 +16,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -36,6 +37,7 @@ import com.example.seoulwalk.R;
 import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
 import com.example.seoulwalk.adapter.ReviewAdapter;
+import com.example.seoulwalk.data.Exam_data;
 import com.example.seoulwalk.data.Review_Data;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -52,6 +54,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -70,7 +74,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     boolean course_layout_flag = false;
     Button course_info_btn, course_review_btn;
     FloatingActionButton dulle_gil_walk; // 따라가기 플로팅버튼
-
+    List<Polyline>polylines =new ArrayList<>();
+    LatLng START_LOCATION;
+    LatLng END_LOCATION;
+    ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
     //뷰페이저
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
@@ -87,7 +94,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private Marker currentMarker = null;
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
+    private static final int UPDATE_INTERVAL_MS = 1000000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
@@ -107,6 +114,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private Location location;
     private View mLayout;
 
+    String dulle_start; //둘레길 시작점 이름
+    String dulle_end; //둘레길 도착점 이름
+    String Lat_start; //둘레길 도착점 이름
+    String Lat_end; //둘레길 도착점 이름
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +130,20 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_course_info);
+
+        /** 여기는 인테트로 시작점 끝점 받는 구간 */
+        Intent intent = getIntent();
+        dulle_start = intent.getStringExtra("dulle_start");
+        dulle_end = intent.getStringExtra("dulle_end");
+        Lat_start = intent.getStringExtra("LanLng");
+        Lat_end = intent.getStringExtra("LatLng_end");
+        System.out.println(dulle_start+"-- : 시작점 값 확인");
+        System.out.println(dulle_end+"-- : 도착점 값 확인");
+        System.out.println(Lat_start+"-- : 시작점 좌표 값 확인");
+        System.out.println(Lat_end+"-- : 도착점 좌표 값 확인");
+
+
+
 
         course_review_layout = findViewById(R.id.course_review_layout);
         course_info_layout = findViewById(R.id.course_info_layout);
@@ -176,8 +205,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS)
-                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+                .setInterval(UPDATE_INTERVAL_MS);
+//                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
@@ -264,8 +293,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
+        //setDefaultLocation();
 
+        setStartLocation();
+        setEndLocation();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -450,7 +481,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
-        if (currentMarker != null) currentMarker.remove();
+//        if (currentMarker != null) currentMarker.remove();
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
@@ -570,6 +601,115 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         }
     }
 
+    // TODO: 11/9/21 //Poly_Line_Draw
+    private void drawPath(){
+
+
+        Exam_data exam_data = new Exam_data();
+        String a = exam_data.getDulle_1_1();
+        Log.e("CREATE!!!!",a);
+        parse_Location(a);
+        PolylineOptions options = new PolylineOptions();
+//        for (int i =0; i<latLngArrayList.size(); i++){
+//            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
+//            polylines.add(mMap.addPolyline(options));
+//        }
+
+        options.addAll(latLngArrayList);
+        options.width(15);
+        options.color(Color.BLACK);
+
+        polylines.add(mMap.addPolyline(options));
+        Log.e("폴리라인","그려지나요?");
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+    }
+
+    // TODO: 11/9/21 위치 데이터 파싱
+    private void parse_Location(String response)
+    {
+
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i=0; i<filt1.length; i++){
+
+            System.out.println(filt1[i]+"확인중"+i);
+            arrayList.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 "+arrayList.size());
+
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        ArrayList<String> arrayList3 = new ArrayList<>();
+
+        for (int i=0; i<arrayList.size(); i++){
+            System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList.get(i).split(",");
+
+            System.out.println("filt2" + filt2.length);
+
+            System.out.println(filt2[0]);
+            System.out.println(filt2[1]);
+            arrayList2.add(filt2[0]);
+            arrayList3.add(filt2[1]);
+            double longitude = Double.parseDouble(arrayList2.get(i).toString());
+            double latitude = Double.parseDouble(arrayList3.get(i).toString());
+            latLngArrayList.add(new LatLng(latitude, longitude));
+
+        }
+
+
+    }
+    // TODO: 11/9/21 시작 지점
+    public void setStartLocation() {
+
+        String[] spil_t = Lat_start.split(",");
+
+        //디폴트 위치, Seoul
+        START_LOCATION = new LatLng(Double.parseDouble(spil_t[0]), Double.parseDouble(spil_t[1]));
+        String markerTitle = "도봉산역 ";
+        String markerSnippet = "여기는 시작 지점입니다.";
+
+
+        //if (currentMarker != null) currentMarker.remove();
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(START_LOCATION);
+        markerOptions.title(dulle_start);
+        markerOptions.snippet(markerSnippet);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        currentMarker = mMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
+        mMap.moveCamera(cameraUpdate);
+
+    }
+
+    // TODO: 11/9/21 도착 지점
+    public void setEndLocation() {
+
+        String[] spil_t2 = Lat_end.split(",");
+        //디폴트 위치, Seoul
+//        END_LOCATION = new LatLng(Double.parseDouble(spil_t2[0]), Double.parseDouble(spil_t2[1]));
+        END_LOCATION = new LatLng(37.66800060666563, 127.083568905654);
+        //String markerTitle = "당고개공원 갈림길";
+        String markerSnippet = "여기는 도착 지점입니다.";
+
+
+        // if (currentMarker != null) currentMarker.remove();
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(END_LOCATION);
+        markerOptions.title(dulle_end);
+        markerOptions.snippet(markerSnippet);
+        markerOptions.draggable(true);
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        currentMarker = mMap.addMarker(markerOptions);
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(END_LOCATION, 15);
+        mMap.moveCamera(cameraUpdate);
+
+    }
 
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {

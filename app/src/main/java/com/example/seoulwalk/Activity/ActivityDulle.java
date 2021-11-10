@@ -56,8 +56,8 @@ public class ActivityDulle extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // TODO: 11/9/21 좀있다가 열어 줘라
-        //retrofit_dulle();
+
+        retrofit_dulle();
     }
 
     @Override
@@ -154,7 +154,11 @@ public class ActivityDulle extends AppCompatActivity {
         test_text_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ActivityMap.class);
+                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                intent.putExtra("dulle_start",list1.get(1).getDulle_name_start());
+                intent.putExtra("dulle_end",list1.get(1).getDulle_name_end());
+                intent.putExtra("LanLng",list1.get(1).getLatlng());
+                intent.putExtra("LatLng_end",list1.get(1).getLatlng_end());
                 startActivity(intent);
             }
         });
@@ -225,26 +229,33 @@ public class ActivityDulle extends AppCompatActivity {
                     dulle_data.setDulle_name_start(dataobj.getString("dulle_start"));
                     dulle_data.setDulle_name_end(dataobj.getString("dulle_end"));
                     dulle_data.setDulle_time(dataobj.getString("dulle_time"));
-                    // System.out.println(dataobj.getString("dulle_start")+i+"번쨰");
+                    dulle_data.setLatlng(dataobj.getString("LatLng"));
+                    dulle_data.setLatlng_end(dataobj.getString("LatLng_End"));
+                    //System.out.println(dataobj.getString("Latlng")+i+"번쨰");
                     list1.add(dulle_data);
                     ///saveInfo(list1);
 
                 }
 
                 //saveInfo(list1);
-                System.out.println(list1.size());
+                System.out.println("size입니다."+list1.size());
                 dulle1Adapter = new Dulle1Adapter(list1);
                 dulle1.setAdapter(dulle1Adapter);
 //
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle1Adapter);
 
+
+                Log.e("확인",list1.get(0).getLatlng());
                 dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
                         //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
-                        intent.putExtra("dulle",list1.get(position).getDulle_name_start());
+                        intent.putExtra("dulle_start",list1.get(position).getDulle_name_start());
+                        intent.putExtra("dulle_end",list1.get(position).getDulle_name_end());
+                        intent.putExtra("LanLng",list1.get(position).getLatlng());
+                        intent.putExtra("LatLng_end",list1.get(position).getLatlng_end());
                         startActivity(intent);
                     }
                 });
