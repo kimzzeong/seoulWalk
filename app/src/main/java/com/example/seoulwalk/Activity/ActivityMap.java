@@ -87,6 +87,11 @@ public class ActivityMap extends AppCompatActivity
     private LocationRequest locationRequest;
     private Location location;
     TextView dullegil_name;
+    String dulle_start; //둘레길 시작점 이름
+    String dulle_end; //둘레길 도착점 이름
+    String Lat_start; //둘레길 도착점 이름
+    String Lat_end; //둘레길 도착점 이름
+
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
@@ -95,10 +100,13 @@ public class ActivityMap extends AppCompatActivity
     private ArrayList<LatLng> arrayPoints;
     //private PolylineOptions polylineOptions = new PolylineOptions();
 
-    private void drawPath(){        //polyline을 그려주는 메소드
-        //EXAM exam = new EXAM();
+
+    //polyline을 그려주는 메소드
+    private void drawPath(){
+
+
         Exam_data exam_data = new Exam_data();
-        String a = exam_data.getVv();
+        String a = exam_data.getDulle_1_1();
         Log.e("CREATE!!!!",a);
         parde_Location(a);
         PolylineOptions options = new PolylineOptions();
@@ -125,10 +133,14 @@ public class ActivityMap extends AppCompatActivity
 
         dullegil_name = findViewById(R.id.dullegil_name);
         Intent intent = getIntent();
-
-        String confirm = intent.getStringExtra("dulle");
-        System.out.println(confirm+"값 확인");
-        //dullegil_name.setText("asdasdasdasdasdasdas");
+        dulle_start = intent.getStringExtra("dulle_start");
+        dulle_end = intent.getStringExtra("dulle_end");
+        Lat_start = intent.getStringExtra("LanLng");
+        Lat_end = intent.getStringExtra("LatLng_end");
+        System.out.println(dulle_start+"-- : 시작점 값 확인");
+        System.out.println(dulle_end+"-- : 도착점 값 확인");
+        System.out.println(Lat_start+"-- : 시작점 좌표 값 확인");
+        System.out.println(Lat_end+"-- : 도착점 좌표 값 확인");
 
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
@@ -176,7 +188,7 @@ public class ActivityMap extends AppCompatActivity
 
         setStartLocation();
         setEndLocation();
-        drawPath();
+//        drawPath();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -443,9 +455,12 @@ public class ActivityMap extends AppCompatActivity
     // TODO: 11/9/21 시작 지점
     public void setStartLocation() {
 
+        String[] spil_t = Lat_start.split(",");
 
         //디폴트 위치, Seoul
-        START_LOCATION = new LatLng(37.68917268817206, 127.0468070568162);
+        START_LOCATION = new LatLng(Double.parseDouble(spil_t[0]), Double.parseDouble(spil_t[1]));
+        //디폴트 위치, Seoul
+
         String markerTitle = "도봉산역 ";
         String markerSnippet = "여기는 시작 지점입니다.";
 
@@ -454,7 +469,7 @@ public class ActivityMap extends AppCompatActivity
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(START_LOCATION);
-        markerOptions.title(markerTitle);
+        markerOptions.title(dulle_start);
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -468,9 +483,11 @@ public class ActivityMap extends AppCompatActivity
     // TODO: 11/9/21 시작 지점
     public void setEndLocation() {
 
-
+        String[] spil_t2 = Lat_end.split(",");
         //디폴트 위치, Seoul
-        END_LOCATION = new LatLng(37.62058395602092,127.0845057476389);
+        END_LOCATION = new LatLng(Double.parseDouble(spil_t2[0]), Double.parseDouble(spil_t2[1]));
+        //디폴트 위치, Seoul
+
         String markerTitle = "당고개공원 갈림길";
         String markerSnippet = "여기는 도착 지점입니다.";
 
@@ -479,7 +496,7 @@ public class ActivityMap extends AppCompatActivity
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(END_LOCATION);
-        markerOptions.title(markerTitle);
+        markerOptions.title(dulle_end);
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
