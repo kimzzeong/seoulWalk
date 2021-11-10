@@ -22,7 +22,7 @@ public class ActivityGoal extends AppCompatActivity {
     LinearLayout goal_maintenance_layout, goal_step_up_layout;
     boolean goal_layout_flag = false;
     Button goal_maintenance_btn, goal_step_up_btn;
-    int user_level = 3; //현재 유저의 레벨
+    int user_level = 2; //현재 유저의 레벨
     ArrayList<String> items = new ArrayList<>();
 
     @Override
