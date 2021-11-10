@@ -166,7 +166,7 @@
                 android:id="@+id/sssss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="40%"
+                android:text="30%"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginTop="10dp"
@@ -421,7 +421,7 @@
                             android:textStyle="bold"
                             android:text="서울 중랑구"
                             />
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -437,7 +437,8 @@
                                 android:layout_width="17dp"
                                 android:layout_height="17dp"
                                 android:src="@drawable/ic_baseline_access_time_24"
-                                android:layout_marginRight="3dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
                                 android:id="@+id/time_icon" />
                             <TextView
                                 android:layout_width="wrap_content"
@@ -445,14 +446,20 @@
                                 android:id="@+id/time_text"
                                 android:text="90분"
                                 android:textSize="15sp"
+                                app:layout_constraintTop_toTopOf="@+id/time_icon"
+                                app:layout_constraintLeft_toRightOf="@+id/time_icon"
                                 android:layout_marginRight="5dp"
+                                android:layout_marginLeft="3dp"
                                 />
                             <ImageView
                                 android:layout_width="17dp"
                                 android:layout_height="17dp"
                                 android:src="@drawable/distance"
                                 android:layout_marginRight="3dp"
-                                android:id="@+id/distance_icon" />
+                                android:id="@+id/distance_icon"
+                                app:layout_constraintTop_toTopOf="@+id/time_icon"
+                                android:layout_marginLeft="3dp"
+                                app:layout_constraintLeft_toRightOf="@+id/time_text"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -460,21 +467,31 @@
                                 android:text="5.5km"
                                 android:textSize="15dp"
                                 android:layout_marginRight="5dp"
+                                app:layout_constraintTop_toTopOf="@+id/time_icon"
+                                android:layout_marginLeft="3dp"
+                                app:layout_constraintLeft_toRightOf="@+id/distance_icon"
                                 />
                             <ImageView
                                 android:layout_width="17dp"
                                 android:layout_height="17dp"
                                 android:src="@drawable/footprints"
                                 android:layout_marginRight="3dp"
-                                android:id="@+id/step_icon" />
+                                android:layout_marginTop="3dp"
+                                android:id="@+id/step_icon"
+                                app:layout_constraintTop_toBottomOf="@+id/time_icon"
+                                app:layout_constraintLeft_toLeftOf="@+id/time_icon"
+                                />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/step_text"
                                 android:text="6000 걸음"
                                 android:textSize="15dp"
+                                android:layout_marginLeft="3dp"
+                                app:layout_constraintTop_toTopOf="@+id/step_icon"
+                                app:layout_constraintLeft_toRightOf="@+id/step_icon"
                                 />
-                        </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
