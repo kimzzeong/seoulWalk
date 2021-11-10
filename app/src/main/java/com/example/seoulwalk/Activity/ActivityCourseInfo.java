@@ -1,6 +1,7 @@
 package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
@@ -32,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
@@ -405,8 +408,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
+                String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
+                System.out.println("Marker"+maker_title[1]);
+
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, markerSnippet);
+                setCurrentLocation(location, maker_title[1], null);
 
                 mCurrentLocatiion = location;
             }
@@ -751,6 +757,54 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         currentMarker = mMap.addMarker(markerOptions);
+        //onMarkerClick(currentMarker);
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(@NonNull Marker marker) {
+//                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Nullable
+            @Override
+            public View getInfoContents(@NonNull Marker marker) {
+                return null;
+
+
+            }
+
+            @Nullable
+            @Override
+            public View getInfoWindow(@NonNull Marker marker) {
+                View infoWindow = getLayoutInflater().inflate(R.layout.info_window,
+                        findViewById(R.id.map),false);
+
+                ImageView info_img = ( (ImageView)infoWindow.findViewById(R.id.img_info));
+                info_img.setImageResource(R.drawable.course);
+
+                TextView title =( (TextView)infoWindow.findViewById(R.id.title));
+                title.setText(marker.getTitle());
+
+                TextView snippet =( (TextView)infoWindow.findViewById(R.id.snippet));
+                snippet.setText(marker.getSnippet());
+
+                Button btn_start=( (Button)infoWindow.findViewById(R.id.btn_start));
+                btn_start.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(ActivityCourseInfo.this, "Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Button btn_end  =( (Button)infoWindow.findViewById(R.id.btn_end));
+                
+
+
+
+                return infoWindow;
+            }
+        });
+
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
         mMap.moveCamera(cameraUpdate);
@@ -846,13 +900,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 break;
         }
     }
-
-
     // TODO: 11/10/21 마커 클릭 이벤트
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {
 
-        Toast.makeText(this, "클릭 이벤트 실험중 ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "클릭 이벤트 실험중 ", Toast.LENGTH_LONG).show();
         return true;
     }
+
+
 }
