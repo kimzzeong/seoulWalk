@@ -3,9 +3,8 @@ package com.example.seoulwalk.data;
 public class Stamp_Data {
     int stmap_img;
     String stamp_name;
-
-
     boolean stamp_it;
+
 
     public Stamp_Data(int stmap_img, String stamp_name, boolean stamp_it){
         this.stmap_img = stmap_img;

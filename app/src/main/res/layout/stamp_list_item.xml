@@ -24,8 +24,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             >
+
             <TextView
-                android:id="@+id/dullegil_title"
+                android:id="@+id/course_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
@@ -34,16 +35,20 @@
                 android:textSize="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
                 />
 
-            <ImageView
+            <TextView
+                android:id="@+id/dullegil_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnShow"
-                app:layout_constraintTop_toTopOf="@id/dullegil_title"
-                app:layout_constraintBottom_toBottomOf="@id/dullegil_title"
-                android:src="@drawable/ic_baseline_expand_less_24"
-                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="14dp"
+                android:text="TextView"
+                android:textColor="#15BD66"
+                android:textSize="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/course_title"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginLeft="10dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <LinearLayout

@@ -32,21 +32,21 @@ public class ActivityStampCollection extends AppCompatActivity {
         stamp_recyclerview = findViewById(R.id.stamp_recyclerview);
         stamp_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
-        StampList_Data stampList_data1 = new StampList_Data("수락·불암산");
+        StampList_Data stampList_data1 = new StampList_Data("수락·불암산","1코스");
         stampList_list.add(stampList_data1);
-        StampList_Data stampList_data2 = new StampList_Data("용마·아차산");
+        StampList_Data stampList_data2 = new StampList_Data("용마·아차산","2코스");
         stampList_list.add(stampList_data2);
-        StampList_Data stampList_data3 = new StampList_Data("고덕·일자산");
+        StampList_Data stampList_data3 = new StampList_Data("고덕·일자산","3코스");
         stampList_list.add(stampList_data3);
-        StampList_Data stampList_data4 = new StampList_Data("대모·우면산");
+        StampList_Data stampList_data4 = new StampList_Data("대모·우면산","4코스");
         stampList_list.add(stampList_data4);
-        StampList_Data stampList_data5 = new StampList_Data("관악산");
+        StampList_Data stampList_data5 = new StampList_Data("관악산","5코스");
         stampList_list.add(stampList_data5);
-        StampList_Data stampList_data6 = new StampList_Data("안양천");
+        StampList_Data stampList_data6 = new StampList_Data("안양천","6코스");
         stampList_list.add(stampList_data6);
-        StampList_Data stampList_data7 = new StampList_Data("봉산·앵봉산");
+        StampList_Data stampList_data7 = new StampList_Data("봉산·앵봉산","7코스");
         stampList_list.add(stampList_data7);
-        StampList_Data stampList_data8 = new StampList_Data("북한산");
+        StampList_Data stampList_data8 = new StampList_Data("북한산","8코스");
         stampList_list.add(stampList_data8);
 
         stampListAdapter = new StampListAdapter(stampList_list);
