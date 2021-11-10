@@ -235,8 +235,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(UPDATE_INTERVAL_MS);
-//                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+                .setInterval(UPDATE_INTERVAL_MS)
+                .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
 
         LocationSettingsRequest.Builder builder =
                 new LocationSettingsRequest.Builder();
