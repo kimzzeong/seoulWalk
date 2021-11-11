@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
     ImageView level_info;
     TextView main_goal_info, main_my_exercise_info;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    String user_idx, user_nickname;
+
+    private static final String SHARED_PREF_NAME = "mypref";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +74,16 @@ public class MainActivity extends AppCompatActivity {
         today_goal_step = 8000; // 오늘 목표 걸음수
         today_step = 2600; // 오늘 걸음수
 
+        sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
+        editor.putString("user_idx","1");
+        editor.putString("user_nickname","Tim_nova_1");
+        editor.apply();
+        user_idx = sharedPreferences.getString("user_idx","");
+        user_nickname = sharedPreferences.getString("user_nickname","");
+        Log.e("user_idx",user_idx);
+        Log.e("user_nickname",user_nickname);
 
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);

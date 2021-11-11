@@ -5,4 +5,10 @@
         <item>코스길이순</item>
         <item>소요시간순</item>
     </string-array>
+
+    <string-array name="communitySpinner">
+        <item>인증??</item>
+        <item>뭐넣을까요</item>
+        <item>뭐있죠</item>
+    </string-array>
 </resources>
