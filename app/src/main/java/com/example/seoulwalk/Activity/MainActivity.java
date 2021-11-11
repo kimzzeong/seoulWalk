@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         main_goal_info = findViewById(R.id.main_goal_info);
 
-        // 나의 활동 분석으로 이동하는 텍스트뷰
+        // 나의 활동 분석으로 이동
         main_my_exercise_info = findViewById(R.id.main_my_exercise_info);
         main_my_exercise_info.setOnClickListener(new View.OnClickListener() {
             @Override
