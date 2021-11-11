@@ -123,15 +123,8 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 
     private void parseFetchedWeeklyStepCount(List<StepCount> lists) {
         Log.d(TAG, "parseFetchedWeeklyStepCount()");
-//        weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
-//        recyclerViewWeeklyStepCount.setAdapter(weeklyStepCountAdapter);
-//        Log.e(TAG, "setAdapter()");
-//        weeklyStepCountAdapter.notifyDataSetChanged();
-//
-//        stepCountList = lists;
 
         int listSize = lists.size();
-
         if (listSize > 0) {
 
             weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
