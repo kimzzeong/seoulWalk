@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
     ImageView level_info;
-    TextView main_goal_info;
+    TextView main_goal_info, main_my_exercise_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,16 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
         main_goal_info = findViewById(R.id.main_goal_info);
+
+        // 나의 활동 분석으로 이동하는 텍스트뷰
+        main_my_exercise_info = findViewById(R.id.main_my_exercise_info);
+        main_my_exercise_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ActivityMyExerciseInfo.class);
+                startActivity(intent);
+            }
+        });
 
         week_goal_step = 56000; // 이번주 목표 걸음수
         week_now_goal_step = 16800; // 이번주 걸음수
