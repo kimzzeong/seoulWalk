@@ -62,27 +62,6 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 
         barChartStepCount = (BarChart) findViewById(R.id.my_exercise_info_barchart_step_count);
 
-//        ArrayList<BarEntry> visitors = new ArrayList<>();
-//        visitors.add(new BarEntry(2014,420));
-//        visitors.add(new BarEntry(2015,475));
-//        visitors.add(new BarEntry(2016,508));
-//        visitors.add(new BarEntry(2017,660));
-//        visitors.add(new BarEntry(2018,550));
-//        visitors.add(new BarEntry(2019,630));
-//        visitors.add(new BarEntry(2020,470));
-//
-//        BarDataSet barDataSet = new BarDataSet(visitors, "Visitors");
-//        barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
-//        barDataSet.setValueTextColor(Color.BLACK);
-//        barDataSet.setValueTextSize(16f);
-//
-//        BarData barData = new BarData(barDataSet);
-//
-//        barChartStepCount.setFitBars(true);
-//        barChartStepCount.setData(barData);
-//        barChartStepCount.getDescription().setText("Bar Chart Example");
-////        barChartStepCount.animateY(1000);
-
         recyclerViewWeeklyStepCount = findViewById(R.id.recyclerview_my_exercise_info);
         recyclerViewWeeklyStepCount.setHasFixedSize(true);
         recyclerViewWeeklyStepCount.setLayoutManager(new LinearLayoutManager(this));
@@ -96,7 +75,7 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 week_num++;
-                Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
 
                 fetchWeeklyStepCount(UserInfo.USER_ID, week_num);
             }
@@ -107,10 +86,10 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (week_num == 0) {
-                    Toast.makeText(ActivityMyExerciseInfo.this, "클릭 불가", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ActivityMyExerciseInfo.this, "더이상 클릭할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     week_num--;
-                    Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
 
                     fetchWeeklyStepCount(UserInfo.USER_ID, week_num);
                 }
@@ -144,83 +123,97 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 
     private void parseFetchedWeeklyStepCount(List<StepCount> lists) {
         Log.d(TAG, "parseFetchedWeeklyStepCount()");
-        weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
-        recyclerViewWeeklyStepCount.setAdapter(weeklyStepCountAdapter);
-        weeklyStepCountAdapter.notifyDataSetChanged();
-
-        stepCountList = lists;
+//        weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
+//        recyclerViewWeeklyStepCount.setAdapter(weeklyStepCountAdapter);
+//        Log.e(TAG, "setAdapter()");
+//        weeklyStepCountAdapter.notifyDataSetChanged();
+//
+//        stepCountList = lists;
 
         int listSize = lists.size();
 
+        if (listSize > 0) {
+
+            weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
+            recyclerViewWeeklyStepCount.setAdapter(weeklyStepCountAdapter);
+            Log.e(TAG, "setAdapter()");
+            weeklyStepCountAdapter.notifyDataSetChanged();
+
+            stepCountList = lists;
+
 //        ArrayList<String> days = new ArrayList<>();
-        ArrayList<Integer> days = new ArrayList<>();
-        ArrayList<Integer> stepCounts = new ArrayList<>();
+            ArrayList<Integer> days = new ArrayList<>();
+            ArrayList<Integer> stepCounts = new ArrayList<>();
 
-        // 주별 각각 날짜를 요일로 변환해서 days arraylist 에 저장하기
-        for (int i = 0; i < listSize; i++) {
-            Date date = null;
-            try {
-                date = new SimpleDateFormat("yyyy-MM-dd").parse(lists.get(i).getDate());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
+            // 주별 각각 날짜를 요일로 변환해서 days arraylist 에 저장하기
+            for (int i = 0; i < listSize; i++) {
+                Date date = null;
+                try {
+                    date = new SimpleDateFormat("yyyy-MM-dd").parse(lists.get(i).getDate());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
 //            days.add(getDayOfWeek(calendar.get(Calendar.DAY_OF_WEEK)));
-            days.add(calendar.get(Calendar.DAY_OF_WEEK));
+                days.add(calendar.get(Calendar.DAY_OF_WEEK));
 
-            stepCounts.add(lists.get(i).getSteps());
-        }
+                stepCounts.add(lists.get(i).getSteps());
+            }
 
-        Log.e(TAG, "days: " + days);
-        Log.e(TAG, "stepCounts: " + stepCounts);
+            Log.e(TAG, "days: " + days);
+            Log.e(TAG, "stepCounts: " + stepCounts);
 
-        ArrayList<BarEntry> stepInfo = new ArrayList<>();
+            ArrayList<BarEntry> stepInfo = new ArrayList<>();
 
-        for (int i = 0; i < listSize; i++) {
-            stepInfo.add(new BarEntry(days.get(i), stepCounts.get(i)));
-        }
+            for (int i = 0; i < listSize; i++) {
+                stepInfo.add(new BarEntry(days.get(i), stepCounts.get(i)));
+            }
 
-        if (!days.contains(1)) {
-            stepInfo.add(new BarEntry(1, 0));
-        }
-        if (!days.contains(2)) {
-            stepInfo.add(new BarEntry(2, 0));
-        }
-        if (!days.contains(3)) {
-            stepInfo.add(new BarEntry(3, 0));
-        }
-        if (!days.contains(4)) {
-            stepInfo.add(new BarEntry(4, 0));
-        }
-        if (!days.contains(5)) {
-            stepInfo.add(new BarEntry(5, 0));
-        }
-        if (!days.contains(6)) {
-            stepInfo.add(new BarEntry(6, 0));
-        }
-        if (!days.contains(7)) {
-            stepInfo.add(new BarEntry(7, 0));
-        }
+            if (!days.contains(1)) {
+                stepInfo.add(new BarEntry(1, 0));
+            }
+            if (!days.contains(2)) {
+                stepInfo.add(new BarEntry(2, 0));
+            }
+            if (!days.contains(3)) {
+                stepInfo.add(new BarEntry(3, 0));
+            }
+            if (!days.contains(4)) {
+                stepInfo.add(new BarEntry(4, 0));
+            }
+            if (!days.contains(5)) {
+                stepInfo.add(new BarEntry(5, 0));
+            }
+            if (!days.contains(6)) {
+                stepInfo.add(new BarEntry(6, 0));
+            }
+            if (!days.contains(7)) {
+                stepInfo.add(new BarEntry(7, 0));
+            }
 
-        BarDataSet barDataSet = new BarDataSet(stepInfo, "걸음 수");
-        barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
-        barDataSet.setValueTextColor(Color.BLACK);
-        barDataSet.setValueTextSize(16f);
+            BarDataSet barDataSet = new BarDataSet(stepInfo, "걸음 수");
+            barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
+            barDataSet.setValueTextColor(Color.BLACK);
+            barDataSet.setValueTextSize(16f);
 
-        BarData barData = new BarData(barDataSet);
+            BarData barData = new BarData(barDataSet);
 
-        barChartStepCount.setFitBars(true);
-        barChartStepCount.setTouchEnabled(false);
-        barChartStepCount.setData(barData);
-        barChartStepCount.getDescription().setText("Bar Chart Example");
-        barChartStepCount.animateY(0);
+            barChartStepCount.setFitBars(true);
+            barChartStepCount.setTouchEnabled(false);
+            barChartStepCount.setData(barData);
+            barChartStepCount.getDescription().setText("Bar Chart Example");
+            barChartStepCount.animateY(0);
 
 //        final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
 //
 //// Set the value formatter
 //        XAxis xAxis = chart.getXAxis();
 //        xAxis.setValueFormatter(new IndexAxisValueFormatter(weekdays));
+        } else {
+            Toast.makeText(ActivityMyExerciseInfo.this, "listSize = 0", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     // 요일 1~7 을 일~토 로 변환하기
