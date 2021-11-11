@@ -193,7 +193,6 @@ public class ActivityDulle extends AppCompatActivity {
         String username = "둘레길";
 
 
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Dulle_Name.REGIST_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
