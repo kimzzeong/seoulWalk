@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:backgroundTint="@null"
+        android:background="#EAE9E9"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/communityInfo_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@color/white"
+            android:elevation="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="25sp"
+                android:text="둘레돌래"
+                android:textColor="#000000"/>
+        </androidx.appcompat.widget.Toolbar>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="666dp"
+            app:layout_constraintTop_toBottomOf="@id/communityInfo_actionbar"
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundTint="@null"
+                android:background="@color/white"
+                >
+                <TextView
+                    android:id="@+id/write_post_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="글제목"
+                    android:textSize="30dp"
+                    tools:layout_editor_absoluteX="10dp"
+                    tools:layout_editor_absoluteY="95dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"/>
+                <ImageView
+                    android:id="@+id/profile_photo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/basic_profile"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/write_post_title"
+                    app:layout_constraintLeft_toRightOf="@id/profile_photo"
+                    app:layout_constraintLeft_toLeftOf="@id/write_post_title"/>
+
+                <TextView
+                    android:id="@+id/nickname_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="8dp"
+                    android:text="닉네임"
+                    app:layout_constraintLeft_toRightOf="@id/profile_photo"
+                    app:layout_constraintTop_toBottomOf="@id/write_post_title"/>
+
+                <TextView
+                    android:id="@+id/date_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="날짜"
+                    app:layout_constraintLeft_toLeftOf="@id/nickname_item"
+                    app:layout_constraintLeft_toRightOf="@id/profile_photo"
+                    app:layout_constraintTop_toBottomOf="@id/nickname_item"
+                    android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                    android:drawablePadding="2dp"
+                    android:gravity="center"/>
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_marginTop="10dp"
+                    android:background="#000000"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    app:layout_constraintTop_toBottomOf="@id/profile_photo"/>
+
+                <TextView
+                    android:id="@+id/write_post_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/line1"
+                    android:text="글 내용"
+                    android:textSize="20dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/black"
+                    android:linksClickable="true"
+                    android:autoLink="web"/>
+
+                <TextView
+                    android:id="@+id/comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:drawableLeft="@drawable/blogging"
+                    android:drawablePadding="4dp"
+                    android:text="댓글"
+                    android:textSize="18dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/write_post_content"/>
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginTop="10dp"
+                    android:background="#000000"
+                    app:layout_constraintTop_toBottomOf="@id/comment"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/line2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comment_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/no_post"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:text="       댓글이 없습니다.\n첫 댓글을 작성해보세요!"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:paddingBottom="50dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/comments_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:weightSum="10"
+            android:background="@color/white"
+            >
+            <EditText
+                android:id="@+id/comments_input"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="댓글을 입력하세요."
+                android:layout_marginTop="5dp"
+                android:imeOptions="actionDone"
+                android:maxLines="5"
+                android:inputType="textMultiLine"/>
+            <ImageButton
+                android:id="@+id/comments_send"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:src="@drawable/send"
+                android:background="@color/main"
+                android:onClick="onClick_send"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

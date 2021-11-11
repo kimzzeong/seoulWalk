@@ -39,6 +39,7 @@
         app:layout_constraintTop_toBottomOf="@+id/login_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:inputType="textPassword"
         android:layout_marginTop="50dp"
         android:hint="비밀번호"
         />

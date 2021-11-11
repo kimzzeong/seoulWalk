@@ -409,11 +409,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
-//                String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
-//                System.out.println("Marker"+maker_title[1]);
+                String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
+                System.out.println("Marker"+maker_title[1]);
 
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, markerTitle, null);
+                setCurrentLocation(location, maker_title[1], null);
 
                 mCurrentLocatiion = location;
             }

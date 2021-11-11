@@ -22,4 +22,6 @@
     <string name="msg_req_enable">Please enable Samsung Health</string>
     <string name="msg_req_agree">Please agree to Samsung Health policy</string>
     <string name="msg_req_available">Please make Samsung Health available</string>
+    <string name="request_permission">This sample needs camera permission.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
 </resources>

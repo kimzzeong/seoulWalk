@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.seoulwalk">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -21,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ActivityStampCollection"></activity>
+        <activity android:name=".Activity.CameraActivity"></activity>
+        <activity android:name=".Activity.ActivityGallery" />
+        <activity android:name=".Activity.ActivityWrite" />
+        <activity android:name=".Activity.ActivityCommunityInfo" />
+        <activity android:name=".Activity.ActivityStampCollection" />
         <activity android:name=".Activity.ActivitySetting" />
         <activity android:name=".Activity.ActivityLevelInfo" />
 
@@ -33,7 +38,8 @@
             android:value="AIzaSyBNVbhp39_02RSt81GNw3lcJ_c6xGtIQaw" />
 
         <activity android:name=".Activity.ActivityMap" />
-        <activity android:name=".Activity.ActivityLogin" />
+        <activity android:name=".Activity.ActivityLogin" >
+        </activity>
         <activity android:name=".Activity.ActivityJoin" />
         <activity android:name=".Activity.ActivityDulle" />
         <activity android:name=".Activity.ActivityMypage" />
@@ -41,12 +47,23 @@
         <activity android:name=".Activity.ActivityGoal" />
         <activity android:name=".Activity.ActivityCommunity" />
         <activity android:name=".Activity.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.seoulwalk.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>
