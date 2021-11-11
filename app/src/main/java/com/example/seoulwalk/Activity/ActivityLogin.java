@@ -72,35 +72,35 @@ public class ActivityLogin extends AppCompatActivity {
                         .build();
 
                 Dulle_Name api = retrofit.create(Dulle_Name.class);
-                Call<Login> call = api.requestLogin(login_email.getText().toString(),login_pw.getText().toString());
-
-                call.enqueue(new Callback<Login>(){
-
-                    @Override
-                    public void onResponse(Call<Login> call, Response<Login> response) {
-
-                        if (response.isSuccessful() && response.body() != null)
-                        {
-                            editor = sharedPreferences.edit();
-
-                            Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
-                            startActivity(intent);
-                            editor.putString("user_idx",response.body().getUser_idx());
-                            editor.putString("user_nickname",response.body().getNickname());
-                            editor.apply();
-
-                            Toast.makeText(getApplicationContext(),response.body().getNickname()+"님 어서오세요.",Toast.LENGTH_SHORT).show();
-                            finish();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<Login> call, Throwable t) {
-                        Log.e("에러",t.getLocalizedMessage());
-                    }
-                });
+//                Call<Login> call = api.requestLogin(login_email.getText().toString(),login_pw.getText().toString());
+//
+//                call.enqueue(new Callback<Login>(){
+//
+//                    @Override
+//                    public void onResponse(Call<Login> call, Response<Login> response) {
+//
+//                        if (response.isSuccessful() && response.body() != null)
+//                        {
+//                            editor = sharedPreferences.edit();
+//
+//                            Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
+//                            startActivity(intent);
+//                            editor.putString("user_idx",response.body().getUser_idx());
+//                            editor.putString("user_nickname",response.body().getNickname());
+//                            editor.apply();
+//
+//                            Toast.makeText(getApplicationContext(),response.body().getNickname()+"님 어서오세요.",Toast.LENGTH_SHORT).show();
+//                            finish();
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<Login> call, Throwable t) {
+//                        Log.e("에러",t.getLocalizedMessage());
+//                    }
+//                });
             }
         });
 

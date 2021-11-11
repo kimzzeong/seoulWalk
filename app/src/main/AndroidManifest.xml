@@ -40,6 +40,8 @@
         <activity android:name=".Activity.ActivityCourseInfo" />
         <activity android:name=".Activity.ActivityGoal" />
         <activity android:name=".Activity.ActivityCommunity" />
+        <activity android:name=".Activity.ActivityMyExerciseInfo" />
+        <activity android:name=".Activity.ActivityWrite" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
