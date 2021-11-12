@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:text="전체 보기 >"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="@+id/dulle_course_title"
                 app:layout_constraintBottom_toBottomOf="@+id/dulle_course_title"
                 app:layout_constraintRight_toRightOf="parent"
