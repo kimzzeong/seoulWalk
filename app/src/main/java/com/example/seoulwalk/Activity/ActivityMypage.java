@@ -1,9 +1,11 @@
 package com.example.seoulwalk.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.adapter.HistoryAdapter;
 import com.example.seoulwalk.data.History_Data;
@@ -24,9 +27,15 @@ public class ActivityMypage extends AppCompatActivity {
     ArrayList<History_Data> history_list = new ArrayList<>();
     HistoryAdapter historyAdapter;
     RecyclerView history;
+    ImageView mypage_profile_photo; // 프로필사진
 
     //도장 컬렉션으로 가는 레이아웃
     LinearLayout dullegil_stamp_collection;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private static final String SHARED_PREF_NAME = "mypref";
+    String user_profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,7 @@ public class ActivityMypage extends AppCompatActivity {
         home_btn = findViewById(R.id.home_btn);
         community_btn = findViewById(R.id.community_btn);
         mypage_btn = findViewById(R.id.mypage_btn);
+        mypage_profile_photo = findViewById(R.id.mypage_profile_photo);
 
         history = findViewById(R.id.walking_history_list);
         history.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -94,6 +104,8 @@ public class ActivityMypage extends AppCompatActivity {
         historyAdapter = new HistoryAdapter(history_list);
         history.setAdapter(historyAdapter);
 
+
+
         //도장 컬렉션
         dullegil_stamp_collection = findViewById(R.id.dullegil_stamp_collection);
         dullegil_stamp_collection.setOnClickListener(new View.OnClickListener() {
@@ -145,6 +157,19 @@ public class ActivityMypage extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        user_profile = sharedPreferences.getString("user_profile","");
+        if(user_profile.equals("")){
+            Glide.with(this) .load(R.drawable.basic_profile) .into(mypage_profile_photo);
+        }else{
+            Glide.with(this) .load(R.drawable.stamp14_on) .into(mypage_profile_photo);
+        }
     }
 
 }

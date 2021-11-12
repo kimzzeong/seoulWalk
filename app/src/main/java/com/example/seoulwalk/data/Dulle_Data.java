@@ -5,7 +5,17 @@ public class Dulle_Data {
     String dulle_time;
     String dulle_name_end;
     String Latlng;
+    String Latlng_end;
     String img_item;
+
+    public Dulle_Data(String dulle_name_start, String dulle_time, String dulle_name_end, String img_item,String LatLng,String LatLng_end) {
+        this.dulle_name_start = dulle_name_start;
+        this.dulle_time = dulle_time;
+        this.dulle_name_end = dulle_name_end;
+        this.img_item = img_item;
+        this.Latlng = LatLng;
+        this.Latlng_end = LatLng_end;
+    }
 
     public String getImg_item() {
         return img_item;
@@ -31,7 +41,7 @@ public class Dulle_Data {
         Latlng_end = latlng_end;
     }
 
-    String Latlng_end;
+
 
 //    public Dulle_Data(String dulle_name_start, String dulle_time, String dulle_name_end) {
 //        this.dulle_name_start = dulle_name_start;

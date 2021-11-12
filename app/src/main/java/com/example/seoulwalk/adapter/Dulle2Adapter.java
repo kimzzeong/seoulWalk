@@ -5,17 +5,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.data.Dulle_Data;
 
 import java.util.ArrayList;
 
 public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder> {
+
+
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
     }
@@ -52,6 +56,10 @@ public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder
         holder.textView.setText(dulle_data.getDulle_name_start());
         holder.textView_end.setText(dulle_data.getDulle_name_end());
         holder.textView_time.setText(dulle_data.getDulle_time());
+
+        Glide.with(holder.img_item)
+                .load("http://49.247.196.22/img/"+dulle_data.getImg_item())
+                .into(holder.img_item);
     }
 
     @Override
@@ -65,13 +73,14 @@ public class Dulle2Adapter extends RecyclerView.Adapter<Dulle2Adapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView,textView_end,textView_time ;
+        ImageView img_item;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.text_start);
             textView_end = itemView.findViewById(R.id.text_end);
             textView_time = itemView.findViewById(R.id.text_time);
 
-
+            img_item = itemView.findViewById(R.id.img_item);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
