@@ -812,15 +812,15 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         currentMarker = mMap.addMarker(markerOptions);
 
         //onMarkerClick(currentMarker);
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(@NonNull Marker marker) {
-                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
-                Bottom_SheetDialog bottomSheetDialog = new Bottom_SheetDialog();
-                bottomSheetDialog.show(getSupportFragmentManager(), "myBottomSheetDialog");
-
-            }
-        });
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(@NonNull Marker marker) {
+//                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
+//                Bottom_SheetDialog bottomSheetDialog = new Bottom_SheetDialog();
+//                bottomSheetDialog.show(getSupportFragmentManager(), "myBottomSheetDialog");
+//
+//            }
+//        });
 
 //        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 //            @Nullable
