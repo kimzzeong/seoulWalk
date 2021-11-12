@@ -70,13 +70,14 @@
             >
 
             <fragment
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
                 android:id="@+id/course_map"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="20dp"
-                >
+                tools:layout_editor_absoluteX="0dp">
+
                 <ImageView
                     android:id="@+id/img_frag"
                     android:layout_width="match_parent"
@@ -85,83 +86,86 @@
 
 
             </fragment>
+
             <LinearLayout
+                android:id="@+id/course_smallinfo_layout"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/course_map"
                 android:background="@drawable/round_layout"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:id="@+id/course_smallinfo_layout"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/course_map">
+
                 <ImageView
+                    android:id="@+id/time_icon"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
-                    android:src="@drawable/ic_baseline_access_time_24"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_marginRight="3dp"
-                    android:id="@+id/time_icon" />
+                    android:src="@drawable/ic_baseline_access_time_24" />
+
                 <TextView
+                    android:id="@+id/time_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/time_text"
+                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="90분"
-                    android:textSize="15sp"
-                    android:layout_marginRight="5dp"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="15sp" />
+
                 <ImageView
+                    android:id="@+id/distance_icon"
                     android:layout_width="17dp"
                     android:layout_height="17dp"
-                    android:src="@drawable/distance"
-                    android:layout_weight="1"
-                    android:gravity="center"
                     android:layout_marginRight="3dp"
-                    android:id="@+id/distance_icon" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:src="@drawable/distance" />
+
+                <TextView
                     android:id="@+id/distance_text"
-                    android:text="5.5km"
-                    android:textSize="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:textColor="@color/black"
-                    />
-                <ImageView
-                    android:layout_width="17dp"
-                    android:layout_height="17dp"
-                    android:src="@drawable/footprints"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:text="5.5km"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/step_icon"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
                     android:layout_marginRight="3dp"
-                    android:id="@+id/step_icon" />
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:src="@drawable/footprints" />
+
                 <TextView
+                    android:id="@+id/step_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:id="@+id/step_text"
                     android:text="걸음수"
-                    android:textSize="15dp"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="15dp" />
+
                 <TextView
+                    android:id="@+id/course_level"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:id="@+id/course_level"
                     android:gravity="center"
                     android:text="난이도 중"
-                    android:textSize="15dp"
                     android:textColor="@color/black"
-                    />
+                    android:textSize="15dp" />
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -244,23 +248,53 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/map_end_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="도착"
+                app:layout_constraintStart_toEndOf="@+id/map_star_btn"
+                app:layout_constraintTop_toTopOf="@+id/map_star_btn" />
+
+            <Button
+                android:id="@+id/map_star_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="12dp"
+                android:text="시작"
+                app:layout_constraintBottom_toTopOf="@+id/course_smallinfo_layout"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/map_map_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="길찾기"
+                app:layout_constraintStart_toEndOf="@+id/map_end_btn"
+                app:layout_constraintTop_toTopOf="@+id/map_end_btn" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/course_review_layout"
+        android:visibility="gone"
+        >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/course_review_list"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:id="@+id/course_review_layout"
-            android:visibility="gone"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/course_review_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dulle_gil_walk"
         android:layout_width="wrap_content"
@@ -271,4 +305,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@color/main"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

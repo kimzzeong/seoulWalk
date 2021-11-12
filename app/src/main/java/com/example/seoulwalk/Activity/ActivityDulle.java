@@ -50,7 +50,7 @@ public class ActivityDulle extends AppCompatActivity {
 
 
     Button course_btn, mypage_btn, home_btn, community_btn;
-   // TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
+    TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
     PreferenceHelper shared;
     ArrayList<Dulle_Data> list1 = new ArrayList<>();
     ArrayList<Dulle_Data> list2 = new ArrayList<>();
@@ -103,7 +103,7 @@ public class ActivityDulle extends AppCompatActivity {
         home_btn = findViewById(R.id.home_btn);
         community_btn = findViewById(R.id.community_btn);
         mypage_btn = findViewById(R.id.mypage_btn);
-
+        test_text_btn = findViewById(R.id.text_view);
 
         //loadData();
         dulle1 = findViewById(R.id.dulle_theme_list);
@@ -121,11 +121,6 @@ public class ActivityDulle extends AppCompatActivity {
         dulleDetailAdapter = new DulleDetailAdapter(detail_list);
         dulle_detail.setAdapter(dulleDetailAdapter);
 
-//        dulle1Adapter = new Dulle1Adapter(list1);
-//        dulle1.setAdapter(dulle1Adapter);
-//
-//        dulle2Adapter = new Dulle2Adapter(list2);
-//        dulle2.setAdapter(dulle2Adapter);
 
 
 
@@ -172,18 +167,23 @@ public class ActivityDulle extends AppCompatActivity {
 
 
 
-        //회원가입 액티비티로 이동
-//        test_text_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
+//        회원가입 액티비티로 이동
+        test_text_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
 //                intent.putExtra("dulle_start",list1.get(1).getDulle_name_start());
 //                intent.putExtra("dulle_end",list1.get(1).getDulle_name_end());
 //                intent.putExtra("LanLng",list1.get(1).getLatlng());
 //                intent.putExtra("LatLng_end",list1.get(1).getLatlng_end());
 //                startActivity(intent);
-//            }
-//        });
+
+
+                    Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                    startActivity(intent);
+
+            }
+        });
     }
 
     // TODO: 11/8/21 레트로핏
@@ -252,6 +252,7 @@ public class ActivityDulle extends AppCompatActivity {
                     dulle_data.setDulle_time(dataobj.getString("dulle_time"));
                     dulle_data.setLatlng(dataobj.getString("LatLng"));
                     dulle_data.setLatlng_end(dataobj.getString("LatLng_End"));
+                    dulle_data.setImg_item(dataobj.getString("img_item"));
                     //System.out.println(dataobj.getString("Latlng")+i+"번쨰");
                     list1.add(dulle_data);
                     ///saveInfo(list1);
