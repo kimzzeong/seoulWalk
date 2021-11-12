@@ -171,6 +171,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 String a = getCurrentAddress(currentPosition);
+                System.out.println("현위치입니다.--> 지울것"+currentPosition);
                 String b = getCurrentAddress(START_LOCATION);
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
@@ -566,7 +567,9 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         currentMarker = mMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
+        mMap.animateCamera(cameraUpdate);
         mMap.moveCamera(cameraUpdate);
+
     }
 
 
@@ -807,6 +810,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         currentMarker = mMap.addMarker(markerOptions);
+
         //onMarkerClick(currentMarker);
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
@@ -859,7 +863,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
-        mMap.moveCamera(cameraUpdate);
+
+        mMap.animateCamera(cameraUpdate);
 
     }
 
@@ -885,7 +890,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         currentMarker = mMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(END_LOCATION, 15);
-        mMap.moveCamera(cameraUpdate);
+        mMap.animateCamera(cameraUpdate);
+        //mMap.moveCamera(cameraUpdate);
 
     }
 
