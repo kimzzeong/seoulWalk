@@ -18,6 +18,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.seoulwalk.Activity.ActivityCourseInfo;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.data.DetailCourse_Data;
 import com.example.seoulwalk.retrofit.ApiClient;
@@ -40,9 +41,9 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
     private final List<DetailCourse_Data> lists;
     private final ItemClickListener itemClickListener;
 
-    int idInt, yearFormatInt, viewInt;
-    String titleString, descriptionString, dateString, videoPathString, locationString, userString, monthDateString, thumbnailString;
-    Uri videoUri;
+    int stepCountInt, timeInt;
+    double distanceDouble, lengthDouble;
+    String courseFullNameString, courseNameString, difficultyString;
 
     public DetailCourseAdapter(Context context, List<DetailCourse_Data> lists, ItemClickListener itemClickListener) {
         this.context = context;
@@ -105,45 +106,39 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
             // getAdapterPosition() is deprecated
             int pos = getBindingAdapterPosition();
-            idInt = lists.get(getBindingAdapterPosition()).getId();
-            titleString = lists.get(getBindingAdapterPosition()).getTitle();
-            descriptionString = lists.get(getBindingAdapterPosition()).getDescription();
-            dateString = lists.get(getBindingAdapterPosition()).getDate();
-            locationString = lists.get(getBindingAdapterPosition()).getLocation();
-            userString = lists.get(getBindingAdapterPosition()).getUser();
-            monthDateString = lists.get(getBindingAdapterPosition()).getMonthDate();
-            thumbnailString = lists.get(getBindingAdapterPosition()).getThumbnail();
-            yearFormatInt = lists.get(getBindingAdapterPosition()).getYearFormat();
-            viewInt = lists.get(getBindingAdapterPosition()).getViews();
-            Log.d(TAG, "userString: " + userString);
-            videoPathString = ApiClient.BASE_URL.concat(lists.get(getBindingAdapterPosition()).getPath());
-            videoUri = Uri.parse(videoPathString);
+            // 세부코스명
+            courseNameString = lists.get(getBindingAdapterPosition()).getCourse_name();
+            // 원래코스명
+            courseFullNameString = lists.get(getBindingAdapterPosition()).getCourse_fullName();
+            // 걸음수
+            stepCountInt = lists.get(getBindingAdapterPosition()).getCourse_stepcount();
+            // 코스길이
+            lengthDouble = lists.get(getBindingAdapterPosition()).getCourse_length();
+            // 나와의 거리
+            distanceDouble = lists.get(getBindingAdapterPosition()).getDistance_to_me();
+            // 난이도
+            difficultyString = lists.get(getBindingAdapterPosition()).getCourse_difficulty();
+            // 소요시간
+            timeInt = lists.get(getBindingAdapterPosition()).getCourse_time();
 
             if (pos != RecyclerView.NO_POSITION) {
-//                Toast.makeText(view.getContext(œ), "pos: " + pos + " / title: " + titleString, Toast.LENGTH_SHORT).show();
-                Log.d("MyVideoAdapter", "onClick: videoPathString: " + videoPathString);
+                Toast.makeText(view.getContext(), "pos: " + pos + " / courseNameString: " + courseNameString, Toast.LENGTH_SHORT).show();
                 Context context = view.getContext();
-                Intent intent = new Intent(context, VideoActivity.class);
-                intent.putExtra("id", idInt);
-                intent.putExtra("title", titleString);
-                intent.putExtra("description", descriptionString);
-                intent.putExtra("date", dateString);
-                intent.putExtra("videoUri", videoUri);
-                intent.putExtra("location", locationString);
-                intent.putExtra("email", userString);
-                intent.putExtra("yearFormat", yearFormatInt);
-                intent.putExtra("monthDate", monthDateString);
-                intent.putExtra("views", viewInt);
-                Log.d("MyVideoAdapter", "intent id: " + idInt);
-                Log.d("MyVideoAdapter", "intent titleString: " + titleString);
-                Log.d("MyVideoAdapter", "intent descriptionString: " + descriptionString);
-                Log.d("MyVideoAdapter", "intent dateString: " + dateString);
-                Log.d("MyVideoAdapter", "intent videoUri: " + videoUri);
-                Log.d("MyVideoAdapter", "intent locationString: " + locationString);
-                Log.d("MyVideoAdapter", "intent email: " + userString);
-                Log.d("MyVideoAdapter", "intent yearFormatInt: " + yearFormatInt);
-                Log.d("MyVideoAdapter", "intent monthDateString: " + monthDateString);
-                Log.d("MyVideoAdapter", "intent viewInt: " + viewInt);
+                Intent intent = new Intent(context, ActivityCourseInfo.class);
+                intent.putExtra("stepCountInt", stepCountInt);
+                intent.putExtra("timeInt", timeInt);
+                intent.putExtra("distanceDouble", distanceDouble);
+                intent.putExtra("lengthDouble", lengthDouble);
+                intent.putExtra("courseFullNameString", courseFullNameString);
+                intent.putExtra("courseNameString", courseNameString);
+                intent.putExtra("difficultyString", difficultyString);
+                Log.d("TAG", "stepCountInt: " + stepCountInt);
+                Log.d("TAG", "timeInt: " + timeInt);
+                Log.d("TAG", "distanceDouble: " + distanceDouble);
+                Log.d("TAG", "lengthDouble: " + lengthDouble);
+                Log.d("TAG", "courseFullNameString: " + courseFullNameString);
+                Log.d("TAG", "courseNameString: " + courseNameString);
+                Log.d("TAG", "difficultyString: " + difficultyString);
                 context.startActivity(intent);
             }
         }
