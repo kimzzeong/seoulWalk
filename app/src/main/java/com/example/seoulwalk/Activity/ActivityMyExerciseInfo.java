@@ -2,6 +2,7 @@ package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -243,7 +244,9 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 //            });
 
             BarDataSet barDataSet = new BarDataSet(stepInfo, "걸음 수");
-            barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
+
+            int color = ContextCompat.getColor(getApplicationContext(), R.color.lightblue);
+            barDataSet.setColor(color);
             barDataSet.setValueTextColor(Color.BLACK);
             barDataSet.setValueTextSize(16f);
 
