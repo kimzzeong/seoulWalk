@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.seoulwalk.R;
 
@@ -24,6 +25,7 @@ public class ActivityGoal extends AppCompatActivity {
     Button goal_maintenance_btn, goal_step_up_btn;
     int user_level = 2; //현재 유저의 레벨
     ArrayList<String> items = new ArrayList<>();
+    TextView level_text,level_week_goal_step,level_day_goal_step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class ActivityGoal extends AppCompatActivity {
         goal_step_up_layout = findViewById(R.id.goal_step_up_layout);
         goal_maintenance_btn = findViewById(R.id.goal_maintenance_btn);
         goal_step_up_btn = findViewById(R.id.goal_step_up_btn);
+        level_text = findViewById(R.id.level_text);
+        level_week_goal_step = findViewById(R.id.level_week_goal_step);
+        level_day_goal_step = findViewById(R.id.level_day_goal_step);
 
         goal_maintenance_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +95,19 @@ public class ActivityGoal extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
               //  Log.e("Log",items.get(position));
+                if(position == 0){
+                    level_text.setText("Lv.3 도전 한다면?");
+                    level_week_goal_step.setText("주간 목표 걸음 수 : 70,000 걸음");
+                    level_day_goal_step.setText("일간 권장 걸음 수 : 10,000 걸음");
+                }else if(position == 1){
+                    level_text.setText("Lv.4 도전 한다면?");
+                    level_week_goal_step.setText("주간 목표 걸음 수 : 80,000 걸음");
+                    level_day_goal_step.setText("일간 권장 걸음 수 : 12,000 걸음");
+                }else{
+                    level_text.setText("Lv.5 도전 한다면?");
+                    level_week_goal_step.setText("주간 목표 걸음 수 : 90,000 걸음");
+                    level_day_goal_step.setText("일간 권장 걸음 수 : 14,000 걸음");
+                }
             }
 
             // 아무것도 선택되지 않은 상태일 때
