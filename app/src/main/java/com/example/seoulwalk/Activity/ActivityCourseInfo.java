@@ -769,10 +769,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         ArrayList<String> arrayList3 = new ArrayList<>();
 
         for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println("array get i" + arrayList.get(i));
+            //System.out.println("array get i" + arrayList.get(i));
             String[] filt2 = arrayList.get(i).split(",");
 
-            System.out.println("filt2" + filt2.length);
+            //System.out.println("filt2" + filt2.length);
 //
 //            System.out.println(filt2[0]);
 //            System.out.println(filt2[1]);
