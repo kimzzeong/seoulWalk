@@ -95,7 +95,7 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
             stamp_list.add(stamp_data3);
 
         }else if(stampList_data.getStampTitle().equals("관악산")){
-            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp14_off,"코스1");
+            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp14_on,"코스1");
             stamp_list.add(stamp_data1);
             Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp15_off,"코스2");
             stamp_list.add(stamp_data2);

@@ -107,13 +107,13 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
         write_course_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                 write_course_spinner_text = write_course_spinner.getSelectedItem().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                 write_course_spinner_text = write_course_spinner.getSelectedItem().toString();
             }
         });
@@ -148,6 +148,8 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
 
                 CommunityData communityData = new CommunityData(post_title.getText().toString(),post_content.getText().toString(),image,user_nickname,postDate,"",user_idx
                         ,gson.toJson(contentsList),write_spinner_text,write_course_spinner_text);
+//                CommunityData communityData2 = new CommunityData("둘레길 도는데 날씨 좋네요.",post_content.getText().toString(),image,"둘레길매니아",postDate,"",user_idx
+//                        ,gson.toJson(contentsList),write_spinner_text,write_course_spinner_text);
                 post_list.add(communityData);
 
                 editor.putString("POST",gson.toJson(post_list));
@@ -156,6 +158,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
+                Toast.makeText(ActivityWrite.this,"글이 정상적으로 등록되었습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 

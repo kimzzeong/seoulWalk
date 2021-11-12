@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -34,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
     Button course_btn, mypage_btn, home_btn, community_btn; //바텀 네비게이션 버튼
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
-    ImageView level_info;
+    ImageView level_info,main_profile_photo;
     TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,main_today_step_count,main_nickname;
     ConstraintLayout main_course_good;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String user_idx, user_nickname;
-
     private static final String SHARED_PREF_NAME = "mypref";
+    String user_idx, user_nickname, user_profile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         main_today_goal_step_count = findViewById(R.id.main_today_goal_step_count);
         main_today_step_count = findViewById(R.id.main_today_step_count);
         main_course_good = findViewById(R.id.main_course_good);
+        main_profile_photo = findViewById(R.id.main_profile_photo);
 
         main_nickname = findViewById(R.id.main_nickname);
 
@@ -96,9 +98,11 @@ public class MainActivity extends AppCompatActivity {
 
         editor.putString("user_idx","1");
         editor.putString("user_nickname","지나지나");
+        //editor.putString("user_profile","");
         editor.apply();
         user_idx = sharedPreferences.getString("user_idx","");
         user_nickname = sharedPreferences.getString("user_nickname","");
+
 
         main_nickname.setText(user_nickname);
 
@@ -186,5 +190,17 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        user_profile = sharedPreferences.getString("user_profile","");
+
+        if(user_profile.equals("")){
+            Glide.with(this) .load(R.drawable.basic_profile) .into(main_profile_photo);
+        }else{
+            Glide.with(this) .load(R.drawable.stamp14_on) .into(main_profile_photo);
+        }
     }
 }
