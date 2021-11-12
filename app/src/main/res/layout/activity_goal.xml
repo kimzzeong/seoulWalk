@@ -118,7 +118,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:text="도전(?)할 레벨을 선택해주세요"
+            android:text="도전할 레벨을 선택해주세요"
             android:padding="5dp"
             />
 

@@ -23,8 +23,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     //뷰페이저
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg" , "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
-    };
+            "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img04.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub3_img.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img01.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img02.jpg"
+           };
 
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
