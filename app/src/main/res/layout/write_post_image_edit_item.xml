@@ -8,8 +8,7 @@
         android:id="@+id/post_image_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        ></ImageView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/post_edit_data"
@@ -17,7 +16,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/post_image_data"
         android:hint="내용을 입력해주세요."
-        android:background="@color/white"
-        ></EditText>
+        android:padding="10dp"
+        android:background="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

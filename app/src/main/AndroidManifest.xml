@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <queries>
@@ -33,6 +34,8 @@
             android:value="AIzaSyBNVbhp39_02RSt81GNw3lcJ_c6xGtIQaw" />
 
         <activity android:name=".Activity.ActivityMap" />
+        <activity android:name=".Activity.CameraActivity" />
+        <activity android:name=".Activity.ActivityGallery" />
         <activity android:name=".Activity.ActivityLogin" />
         <activity android:name=".Activity.ActivityJoin" />
         <activity android:name=".Activity.ActivityDulle" />

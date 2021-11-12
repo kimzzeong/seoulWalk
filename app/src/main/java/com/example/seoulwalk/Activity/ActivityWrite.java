@@ -25,6 +25,8 @@ import com.example.seoulwalk.YoutubeDialog;
 import com.example.seoulwalk.adapter.PostDataAdapter;
 import com.example.seoulwalk.data.PostData;
 import com.example.seoulwalk.retrofit.Dulle_Name;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 
@@ -79,26 +81,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
             }
         });
 
-        //레트로핏 테스트
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Dulle_Name.REGIST_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-        Dulle_Name api = retrofit.create(Dulle_Name.class);
-        Call<String> call = api.savePost("code");
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
 
-                Toast.makeText(getApplicationContext(),response.body(),Toast.LENGTH_SHORT).show();
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"에러",Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
         //카메라 버튼
@@ -162,9 +145,38 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
 
             profilePath = data.getStringExtra("profilePath");
 
+
             PostData item = new PostData(profilePath,null,null,null);
             contentsList.add(item);
+            Log.e("profilePath", profilePath);
             postDataAdapter.notifyDataSetChanged();
+
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+            //레트로핏 테스트
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(Dulle_Name.REGIST_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            Dulle_Name api = retrofit.create(Dulle_Name.class);
+            PostData postData = contentsList.get(contentsList.size()-1);
+            Log.e("test", postData.getImageData());
+            Log.e("Log",contentsList.size()+"");
+            Call<Integer> call = api.savePost(contentsList);
+            call.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    Toast.makeText(getApplicationContext(),""+response.body(),Toast.LENGTH_SHORT).show();
+
+                }
+
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+                    Log.e("에러",t.getLocalizedMessage());
+                }
+            });
         }
     }
 }

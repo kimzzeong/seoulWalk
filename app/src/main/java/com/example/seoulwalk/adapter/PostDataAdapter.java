@@ -25,7 +25,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 import java.util.ArrayList;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class PostDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

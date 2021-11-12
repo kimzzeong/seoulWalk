@@ -1,6 +1,7 @@
 package com.example.seoulwalk.retrofit;
 
 import com.example.seoulwalk.data.Dulle_Data;
+import com.example.seoulwalk.data.PostData;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,8 @@ public interface Dulle_Name {
     );
 
     @GET("tim_php/test.php")
-    Call<String> savePost(
-            @Query("code") String code
+    Call<Integer> savePost(
+            @Query("code[]") ArrayList<PostData> code
     );
 
 
