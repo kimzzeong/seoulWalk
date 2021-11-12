@@ -3,6 +3,7 @@ package com.example.seoulwalk.Activity;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
     ImageView level_info;
-    TextView main_goal_info, main_my_exercise_info;
+    TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,main_today_step_count;
+    ConstraintLayout main_course_good;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -57,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
+        main_goal_step_count = findViewById(R.id.main_goal_step_count);
+        main_week_step_count = findViewById(R.id.main_week_step_count);
+        main_today_goal_step_count = findViewById(R.id.main_today_goal_step_count);
+        main_today_step_count = findViewById(R.id.main_today_step_count);
+        main_course_good = findViewById(R.id.main_course_good);
+
+
         main_goal_info = findViewById(R.id.main_goal_info);
 
         // 나의 활동 분석으로 이동
@@ -72,7 +81,13 @@ public class MainActivity extends AppCompatActivity {
         week_goal_step = 56000; // 이번주 목표 걸음수
         week_now_goal_step = 16800; // 이번주 걸음수
         today_goal_step = 8000; // 오늘 목표 걸음수
-        today_step = 2600; // 오늘 걸음수
+        today_step = 4000; // 오늘 걸음수
+
+
+        main_goal_step_count.setText(String.valueOf(week_goal_step));
+        main_week_step_count.setText(String.valueOf(week_now_goal_step));
+        main_today_goal_step_count.setText(String.valueOf(today_goal_step));
+        main_today_step_count.setText(String.valueOf(today_step));
 
         sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -158,6 +173,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        main_course_good.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this,ActivityCourseInfo.class);
+//                startActivity(intent);
+            }
+        });
 
 
 

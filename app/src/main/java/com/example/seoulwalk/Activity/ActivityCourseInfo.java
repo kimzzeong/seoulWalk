@@ -88,7 +88,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private LinearLayout layoutIndicator;
     ImageView[] indicators;
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg", "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
+            "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img04.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub3_img.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img01.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img02.jpg"
     };
 
     //후기 리스트
@@ -410,10 +410,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
                 String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
-                System.out.println("Marker"+maker_title[1]);
+               // System.out.println("Marker"+maker_title[1]);
 
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, maker_title[1], null);
+               // setCurrentLocation(location, maker_title[1], null);
 
                 mCurrentLocatiion = location;
             }

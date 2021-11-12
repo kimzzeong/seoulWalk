@@ -334,6 +334,7 @@
                 card_view:cardBackgroundColor="#FAFAFA"
                 card_view:cardCornerRadius="5dp">
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/main_course_good"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
