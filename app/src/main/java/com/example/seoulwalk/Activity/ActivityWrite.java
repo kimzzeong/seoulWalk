@@ -45,7 +45,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
     private PostDataAdapter postDataAdapter;
     private RecyclerView postRecyclerview;
     private String profilePath;
-    Spinner write_spinner;
+    Spinner write_spinner, write_course_spinner; // 전체글 카테고리, 후기쓸 때 코스별
 //
 
     @Override
@@ -59,6 +59,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
         btn_link = (Button)findViewById(R.id.link_btn);
         postRecyclerview = findViewById(R.id.post_Data);
         write_spinner = findViewById(R.id.write_spinner);
+        write_course_spinner = findViewById(R.id.write_course_spinner);
         checkPermission();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -66,13 +67,37 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
         postDataAdapter = new PostDataAdapter(this,contentsList);
         postRecyclerview.setAdapter(postDataAdapter);
 
+        //전체글 카테고리
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.communitySpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         write_spinner.setAdapter(spinner_adapter);
+
+        //코스별 카테고리
+        ArrayAdapter<String> course_spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.courseSpinner));
+        course_spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        write_course_spinner.setAdapter(course_spinner_adapter);
+
+        write_course_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
         write_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //선택됐을 때
                 Log.e("Spinner",""+position);
+                if(position == 1){
+                    write_course_spinner.setVisibility(View.VISIBLE);
+                }else{
+                    write_course_spinner.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -81,7 +106,12 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
             }
         });
 
+        write_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 
 
         //카메라 버튼
