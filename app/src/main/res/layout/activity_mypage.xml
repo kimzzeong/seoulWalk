@@ -32,25 +32,13 @@
         android:paddingTop="15dp"
         android:paddingBottom="10dp"
         >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/background"
-            app:civ_border_color="@color/gray"
-            android:src="@color/white"
-            app:civ_border_width="1dp"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/mypage_profile_photo"
-            app:civ_border_color="@color/gray"
-            android:src="@color/white"
-            app:civ_border_width="1dp"/>
+            android:background="@drawable/rectangle"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

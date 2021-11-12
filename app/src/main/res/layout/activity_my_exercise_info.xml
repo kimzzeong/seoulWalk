@@ -195,7 +195,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="18dp"
                 android:textColor="@color/black"
-                android:text="20대 여성 중 주간 걸음 수 상위 31%입니다."
+                android:text="20대 여성 중 주간 걸음 수 상위 41%입니다."
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="6dp"
@@ -231,7 +231,7 @@
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:progress="31"
+                    android:progress="41"
                     android:textAlignment="center"/>
 
 <!--                <TextView-->

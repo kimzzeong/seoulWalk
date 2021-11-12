@@ -38,7 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.adapter.Dulle1Adapter;
+
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
 import com.example.seoulwalk.adapter.ReviewAdapter;
 import com.example.seoulwalk.data.Exam_data;
@@ -253,6 +253,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "따라걷기", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(getApplicationContext(),ActivityMap.class);
+
+                intent1.putExtra("dulle_start",dulle_start);
+                intent1.putExtra("dulle_end",dulle_end);
+                intent1.putExtra("LanLng",Lat_start);
+                intent1.putExtra("LatLng_end",Lat_end);
+                startActivity(intent1);
             }
         });
 
@@ -569,9 +576,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 12);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 13);
         mMap.animateCamera(cameraUpdate);
-        mMap.moveCamera(cameraUpdate);
 
     }
 
@@ -683,7 +689,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
     public void path_data() {
         Exam_data exam_data = new Exam_data();
-        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림")) {
+        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림길")) {
             path = exam_data.getDulle_1_1();
             options.color(Color.BLUE);
         } else if (dulle_start.equals("당고개공원 갈림길")&&dulle_end.equals("철쭉동산")) {
