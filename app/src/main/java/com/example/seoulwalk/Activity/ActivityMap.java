@@ -63,7 +63,11 @@ public class ActivityMap extends AppCompatActivity
     LatLng START_LOCATION;
     LatLng END_LOCATION;
     ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
+    ArrayList<LatLng> my_load_ArrayList = new ArrayList<LatLng>();
+    ArrayList<LatLng> my_load_ArrayList2 = new ArrayList<LatLng>();
     PolylineOptions options = new PolylineOptions();
+    PolylineOptions options2 = new PolylineOptions();
+    PolylineOptions options3 = new PolylineOptions();
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 60000;  // 10초
@@ -136,15 +140,15 @@ public class ActivityMap extends AppCompatActivity
 //        startService(intent);
 
 
-//        if (checkPermission()) {
-//
-//            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
-//            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-//
-//            if (mMap!=null)
-//                mMap.setMyLocationEnabled(true);
-//
-//        }
+        if (checkPermission()) {
+
+            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+
+            if (mMap!=null)
+                mMap.setMyLocationEnabled(true);
+
+        }
 
 
     }
@@ -152,20 +156,15 @@ public class ActivityMap extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        Intent intent = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
-        startService(intent);
-        Intent intent1 = new Intent(getApplicationContext(), Map_service.class);
-        startService(intent1);
+//        Intent intent = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
+//        startService(intent);
+//        Intent intent1 = new Intent(getApplicationContext(), Map_service.class);
+//        startService(intent1);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
-
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -234,6 +233,7 @@ public class ActivityMap extends AppCompatActivity
         setStartLocation();
         setEndLocation();
         drawPath();
+        drawPath2();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -313,6 +313,7 @@ public class ActivityMap extends AppCompatActivity
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
+                System.out.println("현재 위치입니다."+currentPosition);
 
                 String markerTitle = getCurrentAddress(currentPosition);
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
@@ -320,6 +321,21 @@ public class ActivityMap extends AppCompatActivity
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
+                if (!currentPosition.equals(new LatLng(37.6218817, 127.086575))){
+                    // TODO: 11/13/21 여기 만들기
+                    String exam = "127.0868762596695,37.62213946756835,0 127.0870212659526,37.62185124518431,0 127.0869320614216,37.62168127987147,0 127.0867778527135,37.62155989094231,0 127.0865706754879,37.62147452625686,0 127.0864253684765,37.62135459589448,0 127.0861796894806,37.62128716322113,0 127.0854037515403,37.62098433536994,0 127.0851414422273,37.62092616335796,0 127.0848704776604,37.6207875398179,0 127.084712434564,37.62070002518217";
+                    System.out.println("확인중입니다___제발");
+                    parse_Location3(exam);
+//                    options3.add(new LatLng( 37.62213946756835, 127.0868762596695)).add(new LatLng(37.62070002518217,127.084712434564));
+                    options3.addAll(my_load_ArrayList2);
+                    options3.color(Color.RED);
+                    options3.width(8);
+                    //options.color(Color.BLACK);
+
+                    polylines.add(mMap.addPolyline(options3));
+                    Toast.makeText(ActivityMap.this, "목적지에 도착하였습니다.", Toast.LENGTH_SHORT).show();
+
+                }
 
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet);
@@ -441,14 +457,14 @@ public class ActivityMap extends AppCompatActivity
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLatLng);
-        markerOptions.title(markerTitle);
+        markerOptions.title("현위치 입니다.");
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
 
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 13);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 15);
         mMap.animateCamera(cameraUpdate);
 
     }
@@ -678,6 +694,7 @@ public class ActivityMap extends AppCompatActivity
 
     // TODO: 11/9/21 //Poly_Line_Draw
     String path;
+    String path2;
 
     public void path_data() {
         Exam_data exam_data = new Exam_data();
@@ -749,7 +766,12 @@ public class ActivityMap extends AppCompatActivity
             /** 여기서 부턴 코스별 구분*/
         }else if (dulle_start.equals("도봉산역") && dulle_end.equals("화랑대역")){
             path = exam_data.getDulle_1_1()+",0"+exam_data.getDulle_1_2()+",0"+exam_data.getDulle_1_3();
+
             options.color(Color.BLUE);
+
+            path2 =exam_data.getDulle_1_1()+",0"+exam_data.getDulle_exam();
+            // TODO: 11/13/21 여기서 빼오기 
+//            "현위치"->127.0868762596695,37.62213946756835,0 127.0870212659526,37.62185124518431,0 127.0869320614216,37.62168127987147,0 127.0867778527135,37.62155989094231,0 127.0865706754879,37.62147452625686,0 127.0864253684765,37.62135459589448,0 127.0861796894806,37.62128716322113,0 127.0854037515403,37.62098433536994,0 127.0851414422273,37.62092616335796,0 127.0848704776604,37.6207875398179,0  "도착위치"->127.084712434564,37.62070002518217
         }
         else if (dulle_start.equals("화랑대역") && dulle_end.equals("광나루역")){
             path = exam_data.getDulle_2_1()+",0"+exam_data.getDulle_2_2();
@@ -798,6 +820,7 @@ public class ActivityMap extends AppCompatActivity
 //            polylines.add(mMap.addPolyline(options));
 //        }
 
+
         options.addAll(latLngArrayList);
         options.width(15);
         //options.color(Color.BLACK);
@@ -837,9 +860,107 @@ public class ActivityMap extends AppCompatActivity
             double latitude = Double.parseDouble(arrayList3.get(i).toString());
             latLngArrayList.add(new LatLng(latitude, longitude));
 
+
+
         }
 
 
     }
+    private void drawPath2() {
+
+        path_data();
+
+
+
+        parse_Location2(path2);
+//        for (int i =0; i<latLngArrayList.size(); i++){
+//            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
+//            polylines.add(mMap.addPolyline(options));
+//        }
+
+        options2.color(Color.RED);
+        options2.addAll(my_load_ArrayList);
+        options2.width(8);
+        //options.color(Color.BLACK);
+
+        polylines.add(mMap.addPolyline(options2));
+        Log.e("폴리라인2", "그려지나요?2");
+       /// mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+    }
+
+
+
+    private void parse_Location2(String response) {
+
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList4 = new ArrayList<>();
+        for (int i = 0; i < filt1.length; i++) {
+
+            //System.out.println(filt1[i]+"확인중"+i);
+            arrayList4.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 " + arrayList4.size());
+
+        ArrayList<String> arrayList5 = new ArrayList<>();
+        ArrayList<String> arrayList6 = new ArrayList<>();
+
+        for (int i = 0; i < arrayList4.size(); i++) {
+            //System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList4.get(i).split(",");
+
+            //System.out.println("filt2" + filt2.length);
+//
+//            System.out.println(filt2[0]);
+//            System.out.println(filt2[1]);
+            arrayList5.add(filt2[0]);
+            arrayList6.add(filt2[1]);
+            double longitude = Double.parseDouble(arrayList5.get(i).toString());
+            double latitude = Double.parseDouble(arrayList6.get(i).toString());
+
+
+            my_load_ArrayList.add(new LatLng(latitude, longitude));
+
+
+        }
+
+
+    }
+
+    private void parse_Location3(String response) {
+
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList4 = new ArrayList<>();
+        for (int i = 0; i < filt1.length; i++) {
+
+            //System.out.println(filt1[i]+"확인중"+i);
+            arrayList4.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 " + arrayList4.size());
+
+        ArrayList<String> arrayList5 = new ArrayList<>();
+        ArrayList<String> arrayList6 = new ArrayList<>();
+
+        for (int i = 0; i < arrayList4.size(); i++) {
+            //System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList4.get(i).split(",");
+
+            //System.out.println("filt2" + filt2.length);
+//
+//            System.out.println(filt2[0]);
+//            System.out.println(filt2[1]);
+            arrayList5.add(filt2[0]);
+            arrayList6.add(filt2[1]);
+            double longitude = Double.parseDouble(arrayList5.get(i).toString());
+            double latitude = Double.parseDouble(arrayList6.get(i).toString());
+
+
+            my_load_ArrayList2.add(new LatLng(latitude, longitude));
+
+
+        }
+    }
+
 
 }
