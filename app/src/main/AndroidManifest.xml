@@ -29,6 +29,18 @@
         <activity android:name=".Activity.ActivitySetting" />
         <activity android:name=".Activity.ActivityLevelInfo" />
 
+        <service
+            android:name=".Activity.Map_service"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Activity.Notifi_Service"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".Activity.Map_Kid_Receiver_Service"
+            android:enabled="true"
+            android:exported="true" />
         <meta-data
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count;com.samsung.shealth.step_daily_trend" />

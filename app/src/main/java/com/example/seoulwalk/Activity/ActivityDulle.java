@@ -288,6 +288,7 @@ public class ActivityDulle extends AppCompatActivity {
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle1Adapter);
 
+                /** Adapter2 -> 상세코스 추천 */
                 dulleDetailAdapter = new DulleDetailAdapter(detail_list);
                 dulle_detail.setAdapter(dulleDetailAdapter);
 

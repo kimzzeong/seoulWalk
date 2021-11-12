@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.example.seoulwalk.data.Exam_data;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,12 +31,14 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -48,7 +51,7 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
     double longt;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
     public Map_service() {
     }
 
@@ -74,6 +77,10 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
         check_permission();
 
         Location_map();
+
+        Exam_data exam_data = new Exam_data();
+        String abc =exam_data.getDulle_1_1();
+        parse_Location(abc);
 
 
         return START_STICKY;
@@ -207,16 +214,23 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
 
                     if (lat != 0.0 && longt != 0.0) {
                         System.out.println("실행되는지 좀 보자");
-                        address = getCurrentAddress(lat, longt);
+                        for (int i =0; i<latLngArrayList.size(); i++){
+                            String a=String.valueOf(latLngArrayList.get(i).latitude);
+                            String b=String.valueOf(latLngArrayList.get(i).longitude);
+                            address = a+","+b;
+                           // Thread.sleep(10000);
+                            outstream.writeUTF(String.valueOf(address));
+                            editor.putString("Kid_Locaion", String.valueOf(address));
+                            editor.apply();
+                            Log.e("DDDD", "서버로 보내는 값 :" + String.valueOf(address));
+                            Thread.sleep(1000);
+                        }
+//                        address = getCurrentAddress(lat, longt);
                     } else {
                         address = "";
                         System.out.println("여기가 나오나?");
                     }
-                    outstream.writeUTF(String.valueOf(address));
-                    editor.putString("Kid_Locaion", String.valueOf(address));
-                    editor.apply();
-                    Log.e("DDDD", "서버로 보내는 값 :" + String.valueOf(address));
-                    Thread.sleep(1000);
+
                 }
 
 //
@@ -265,6 +279,40 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
 
         Address address = addresses.get(0);
         return address.getAddressLine(0).toString() + "\n";
+
+    }
+    // TODO: 11/9/21 위치 데이터 파싱
+    private void parse_Location(String response) {
+
+        String[] filt1 = response.split(",0");
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < filt1.length; i++) {
+
+            //System.out.println(filt1[i]+"확인중"+i);
+            arrayList.add(filt1[i]);
+
+        }
+        System.out.println("확인합니다 " + arrayList.size());
+
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        ArrayList<String> arrayList3 = new ArrayList<>();
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            //System.out.println("array get i" + arrayList.get(i));
+            String[] filt2 = arrayList.get(i).split(",");
+
+            //System.out.println("filt2" + filt2.length);
+//
+//            System.out.println(filt2[0]);
+//            System.out.println(filt2[1]);
+            arrayList2.add(filt2[0]);
+            arrayList3.add(filt2[1]);
+            double longitude = Double.parseDouble(arrayList2.get(i).toString());
+            double latitude = Double.parseDouble(arrayList3.get(i).toString());
+            latLngArrayList.add(new LatLng(latitude, longitude));
+
+        }
+
 
     }
 
