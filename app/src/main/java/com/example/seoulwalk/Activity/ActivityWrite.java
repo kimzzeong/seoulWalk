@@ -46,7 +46,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
     private RecyclerView postRecyclerview;
     private String profilePath;
     Spinner write_spinner;
-
+//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
