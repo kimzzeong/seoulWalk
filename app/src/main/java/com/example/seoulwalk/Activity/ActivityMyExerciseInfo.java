@@ -27,12 +27,14 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +67,8 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
         recyclerViewWeeklyStepCount = findViewById(R.id.recyclerview_my_exercise_info);
         recyclerViewWeeklyStepCount.setHasFixedSize(true);
         recyclerViewWeeklyStepCount.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerViewWeeklyStepCount.setVisibility(View.GONE);
         
         fetchWeeklyStepCount(UserInfo.USER_ID, week_num);
         
@@ -74,6 +78,11 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
         beforeWeekBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!nextWeekBtn.isEnabled()) {
+                    nextWeekBtn.setEnabled(true);
+                }
+
                 week_num++;
 //                Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
 
@@ -85,8 +94,13 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                if (!beforeWeekBtn.isEnabled()) {
+                    beforeWeekBtn.setEnabled(true);
+                }
+
                 if (week_num == 0) {
 //                    Toast.makeText(ActivityMyExerciseInfo.this, "더이상 클릭할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    nextWeekBtn.setEnabled(false);
                 } else {
                     week_num--;
 //                    Toast.makeText(ActivityMyExerciseInfo.this, String.valueOf(week_num), Toast.LENGTH_SHORT).show();
@@ -123,8 +137,15 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 
     private void parseFetchedWeeklyStepCount(List<StepCount> lists) {
         Log.d(TAG, "parseFetchedWeeklyStepCount()");
+//        weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
+//        recyclerViewWeeklyStepCount.setAdapter(weeklyStepCountAdapter);
+//        Log.e(TAG, "setAdapter()");
+//        weeklyStepCountAdapter.notifyDataSetChanged();
+//
+//        stepCountList = lists;
 
         int listSize = lists.size();
+
         if (listSize > 0) {
 
             weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);
@@ -137,6 +158,8 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 //        ArrayList<String> days = new ArrayList<>();
             ArrayList<Integer> days = new ArrayList<>();
             ArrayList<Integer> stepCounts = new ArrayList<>();
+
+            List<String> xAxisValues = new ArrayList<>(Arrays.asList("", "일", "월", "화", "수", "목", "금", "토"));
 
             // 주별 각각 날짜를 요일로 변환해서 days arraylist 에 저장하기
             for (int i = 0; i < listSize; i++) {
@@ -185,6 +208,40 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
                 stepInfo.add(new BarEntry(7, 0));
             }
 
+            //String setter in x-Axis
+            barChartStepCount.getXAxis().setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(xAxisValues));
+
+//            XAxis xAxis = barChartStepCount.getXAxis();
+//            xAxis.setGranularity(1f);
+//            xAxis.setCenterAxisLabels(false);
+//            xAxis.setEnabled(true);
+//            xAxis.setDrawGridLines(false);
+//            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+//            XAxis xAxis = barChartStepCount.getXAxis();
+//            xAxis.setValueFormatter(new ValueFormatter() {
+//                @Override
+//                public String getFormattedValue(float value, AxisBase axis) {
+//                    switch ((int)value){
+//                        //write your logic here
+//                        case 1:
+//                            return "일";
+//                        case 2:
+//                            return "월";
+//                        case 3:
+//                            return "화";
+//                        case 4:
+//                            return "수";
+//                        case 5:
+//                            return "목";
+//                        case 6:
+//                            return "금";
+//                        case 7:
+//                            return "토";
+//                    }
+//                }
+//            });
+
             BarDataSet barDataSet = new BarDataSet(stepInfo, "걸음 수");
             barDataSet.setColors(ColorTemplate.PASTEL_COLORS);
             barDataSet.setValueTextColor(Color.BLACK);
@@ -195,16 +252,16 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             barChartStepCount.setFitBars(true);
             barChartStepCount.setTouchEnabled(false);
             barChartStepCount.setData(barData);
-            barChartStepCount.getDescription().setText("Bar Chart Example");
+//            barChartStepCount.getDescription().setText("Bar Chart Example");
             barChartStepCount.animateY(0);
+            barChartStepCount.invalidate();
+//            barChartStepCount.getLegend().setEnabled(false);
+//            barChartStepCount.getDescription().setEnabled(false);
 
-//        final String[] weekdays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"}; // Your List / array with String Values For X-axis Labels
-//
-//// Set the value formatter
-//        XAxis xAxis = chart.getXAxis();
-//        xAxis.setValueFormatter(new IndexAxisValueFormatter(weekdays));
         } else {
-            Toast.makeText(ActivityMyExerciseInfo.this, "listSize = 0", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ActivityMyExerciseInfo.this, "listSize = 0", Toast.LENGTH_SHORT).show();
+            week_num--;
+            beforeWeekBtn.setEnabled(false);
         }
 
     }
