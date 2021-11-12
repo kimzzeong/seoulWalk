@@ -172,8 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0,0);
             }
         });
-
-
+        
         main_course_good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,11 +180,5 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent);
             }
         });
-
-
-
-
     }
-
-
 }
