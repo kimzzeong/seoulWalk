@@ -35,6 +35,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -63,6 +64,8 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
     private static final String SHARED_PREF_NAME = "mypref";
     String image = null;
 
+    ActivityCommunity activityCommunity = (ActivityCommunity)ActivityCommunity.activityCommunity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +89,12 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
 
         Type type = new TypeToken<ArrayList<CommunityData>>() {}.getType();
         gson = new Gson();
-        post_list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+
+        if(!sharedPreferences.getString("POST","").equals("")){
+
+            post_list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+        }
+
         //Log.e("post_lost",""+post_list.size());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -157,6 +165,9 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
                 Intent intent = new Intent(ActivityWrite.this,ActivityCommunity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+                if(activityCommunity!=null){
+                    activityCommunity.finish();
+                }
                 finish();
                 Toast.makeText(ActivityWrite.this,"글이 정상적으로 등록되었습니다.",Toast.LENGTH_SHORT).show();
             }

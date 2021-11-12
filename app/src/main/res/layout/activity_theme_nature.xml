@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/dulle_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="테마별 둘레길"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            tools:layout_editor_absoluteX="157dp"
+            tools:layout_editor_absoluteY="14dp">
+
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="자연을 위한 길"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" - 가능한 기존 등산로만 연결하여 흙길로 조성 \n
+- 사용하지 않는 샛길은 적극적인 폐쇄, 훼손된 등산로 복원\n
+- 수목 식재 필요할 경우 해당지역 자생 산림수종 선정\n
+- 콘크리트·철제·방부목재·로프 사용 지양, 현장소재 활용"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:layout_marginLeft="20dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/theme_nature_recycler"
+        android:layout_margin="20dp"/>
+
+
+</LinearLayout>

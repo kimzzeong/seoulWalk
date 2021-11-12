@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraint_course_detail_item"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dp"
+    android:background="#EFEFEF"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/course_detail_item_image"
+        android:layout_width="120dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_launcher_background"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_detail_item_distance_icon" />
+
+    <TextView
+        android:id="@+id/course_detail_item_original_course_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="고덕·일자산코스"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_image"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_image"
+        android:textSize="18dp"
+        android:textColor="@color/darker_gray" />
+
+    <ImageView
+        android:id="@+id/course_detail_item_distance_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_baseline_place_24"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/course_detail_item_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="반경 1.0km"
+        android:textSize="16sp"
+        android:textColor="@color/darker_gray"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_distance_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="4dp" />
+
+    <TextView
+        android:id="@+id/course_detail_item_difficulty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="난이도"
+        android:textSize="16sp"
+        android:textColor="@color/darker_gray"
+        app:layout_constraintEnd_toStartOf="@+id/course_detail_item_difficulty"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="6dp" />
+
+    <TextView
+        android:id="@+id/course_detail_item_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="중"
+        android:textColor="@color/darker_gray"
+        android:textSize="16sp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/course_detail_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="서울둘레길 3-1코스"
+        app:layout_constraintStart_toStartOf="@+id/course_detail_item_original_course_name"
+        app:layout_constraintTop_toBottomOf="@+id/course_detail_item_original_course_name"
+        android:textSize="20dp"
+        android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/course_detail_item_length_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/distance"
+        app:layout_constraintStart_toStartOf="@+id/course_detail_item_original_course_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/course_detail_item_length"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0km"
+        android:textSize="15sp"
+        android:textColor="@color/darker_gray"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_length_icon"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_length_icon"
+        android:layout_marginStart="4dp" />
+
+    <ImageView
+        android:id="@+id/course_detail_item_time_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_baseline_access_time_24"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_length"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_length_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/course_detail_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2시간 10분"
+        android:textSize="15sp"
+        android:textColor="@color/darker_gray"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_time_icon"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_time_icon"
+        android:layout_marginStart="4dp" />
+
+    <ImageView
+        android:id="@+id/course_detail_item_step_count_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/footprints"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_time"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_length_icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/course_detail_item_step_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6000걸음"
+        android:textSize="15sp"
+        android:textColor="@color/darker_gray"
+        app:layout_constraintStart_toEndOf="@+id/course_detail_item_step_count_icon"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_time_icon"
+        android:layout_marginStart="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

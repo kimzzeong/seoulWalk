@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="25sp"
-            android:text="둘레돌래"
+            android:text="커뮤니티"
             android:textColor="#000000"/>
         <ImageView
             android:layout_width="35dp"

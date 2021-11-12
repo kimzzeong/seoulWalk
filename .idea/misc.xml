@@ -14,14 +14,15 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2537037037037037" />
         <entry key="app/src/main/res/layout/activity_my_exercise_info.xml" value="0.23055555555555557" />
         <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.3182291666666667" />
-        <entry key="app/src/main/res/layout/activity_result_after_walk.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_result_after_walk.xml" value="0.22685185185185186" />
+        <entry key="app/src/main/res/layout/course_detail_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/dulle_item.xml" value="0.3182291666666667" />
-        <entry key="app/src/main/res/layout/history_item.xml" value="0.3182291666666667" />
+        <entry key="app/src/main/res/layout/history_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/weekly_step_count_item.xml" value="0.31927083333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

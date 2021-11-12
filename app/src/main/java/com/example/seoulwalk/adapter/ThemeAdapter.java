@@ -2,6 +2,7 @@ package com.example.seoulwalk.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.seoulwalk.Activity.ActivityTheme_Nature;
+import com.example.seoulwalk.Activity.ActivityTheme_Person;
+import com.example.seoulwalk.Activity.ActivityTheme_Story;
+import com.example.seoulwalk.Activity.ActivityTheme_Walk;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.data.Dulle_theme_Data;
 
@@ -79,11 +84,29 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    if(pos != RecyclerView.NO_POSITION){
-                        if (mListener != null) {
-                            mListener.onItemClick(v, pos) ;
-                        }
+                    //
+
+                    if (getAdapterPosition() == 0){
+                        //액티비티로 이동
+                        Intent intent = new Intent(context, ActivityTheme_Person.class);
+                        context.startActivity(intent);
+
+
+                    }else if (getAdapterPosition() == 1){
+                        //액티비티로 이동
+                        Intent intent = new Intent(context, ActivityTheme_Nature.class);
+                        context.startActivity(intent);
+
+                    }else if (getAdapterPosition() == 2){
+                        //액티비티로 이동
+                        Intent intent = new Intent(context, ActivityTheme_Walk.class);
+                        context.startActivity(intent);
+
+                    }else {
+                        //액티비티로 이동
+                        Intent intent = new Intent(context, ActivityTheme_Story.class);
+                        context.startActivity(intent);
+
                     }
                 }
             });
