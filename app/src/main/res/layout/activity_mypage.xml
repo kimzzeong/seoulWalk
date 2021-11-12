@@ -39,19 +39,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/mypage_profile_photo"
             android:background="@drawable/rectangle"/>
-
         <TextView
-            android:id="@+id/mypage_level_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="이제 막 걷기 시작한"
+            app:layout_constraintTop_toTopOf="@id/mypage_profile_photo"
+            app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo"
+            android:text="수식어"
             android:textColor="@color/black"
             android:textSize="20sp"
+            android:layout_marginLeft="20dp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo"
-            app:layout_constraintTop_toTopOf="@id/mypage_profile_photo" />
+            android:id="@+id/mypage_level_title"
+            android:layout_marginTop="15dp"
+            />
 
         <TextView
             android:layout_width="wrap_content"

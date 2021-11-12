@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ActivityResultAfterWalk">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/result_after_walk_actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="25sp"
+            android:text="걷기 활동 결과"
+            android:textColor="#000000"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_result_after_walk_contents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/result_after_walk_actionbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="코스 :  " />
+
+        <TextView
+            android:id="@+id/course_name_result_after_walk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울둘레길 0-0코스"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@+id/textView7"
+            app:layout_constraintStart_toEndOf="@+id/textView7" />
+
+        <TextView
+            android:id="@+id/datetime_result_after_walk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2021-11-03 17:20:35"
+            android:textSize="18sp"
+            android:textColor="@color/gray"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"/>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_result_after_walk_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/datetime_result_after_walk">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="소요시간"
+                android:textColor="@color/purple_700"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:id="@+id/time_result_after_walk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="2시간 10분"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="이동거리"
+                android:textColor="@color/purple_700"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:id="@+id/distance_result_after_walk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="6.0 km"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_result_after_walk_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearlayout_result_after_walk_1">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="칼로리"
+                android:textColor="@color/purple_700"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:id="@+id/calorie_result_after_walk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="554.5 kcal"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="평균속도"
+                android:textColor="@color/purple_700"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+            <TextView
+                android:id="@+id/speed_result_after_walk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="2.82 km/h"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textSize="14sp"
+                android:background="@drawable/back_light" />
+
+        </LinearLayout>
+
+            <!--    여기에 지도 넣어주세요    -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button_okay_result_after_walk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textSize="20sp"
+        android:layout_margin="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

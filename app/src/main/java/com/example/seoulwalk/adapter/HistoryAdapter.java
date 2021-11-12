@@ -33,9 +33,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         History_Data history_data = mData.get(position);
 
-        holder.history_time.setText(history_data.getHistory_time());
+        holder.history_datetime.setText(history_data.getHistory_datetime());
         holder.history_name.setText(history_data.getHistory_name());
-        holder.history_history_review.setText(history_data.getHistory_review());
+        holder.history_course_name_detail.setText(history_data.getHistory_course_name());
+        holder.history_time.setText(history_data.getHistory_time());
+        holder.history_distance.setText(history_data.getHistory_distance());
+        holder.history_calorie.setText(history_data.getHistory_calorie());
+        holder.history_speed.setText(history_data.getHistory_speed());
 
     }
 
@@ -50,14 +54,18 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView history_time, history_name, history_history_review;
+        TextView history_datetime, history_name, history_course_name_detail, history_time, history_distance, history_calorie, history_speed;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            history_time = itemView.findViewById(R.id.history_time);
+            history_datetime = itemView.findViewById(R.id.history_datetime);
             history_name = itemView.findViewById(R.id.history_name);
-            history_history_review = itemView.findViewById(R.id.history_review);
+            history_course_name_detail = itemView.findViewById(R.id.course_name_detail_history_item);
+            history_time = itemView.findViewById(R.id.time_history_item);
+            history_distance = itemView.findViewById(R.id.distance_history_item);
+            history_calorie = itemView.findViewById(R.id.calorie_history_item);
+            history_speed = itemView.findViewById(R.id.speed_history_item);
         }
     }
 }

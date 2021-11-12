@@ -22,7 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.ActivityStampCollection"></activity>
+        <activity
+            android:name=".Activity.ActivityResultAfterWalk"
+            android:exported="false" />
+        <activity android:name=".Activity.ActivityStampCollection" />
         <activity android:name=".Activity.ActivitySetting" />
         <activity android:name=".Activity.ActivityLevelInfo" />
 
@@ -43,6 +46,7 @@
         <activity android:name=".Activity.ActivityCourseInfo" />
         <activity android:name=".Activity.ActivityGoal" />
         <activity android:name=".Activity.ActivityCommunity" />
+        <activity android:name=".Activity.ActivityCommunityInfo" />
         <activity android:name=".Activity.ActivityMyExerciseInfo" />
         <activity android:name=".Activity.ActivityWrite" />
         <activity android:name=".Activity.MainActivity">
