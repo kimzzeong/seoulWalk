@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="24dp"
                 android:text="걸음 수"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -93,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/gray"
                 android:textSize="16sp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="@+id/my_exercise_info_step_count_chart_title"
                 app:layout_constraintTop_toBottomOf="@+id/my_exercise_info_step_count_chart_title"
                 android:text="기간 : " />
