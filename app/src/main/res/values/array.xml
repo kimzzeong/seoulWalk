@@ -7,8 +7,8 @@
     </string-array>
 
     <string-array name="communitySpinner">
-        <item>인증??</item>
-        <item>뭐넣을까요</item>
-        <item>뭐있죠</item>
+        <item>인증글</item>
+        <item>정보공유글</item>
+        <item>자유글</item>
     </string-array>
 </resources>
