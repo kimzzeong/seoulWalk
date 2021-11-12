@@ -2,25 +2,21 @@ package com.example.seoulwalk.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.data.Dulle_Data;
 import com.example.seoulwalk.data.Dulle_theme_Data;
 
 import java.util.ArrayList;
 
-public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder> {
+public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> {
     Context context;
 
 
@@ -42,7 +38,7 @@ public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.dulle_theme_item, parent,false);
-        Dulle1Adapter.ViewHolder vh = new Dulle1Adapter.ViewHolder(view);
+        ThemeAdapter.ViewHolder vh = new ThemeAdapter.ViewHolder(view);
         return vh;
     }
 
@@ -64,7 +60,7 @@ public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder
         return mData.size();
     }
 
-    public Dulle1Adapter(ArrayList<Dulle_theme_Data> list) {
+    public ThemeAdapter(ArrayList<Dulle_theme_Data> list) {
         mData = list;
     }
 

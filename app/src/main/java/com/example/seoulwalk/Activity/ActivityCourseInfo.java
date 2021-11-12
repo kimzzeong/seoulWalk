@@ -1,7 +1,6 @@
 package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
@@ -34,13 +31,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
-import com.example.seoulwalk.adapter.ReviewAdapter;
 import com.example.seoulwalk.data.Exam_data;
 import com.example.seoulwalk.data.Review_Data;
 import com.google.android.gms.location.FusedLocationProviderClient;
