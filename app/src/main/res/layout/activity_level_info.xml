@@ -28,11 +28,11 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20대 여성 기준표"
-        android:textSize="22sp"
+        android:layout_marginTop="26dp"
+        android:text="20대 여성 레벨 기준표"
         android:textColor="@color/black"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/level_actionbar" />
 
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside_color"
                 android:gravity="center"
-                android:text="걸음 수 기준"
+                android:text="일주일 걸음 수 기준"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside"
                 android:gravity="center"
-                android:text="9240"
+                android:text="64,680"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside"
                 android:gravity="center"
-                android:text="7782"
+                android:text="54,474"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside"
                 android:gravity="center"
-                android:text="6324"
+                android:text="44,268"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -196,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside"
                 android:gravity="center"
-                android:text="4766"
+                android:text="33,362"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -228,7 +228,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/table_inside"
                 android:gravity="center"
-                android:text="4766 미만"
+                android:text="33,362 미만"
                 android:padding="5dp"
                 android:textSize="18sp" />
 
@@ -253,7 +253,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tablelayout_level_info"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp" />
 
