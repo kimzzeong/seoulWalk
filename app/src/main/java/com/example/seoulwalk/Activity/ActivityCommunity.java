@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.adapter.CommunityAdapter;
 import com.example.seoulwalk.data.CommunityData;
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class ActivityCommunity extends AppCompatActivity {
 
     Button course_btn, mypage_btn, home_btn, community_btn;
     RecyclerView community_list;
-    CommunityAdapter communityAdapter;
+    //CommunityAdapter communityAdapter;
     Spinner community_spinner;
     ArrayList<CommunityData> list = new ArrayList<>();
     ImageView create_post;
@@ -51,20 +50,20 @@ public class ActivityCommunity extends AppCompatActivity {
             }
         });
 
-        community_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
-
-        for (int i = 1; i <= 10; i++){
-            CommunityData communityData;
-            if(i%2 == 1){
-                communityData = new CommunityData("제목"+i,"내용"+i,"https://i.imgur.com/36Bivob.jpeg","닉네임"+i,"날짜"+i,"사용자"+i);
-            }else{
-                communityData = new CommunityData("제목"+i,"내용"+i,"","닉네임"+i,"날짜"+i,"사용자"+i);
-            }
-            list.add(communityData);
-        }
-
-        communityAdapter = new CommunityAdapter(list,this);
-        community_list.setAdapter(communityAdapter);
+//        community_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+//
+//        for (int i = 1; i <= 10; i++){
+//            CommunityData communityData;
+//            if(i%2 == 1){
+//                communityData = new CommunityData("제목"+i,"내용"+i,"https://i.imgur.com/36Bivob.jpeg","닉네임"+i,"날짜"+i,"사용자"+i);
+//            }else{
+//                communityData = new CommunityData("제목"+i,"내용"+i,"","닉네임"+i,"날짜"+i,"사용자"+i);
+//            }
+//            list.add(communityData);
+//        }
+//
+//        communityAdapter = new CommunityAdapter(list,this);
+//        community_list.setAdapter(communityAdapter);
 
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.communitySpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -81,13 +80,13 @@ public class ActivityCommunity extends AppCompatActivity {
             }
         });
 
-        communityAdapter.setOnItemClickListener(new CommunityAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                Intent intent = new Intent(getApplicationContext(),ActivityCommunityInfo.class);
-                startActivity(intent);
-            }
-        });
+//        communityAdapter.setOnItemClickListener(new CommunityAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(View v, int position) {
+//                Intent intent = new Intent(getApplicationContext(),ActivityCommunityInfo.class);
+//                startActivity(intent);
+//            }
+//        });
 
         //홈 버튼 클릭 시 차트 액티비티로 이동
         home_btn.setOnClickListener(new View.OnClickListener() {

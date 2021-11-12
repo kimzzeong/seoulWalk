@@ -7,8 +7,35 @@
     </string-array>
 
     <string-array name="communitySpinner">
+
+        <item>전체글</item>
+        <item>후기글</item>
         <item>인증글</item>
         <item>정보공유글</item>
         <item>자유글</item>
+    </string-array>
+
+    <string-array name="courseSpinner">
+
+        <item>1-1 코스</item>
+        <item>1-2 코스</item>
+        <item>2-1 코스</item>
+        <item>2-2 코스</item>
+        <item>3-1 코스</item>
+        <item>3-2 코스</item>
+        <item>3-3 코스</item>
+        <item>4-1 코스</item>
+        <item>4-2 코스</item>
+        <item>5-1 코스</item>
+        <item>5-2 코스</item>
+        <item>6-1 코스</item>
+        <item>6-2 코스</item>
+        <item>7-1 코스</item>
+        <item>7-2 코스</item>
+        <item>8-1 코스</item>
+        <item>8-2 코스</item>
+        <item>8-3 코스</item>
+        <item>8-4 코스</item>
+        <item>8-5 코스</item>
     </string-array>
 </resources>
