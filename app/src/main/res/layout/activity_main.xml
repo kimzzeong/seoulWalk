@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="수식어 길때 처리 어케할까용"
+                android:text="이제 막 걷기 시작한"
                 android:textColor="@color/black"
                 android:textSize="23sp"
                 app:layout_constraintLeft_toRightOf="@+id/main_profile_photo"
