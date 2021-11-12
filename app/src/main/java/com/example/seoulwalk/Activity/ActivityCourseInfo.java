@@ -169,13 +169,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 System.out.println("현위치입니다.--> 지울것"+currentPosition);
                 String b = getCurrentAddress(START_LOCATION);
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
+                        Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
                 startActivity(intent);
             }
         });
 
 //        course_review_layout = findViewById(R.id.course_review_layout);
- //       course_info_layout = findViewById(R.id.course_info_layout);
+        //       course_info_layout = findViewById(R.id.course_info_layout);
 
 //        course_info_btn = findViewById(R.id.course_info_btn);
 //        course_review_btn = findViewById(R.id.course_review_btn);
@@ -254,10 +254,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             Review_Data review_data = new Review_Data("aaaa" + i);
             review_list.add(review_data);
-            
+
         }
 
-       // RecyclerView review = findViewById(R.id.course_review_list);
+        // RecyclerView review = findViewById(R.id.course_review_list);
 //        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 //
 //        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list, this);
@@ -787,7 +787,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         path_data();
 
 
-         parse_Location(path);
+        parse_Location(path);
 
 //        for (int i =0; i<latLngArrayList.size(); i++){
 //            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);

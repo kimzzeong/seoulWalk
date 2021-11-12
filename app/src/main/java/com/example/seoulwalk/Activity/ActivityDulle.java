@@ -2,32 +2,31 @@ package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.adapter.Dulle1Adapter;
+import com.example.seoulwalk.adapter.ThemeAdapter;
 import com.example.seoulwalk.adapter.Dulle2Adapter;
 import com.example.seoulwalk.adapter.DulleDetailAdapter;
 import com.example.seoulwalk.data.DulleDetail_Data;
 import com.example.seoulwalk.data.Dulle_Data;
-import com.example.seoulwalk.data.Exam_data;
+import com.example.seoulwalk.data.Dulle_theme_Data;
 import com.example.seoulwalk.retrofit.Dulle_Name;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -56,13 +55,16 @@ public class ActivityDulle extends AppCompatActivity {
     ArrayList<Dulle_Data> list2 = new ArrayList<>();
     ArrayList<DulleDetail_Data> detail_list = new ArrayList<>();
     Dulle_Data dulle_data ;
-    Dulle1Adapter dulle1Adapter;
+    DulleDetail_Data dulleDetail_data;
+
+    ThemeAdapter ThemeAdapter;
     RecyclerView dulle1;
     Dulle2Adapter dulle2Adapter;
     RecyclerView dulle2;
     DulleDetailAdapter dulleDetailAdapter;
     RecyclerView dulle_detail;
     Spinner listing_spinner;
+    ArrayList<Dulle_theme_Data> theme_list = new ArrayList<>();
 
     @Override
     protected void onStart() {
@@ -113,10 +115,7 @@ public class ActivityDulle extends AppCompatActivity {
         dulle2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         dulle_detail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
-        for (int i = 1; i <= 10; i++){
-            DulleDetail_Data dulleDetail_data = new DulleDetail_Data("시작점"+i,"시간"+i,"도착점"+i);
-            detail_list.add(dulleDetail_data);
-        }
+
 
         dulleDetailAdapter = new DulleDetailAdapter(detail_list);
         dulle_detail.setAdapter(dulleDetailAdapter);
@@ -179,8 +178,8 @@ public class ActivityDulle extends AppCompatActivity {
 //                startActivity(intent);
 
 
-                    Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
-                    startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(),ActivityMap.class);
+                startActivity(intent);
 
             }
         });
@@ -245,31 +244,65 @@ public class ActivityDulle extends AppCompatActivity {
                 Log.e("OK", String.valueOf(dataArray.length()));
                 for (int i = 0; i < dataArray.length(); i++)
                 {
-                    dulle_data = new Dulle_Data();
+
+                    dulleDetail_data = new DulleDetail_Data();
                     JSONObject dataobj = dataArray.getJSONObject(i);
-                    dulle_data.setDulle_name_start(dataobj.getString("dulle_start"));
-                    dulle_data.setDulle_name_end(dataobj.getString("dulle_end"));
-                    dulle_data.setDulle_time(dataobj.getString("dulle_time"));
-                    dulle_data.setLatlng(dataobj.getString("LatLng"));
-                    dulle_data.setLatlng_end(dataobj.getString("LatLng_End"));
-                    dulle_data.setImg_item(dataobj.getString("img_item"));
+                    dulleDetail_data.setDulle_name_start(dataobj.getString("dulle_start"));
+                    dulleDetail_data.setDulle_name_end(dataobj.getString("dulle_end"));
+                    dulleDetail_data.setDulle_time(dataobj.getString("dulle_time"));
+                    dulleDetail_data.setLatlng(dataobj.getString("LatLng"));
+                    dulleDetail_data.setLatlng_end(dataobj.getString("LatLng_End"));
+                    dulleDetail_data.setImg_item(dataobj.getString("img_item"));
                     //System.out.println(dataobj.getString("Latlng")+i+"번쨰");
-                    list1.add(dulle_data);
+
                     ///saveInfo(list1);
 
+                    detail_list.add(dulleDetail_data);
                 }
+
+
+                /** 여기 코스별로 나누자 */
+                list2.add(new Dulle_Data("도봉산역","1코스-수락·불암산코스","화랑대역","dulle_1_1.jpg","37.68917268817206,  127.0468070568162","37.62057141019006, 127.0846233899846"));
+                list2.add(new Dulle_Data("화랑대역","2코스-용마·아차산코스","광나루역","dulle_2_1.jpg","37.62057141019006, 127.0846233899846","37.5453623012, 127.1044593584"));
+                list2.add(new Dulle_Data("광나루역","3코스-고덕·일자산코스","수서역","dulle_3_1.jpg","37.5453623012, 127.1044593584","37.48703092484752, 127.1014292535824"));
+                list2.add(new Dulle_Data("수서역","4코스-대모·우면산코스","사당역 갈림길","dulle_4_1.jpg","37.48703092484752, 127.1014292535824","37.47597056036504, 126.9818863213483"));
+                list2.add(new Dulle_Data("사당역 갈림길","5코스-관악산코스","석수역","dulle_5_1.jpg","37.47597056036504, 126.9818863213483","37.43428146926362, 126.9021778590784"));
+                list2.add(new Dulle_Data("석수역","6코스-안양천코스","가양대교 남단","dulle_6_1.jpg","37.43428146926362, 126.9021778590784","37.56137725367158, 126.8554687742643"));
+                list2.add(new Dulle_Data("가양대교 남단","7코스-봉산·앵봉산코스","구파발역","dulle_7_1.jpg","37.56137725367158, 126.8554687742643","37.6361699551611, 126.9189621745594"));
+                list2.add(new Dulle_Data("구파발역","8코스-북한산코스","도봉산역","dulle_8_1.jpg","37.6366754939268, 126.9189565646409","37.68900589242598, 127.0459151597205"));
+
+
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman = ContextCompat.getDrawable(getApplicationContext(), R.drawable.forman);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.fornature);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman3= ContextCompat.getDrawable(getApplicationContext(), R.drawable.forwalk);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman4= ContextCompat.getDrawable(getApplicationContext(), R.drawable.forstory);
+
+
+                //하드로 theme 데이터들 넣어야함
+                Dulle_theme_Data dulle_theme_data = new Dulle_theme_Data("사람을 위한 길", forman);
+                Dulle_theme_Data dulle_theme_data1 = new Dulle_theme_Data("자연을 위한 길", forman2);
+                Dulle_theme_Data dulle_theme_data2 = new Dulle_theme_Data("산책을 위한 길", forman3);
+                Dulle_theme_Data dulle_theme_data3 = new Dulle_theme_Data("이야기가 있는 길", forman4);
+
+
+                theme_list.add(dulle_theme_data);
+                theme_list.add(dulle_theme_data1);
+                theme_list.add(dulle_theme_data2);
+                theme_list.add(dulle_theme_data3);
+
+
+                ThemeAdapter = new ThemeAdapter(theme_list);
+
 
                 //saveInfo(list1);
                 System.out.println("size입니다."+list1.size());
-                dulle1Adapter = new Dulle1Adapter(list1);
-                dulle1.setAdapter(dulle1Adapter);
+                dulle1.setAdapter(ThemeAdapter);
 
                 dulle2Adapter = new Dulle2Adapter(list2);
-                dulle2.setAdapter(dulle1Adapter);
+                dulle2.setAdapter(dulle2Adapter);
 
 
-                Log.e("확인",list1.get(0).getLatlng());
-                dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
+                ThemeAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
                         //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
@@ -287,8 +320,31 @@ public class ActivityDulle extends AppCompatActivity {
                     @Override
                     public void onItemClick(View v, int position) {
                         //Toast.makeText(getApplicationContext(),"click2 : "+position,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"click1 : "+position,Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
+                        intent.putExtra("dulle_start",list2.get(position).getDulle_name_start());
+                        intent.putExtra("dulle_end",list2.get(position).getDulle_name_end());
+                        intent.putExtra("LanLng",list2.get(position).getLatlng());
+                        intent.putExtra("LatLng_end",list2.get(position).getLatlng_end());
+
                         startActivity(intent);
+                    }
+                });
+
+
+                dulleDetailAdapter.setOnItemClickListener(new DulleDetailAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+
+                        Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
+                        intent.putExtra("dulle_start",detail_list.get(position).getDulle_name_start());
+                        intent.putExtra("dulle_end",detail_list.get(position).getDulle_name_end());
+                        intent.putExtra("LanLng",detail_list.get(position).getLatlng());
+                        intent.putExtra("LatLng_end",detail_list.get(position).getLatlng_end());
+                        startActivity(intent);
+
+
+
                     }
                 });
 
