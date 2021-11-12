@@ -1,6 +1,7 @@
 package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
@@ -31,10 +34,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
+
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
+import com.example.seoulwalk.adapter.ReviewAdapter;
 import com.example.seoulwalk.data.Exam_data;
 import com.example.seoulwalk.data.Review_Data;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -169,13 +175,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 System.out.println("현위치입니다.--> 지울것"+currentPosition);
                 String b = getCurrentAddress(START_LOCATION);
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
+                Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
                 startActivity(intent);
             }
         });
 
 //        course_review_layout = findViewById(R.id.course_review_layout);
-        //       course_info_layout = findViewById(R.id.course_info_layout);
+ //       course_info_layout = findViewById(R.id.course_info_layout);
 
 //        course_info_btn = findViewById(R.id.course_info_btn);
 //        course_review_btn = findViewById(R.id.course_review_btn);
@@ -247,6 +253,13 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "따라걷기", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(getApplicationContext(),ActivityMap.class);
+
+                intent1.putExtra("dulle_start",dulle_start);
+                intent1.putExtra("dulle_end",dulle_end);
+                intent1.putExtra("LanLng",Lat_start);
+                intent1.putExtra("LatLng_end",Lat_end);
+                startActivity(intent1);
             }
         });
 
@@ -254,10 +267,10 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             Review_Data review_data = new Review_Data("aaaa" + i);
             review_list.add(review_data);
-
+            
         }
 
-        // RecyclerView review = findViewById(R.id.course_review_list);
+       // RecyclerView review = findViewById(R.id.course_review_list);
 //        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 //
 //        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list, this);
@@ -563,9 +576,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 12);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 13);
         mMap.animateCamera(cameraUpdate);
-        mMap.moveCamera(cameraUpdate);
 
     }
 
@@ -677,7 +689,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
     public void path_data() {
         Exam_data exam_data = new Exam_data();
-        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림")) {
+        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림길")) {
             path = exam_data.getDulle_1_1();
             options.color(Color.BLUE);
         } else if (dulle_start.equals("당고개공원 갈림길")&&dulle_end.equals("철쭉동산")) {
@@ -787,7 +799,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         path_data();
 
 
-        parse_Location(path);
+         parse_Location(path);
 
 //        for (int i =0; i<latLngArrayList.size(); i++){
 //            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);

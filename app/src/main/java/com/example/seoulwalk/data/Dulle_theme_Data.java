@@ -2,7 +2,7 @@ package com.example.seoulwalk.data;
 
 import android.graphics.drawable.Drawable;
 
-public class Dulle_theme_Data {
+public class  Dulle_theme_Data {
 
     String dulle_theme_name;
     Drawable dulle_theme_background;

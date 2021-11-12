@@ -117,8 +117,7 @@ public class ActivityDulle extends AppCompatActivity {
 
 
 
-        dulleDetailAdapter = new DulleDetailAdapter(detail_list);
-        dulle_detail.setAdapter(dulleDetailAdapter);
+
 
 
 
@@ -300,7 +299,8 @@ public class ActivityDulle extends AppCompatActivity {
 
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle2Adapter);
-
+                dulleDetailAdapter = new DulleDetailAdapter(detail_list);
+                dulle_detail.setAdapter(dulleDetailAdapter);
 
                 ThemeAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
                     @Override
@@ -342,8 +342,6 @@ public class ActivityDulle extends AppCompatActivity {
                         intent.putExtra("LanLng",detail_list.get(position).getLatlng());
                         intent.putExtra("LatLng_end",detail_list.get(position).getLatlng_end());
                         startActivity(intent);
-
-
 
                     }
                 });

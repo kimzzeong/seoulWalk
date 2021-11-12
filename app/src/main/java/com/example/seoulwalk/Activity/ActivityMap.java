@@ -136,15 +136,15 @@ public class ActivityMap extends AppCompatActivity
 //        startService(intent);
 
 
-        if (checkPermission()) {
-
-            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
-            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-
-            if (mMap!=null)
-                mMap.setMyLocationEnabled(true);
-
-        }
+//        if (checkPermission()) {
+//
+//            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+//            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+//
+//            if (mMap!=null)
+//                mMap.setMyLocationEnabled(true);
+//
+//        }
 
 
     }
@@ -152,12 +152,10 @@ public class ActivityMap extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-
-        Intent intent = new Intent(getApplicationContext(), Map_service.class);
+        Intent intent = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
         startService(intent);
-
-        Intent intent123 = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
-        startService(intent123);
+        Intent intent1 = new Intent(getApplicationContext(), Map_service.class);
+        startService(intent1);
     }
 
     @Override
