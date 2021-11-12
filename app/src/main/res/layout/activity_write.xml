@@ -50,6 +50,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"/>
+            <Spinner
+                android:id="@+id/write_course_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_margin="10dp"/>
             <EditText
                 android:id="@+id/post_title"
                 android:layout_width="match_parent"

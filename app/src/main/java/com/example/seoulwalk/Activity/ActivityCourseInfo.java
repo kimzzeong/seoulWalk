@@ -76,7 +76,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     ConstraintLayout course_review_layout;
     ScrollView course_info_layout;
     boolean course_layout_flag = false;
-    Button course_info_btn, course_review_btn;
+    //Button course_info_btn, course_review_btn;
     FloatingActionButton dulle_gil_walk; // 따라가기 플로팅버튼
     List<Polyline> polylines = new ArrayList<>();
     LatLng START_LOCATION;
@@ -179,30 +179,30 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             }
         });
 
-        course_review_layout = findViewById(R.id.course_review_layout);
-        course_info_layout = findViewById(R.id.course_info_layout);
+//        course_review_layout = findViewById(R.id.course_review_layout);
+ //       course_info_layout = findViewById(R.id.course_info_layout);
 
-        course_info_btn = findViewById(R.id.course_info_btn);
-        course_review_btn = findViewById(R.id.course_review_btn);
+//        course_info_btn = findViewById(R.id.course_info_btn);
+//        course_review_btn = findViewById(R.id.course_review_btn);
 
         dulle_gil_walk = findViewById(R.id.dulle_gil_walk);
 
-        course_info_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                course_layout_flag = false;
-                layoutChange(course_layout_flag);
-
-            }
-        });
-
-        course_review_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                course_layout_flag = true;
-                layoutChange(course_layout_flag);
-            }
-        });
+//        course_info_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                course_layout_flag = false;
+//                layoutChange(course_layout_flag);
+//
+//            }
+//        });
+//
+//        course_review_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                course_layout_flag = true;
+//                layoutChange(course_layout_flag);
+//            }
+//        });
 // TODO: 11/10/21 지도 고정
         ImageView img_frag = findViewById(R.id.img_frag);
         ScrollView scrollView = findViewById(R.id.course_info_layout);
@@ -261,11 +261,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             
         }
 
-        RecyclerView review = findViewById(R.id.course_review_list);
-        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list, this);
-        review.setAdapter(reviewAdapter);
+       // RecyclerView review = findViewById(R.id.course_review_list);
+//        review.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+//
+//        ReviewAdapter reviewAdapter = new ReviewAdapter(review_list, this);
+//        review.setAdapter(reviewAdapter);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)

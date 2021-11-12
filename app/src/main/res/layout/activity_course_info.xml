@@ -25,36 +25,36 @@
             android:textColor="#000000"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_info_actionbar"
-        android:background="@drawable/round_layout"
-        android:gravity="center"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:id="@+id/course_tap_layout"
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/course_info_actionbar"-->
+<!--        android:background="@drawable/round_layout"-->
+<!--        android:gravity="center"-->
+<!--        android:paddingLeft="5dp"-->
+<!--        android:paddingRight="5dp"-->
+<!--        android:id="@+id/course_tap_layout"-->
 
-        >
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="코스 정보"
-            android:layout_weight="1"
-            android:id="@+id/course_info_btn"
+<!--        >-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="코스 정보"-->
+<!--            android:layout_weight="1"-->
+<!--            android:id="@+id/course_info_btn"-->
 
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="후기"
-            android:layout_weight="1"
-            android:id="@+id/course_review_btn"
-            />
-    </LinearLayout>
+<!--            />-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="후기"-->
+<!--            android:layout_weight="1"-->
+<!--            android:id="@+id/course_review_btn"-->
+<!--            />-->
+<!--    </LinearLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -186,7 +186,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:paddingLeft="10dp"
-                android:text="코스개요 : ~~~~"
+                android:text="시간 : 2시간50분"
                 android:id="@+id/course_content"
                 />
             <TextView
@@ -197,7 +197,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:paddingLeft="10dp"
-                android:text="세부코스 : A - B - C"
+                android:text="세부코스 : 도봉산역 ~ 당고개공원갈림길"
                 android:id="@+id/course_detail"
                 />
             <TextView
@@ -208,7 +208,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:paddingLeft="10dp"
-                android:text="교통편 : 출발지에서 가장 가까운 역"
+                android:text="교통 : 지하철 1호선, 7호선 도봉산역 2번 출입구"
                 android:id="@+id/course_traffic"
                 />
 
@@ -280,21 +280,21 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:id="@+id/course_review_layout"
-        android:visibility="gone"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/course_review_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/course_tap_layout"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        android:id="@+id/course_review_layout"-->
+<!--        android:visibility="gone"-->
+<!--        >-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/course_review_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dulle_gil_walk"
         android:layout_width="wrap_content"

@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
     ImageView level_info;
-    TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,main_today_step_count;
+    TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,main_today_step_count,main_nickname;
     ConstraintLayout main_course_good;
 
     SharedPreferences sharedPreferences;
@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         main_today_step_count = findViewById(R.id.main_today_step_count);
         main_course_good = findViewById(R.id.main_course_good);
 
+        main_nickname = findViewById(R.id.main_nickname);
+
 
         main_goal_info = findViewById(R.id.main_goal_info);
 
@@ -93,10 +95,13 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
 
         editor.putString("user_idx","1");
-        editor.putString("user_nickname","Tim_nova_1");
+        editor.putString("user_nickname","지나지나");
         editor.apply();
         user_idx = sharedPreferences.getString("user_idx","");
         user_nickname = sharedPreferences.getString("user_nickname","");
+
+        main_nickname.setText(user_nickname);
+
         Log.e("user_idx",user_idx);
         Log.e("user_nickname",user_nickname);
 
@@ -172,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 overridePendingTransition(0,0);
             }
         });
-        
+
         main_course_good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
