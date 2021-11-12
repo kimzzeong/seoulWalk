@@ -149,63 +149,6 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
         }
     }
 
-    private void setMainVideo(int videoId, String email, String title, String date, int views, String thumbnail, Context context) {
-        Log.d(TAG, "setMainVideo()");
-        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<String> call = apiInterface.setChannelMainVideo(videoId, email);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "setMainVideo(): onResponse(): successful");
-                    parseSetMainVideoResult(response.body(), videoId, title, date, views, thumbnail, context);
-                } else {
-                    Log.d(TAG, "setMainVideo(): onResponse(): not successful");
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
-                Log.d(TAG, "setMainVideo(): onFailure : " + t.getMessage());
-            }
-        });
-    }
-
-    private void parseSetMainVideoResult(String response, int videoId, String title, String date, int views, String thumbnail, Context context) {
-        Log.d(TAG, "parseSetMainVideoResult()");
-        try {
-            JSONObject jsonObject = new JSONObject(response);
-            if (jsonObject.getString("status").equals("true")) {
-                Log.d(TAG, "parseSetMainVideoResult(): message: " + jsonObject.getString("message"));
-
-                Intent intent = new Intent(context, MyProfileActivity.class);
-                intent.putExtra("id", videoId);
-                intent.putExtra("title", title);
-                intent.putExtra("date", date);
-                intent.putExtra("views", views);
-                intent.putExtra("thumbnail", thumbnail);
-                Log.d(TAG, "intent id: " + videoId);
-                Log.d(TAG, "intent titleString: " + title);
-                Log.d(TAG, "intent dateString: " + date);
-                Log.d(TAG, "intent viewInt: " + views);
-                Log.d(TAG, "intent thumbnail: " + thumbnail);
-                context.startActivity(intent);
-
-            } else {
-                Log.d(TAG, "parseSetMainVideoResult(): " + jsonObject.getString("message"));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void displaySnackBar() {
-        Log.d(TAG, "///////////////////////////");
-        Log.d(TAG, "displaySnackBar()");
-        Log.d(TAG, "///////////////////////////");
-        LocalBroadcastManager.getInstance(context).sendBroadcast(new Intent("display_deleted_my_video_snack_bar"));
-    }
-
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

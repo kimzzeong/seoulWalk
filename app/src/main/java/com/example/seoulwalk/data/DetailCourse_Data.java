@@ -2,8 +2,7 @@ package com.example.seoulwalk.data;
 
 public class DetailCourse_Data {
 
-    //난이도, 나와의 거리
-    String course_level;
+    // 나와의 거리
     double distance_to_me;
 
 
@@ -18,14 +17,6 @@ public class DetailCourse_Data {
     String course_fullName;
     double course_length;
     String course_difficulty;
-
-    public String getCourse_level() {
-        return course_level;
-    }
-
-    public void setCourse_level(String course_level) {
-        this.course_level = course_level;
-    }
 
     public double getDistance_to_me() {
         return distance_to_me;
