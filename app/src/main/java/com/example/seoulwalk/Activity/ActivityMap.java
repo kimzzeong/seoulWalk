@@ -42,6 +42,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -67,6 +68,7 @@ public class ActivityMap extends AppCompatActivity
     private static final int UPDATE_INTERVAL_MS = 60000;  // 10초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 5000; //5초
 
+    private BottomSheetBehavior bottomSheetBehavior;
 
     // onRequestPermissionsResult에서 수신된 결과에서
     // ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
@@ -185,9 +187,9 @@ public class ActivityMap extends AppCompatActivity
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
 
-
-        setStartLocation();
-        setEndLocation();
+setDefaultLocation();
+//        setStartLocation();
+//        setEndLocation();
 //        drawPath();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
@@ -480,7 +482,7 @@ public class ActivityMap extends AppCompatActivity
 
     }
 
-    // TODO: 11/9/21 시작 지점
+    // TODO: 11/9/21 도착 지점
     public void setEndLocation() {
 
         String[] spil_t2 = Lat_end.split(",");

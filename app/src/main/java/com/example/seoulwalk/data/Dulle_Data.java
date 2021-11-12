@@ -5,6 +5,15 @@ public class Dulle_Data {
     String dulle_time;
     String dulle_name_end;
     String Latlng;
+    String img_item;
+
+    public String getImg_item() {
+        return img_item;
+    }
+
+    public void setImg_item(String img_item) {
+        this.img_item = img_item;
+    }
 
     public String getLatlng() {
         return Latlng;
