@@ -46,6 +46,7 @@ public class ActivityCommunity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
 
+        activityCommunity = ActivityCommunity.this;
 
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);

@@ -163,6 +163,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
                 editor.putString("POST",gson.toJson(post_list));
                 editor.apply();
                 Intent intent = new Intent(ActivityWrite.this,ActivityCommunity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 if(activityCommunity!=null){
                     activityCommunity.finish();
