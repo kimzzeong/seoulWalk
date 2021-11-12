@@ -3,6 +3,7 @@ package com.example.seoulwalk.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -116,10 +117,8 @@ public class ActivityDulle extends AppCompatActivity {
         dulle_detail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
 
-
-
-
-
+        //그리드 레이아웃 쓸 때 이거 복붙하시면 되구여 this 다음 숫자부분이 몇줄 보여줄까 입니당
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
 
 
         //홈 버튼 클릭 시 차트 액티비티로 이동
