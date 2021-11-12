@@ -75,6 +75,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     List<Polyline> polylines = new ArrayList<>();
     LatLng START_LOCATION;
     LatLng END_LOCATION;
+    LatLng Middle_LOCATION;
     PolylineOptions options = new PolylineOptions();
     ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
     //뷰페이저
@@ -225,6 +226,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 }
             }
         });
+
 
 
         //커스텀 액션바 세팅
@@ -456,7 +458,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        } else {
+        }
+        else {
 
             int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION);
@@ -560,7 +563,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 12);
         mMap.animateCamera(cameraUpdate);
         mMap.moveCamera(cameraUpdate);
 
@@ -674,55 +677,106 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
     public void path_data() {
         Exam_data exam_data = new Exam_data();
-        if (dulle_start.equals("도봉산역")) {
+        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림")) {
             path = exam_data.getDulle_1_1();
             options.color(Color.BLUE);
-        } else if (dulle_start.equals("당고개공원 갈림길")) {
+        } else if (dulle_start.equals("당고개공원 갈림길")&&dulle_end.equals("철쭉동산")) {
             path = exam_data.getDulle_1_2();
             options.color(Color.BLUE);
-        } else if (dulle_start.equals("철쭉동산")) {
+        } else if (dulle_start.equals("철쭉동산")&&dulle_end.equals("화랑대역")) {
             path = exam_data.getDulle_1_3();
             options.color(Color.BLUE);
-        } else if (dulle_start.equals("화랑대역")) {
+        } else if (dulle_start.equals("화랑대역")&&dulle_end.equals("깔딱고개 쉼터(사가정 역)")) {
             path = exam_data.getDulle_2_1();
             options.color(Color.RED);
-        } else if (dulle_start.equals("깔딱고개 쉼터(사가정 역)")) {
+        } else if (dulle_start.equals("깔딱고개 쉼터(사가정 역)")&&dulle_end.equals("광나루역")) {
             path = exam_data.getDulle_2_2();
             options.color(Color.RED);
-        } else if (dulle_start.equals("광나루역")) {
+        } else if (dulle_start.equals("광나루역")&&dulle_end.equals("명일근린공원 입구")) {
             path = exam_data.getDulle_3_1();
             options.color(Color.BLACK);
-        } else if (dulle_start.equals("명일근린공원 입구")) {
+        } else if (dulle_start.equals("명일근린공원 입구")&&dulle_end.equals("오금 1교")) {
             path = exam_data.getDulle_3_2();
             options.color(Color.BLACK);
-        } else if (dulle_start.equals("오금 1교")) {
+        } else if (dulle_start.equals("오금 1교")&&dulle_end.equals("오금 1교")) {
             path = exam_data.getDulle_3_3();
             options.color(Color.BLACK);
-        } else if (dulle_start.equals("수서역")) {
+        } else if (dulle_start.equals("수서역")&&dulle_end.equals("양재시민숲")) {
             path = exam_data.getDulle_4_1();
             options.color(Color.YELLOW);
-        } else if (dulle_start.equals("양재시민숲")) {
+        } else if (dulle_start.equals("양재시민숲")&&dulle_end.equals("사당역 갈림길")) {
             path = exam_data.getDulle_4_2();
             options.color(Color.YELLOW);
-        } else if (dulle_start.equals("사당역 갈림길")) {
+        } else if (dulle_start.equals("사당역 갈림길")&&dulle_end.equals("관악산 공원 입구")) {
             path = exam_data.getDulle_5_1();
             options.color(Color.LTGRAY);
-        } else if (dulle_start.equals("관악산 공원 입구")) {
+        } else if (dulle_start.equals("관악산 공원 입구")&&dulle_end.equals("석수역")) {
             path = exam_data.getDulle_5_2();
             options.color(Color.LTGRAY);
-        } else if (dulle_start.equals("석수역")) {
+        } else if (dulle_start.equals("석수역")&&dulle_end.equals("구일역")) {
             path = exam_data.getDulle_6_1();
             options.color(Color.GREEN);
-        } else if (dulle_start.equals("구일역")) {
+        } else if (dulle_start.equals("구일역")&&dulle_end.equals("가양대교 남단")) {
             path = exam_data.getDulle_6_2();
             options.color(Color.GREEN);
-        } else if (dulle_start.equals("가양대교 남단")) {
+        } else if (dulle_start.equals("가양대교 남단")&&dulle_end.equals("증산역 갈림길")) {
             path = exam_data.getDulle_7_1();
             options.color(Color.CYAN);
-        } else if (dulle_start.equals("증산역 갈림길")) {
+        } else if (dulle_start.equals("증산역 갈림길")&&dulle_end.equals("구파발역")) {
             path = exam_data.getDulle_7_2();
             options.color(Color.CYAN);
-        } else {
+        } else if (dulle_start.equals("구파발역")&&dulle_end.equals("북한산 생태공원")) {
+            path = exam_data.getDulle_8_1();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("북한산 생태공원")&&dulle_end.equals("형제봉 입구")) {
+            path = exam_data.getDulle_8_2();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("형제봉 입구")&&dulle_end.equals("화계사 일주문")) {
+            path = exam_data.getDulle_8_3();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("화계사 일주문")&&dulle_end.equals("북한산 우이역")) {
+            path = exam_data.getDulle_8_4();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("북한산 우이역")&&dulle_end.equals("도봉산역")) {
+            path = exam_data.getDulle_8_5();
+            options.color(Color.MAGENTA);
+
+
+            /** 여기서 부턴 코스별 구분*/
+        }else if (dulle_start.equals("도봉산역") && dulle_end.equals("화랑대역")){
+            path = exam_data.getDulle_1_1()+",0"+exam_data.getDulle_1_2()+",0"+exam_data.getDulle_1_3();
+            options.color(Color.BLUE);
+        }
+        else if (dulle_start.equals("화랑대역") && dulle_end.equals("광나루역")){
+            path = exam_data.getDulle_2_1()+",0"+exam_data.getDulle_2_2();
+            options.color(Color.RED);
+        }
+        else if (dulle_start.equals("광나루역") && dulle_end.equals("수서역")){
+            path = exam_data.getDulle_3_1()+",0"+exam_data.getDulle_3_2()+",0"+exam_data.getDulle_3_3();
+            options.color(Color.BLACK);
+        }
+        else if (dulle_start.equals("수서역") && dulle_end.equals("사당역 갈림길")){
+            path = exam_data.getDulle_4_1()+",0"+exam_data.getDulle_4_2();
+            options.color(Color.YELLOW);
+        }
+        else if (dulle_start.equals("사당역 갈림길") && dulle_end.equals("석수역")){
+            path = exam_data.getDulle_5_1()+",0"+exam_data.getDulle_5_2();
+            options.color(Color.GREEN);
+        }
+        else if (dulle_start.equals("석수역") && dulle_end.equals("가양대교 남단")){
+            path = exam_data.getDulle_6_1()+",0"+exam_data.getDulle_6_2();
+            options.color(Color.BLACK);
+        }
+        else if (dulle_start.equals("가양대교 남단") && dulle_end.equals("구파발역")){
+            path = exam_data.getDulle_7_1()+",0"+exam_data.getDulle_7_2();
+            options.color(Color.CYAN);
+        }
+        else if (dulle_start.equals("구파발역") && dulle_end.equals("도봉산역")){
+            path = exam_data.getDulle_8_1()+",0"+exam_data.getDulle_8_2()+",0"+exam_data.getDulle_8_3()+",0"+exam_data.getDulle_8_4()+",0"+exam_data.getDulle_8_5();
+            options.color(Color.MAGENTA);
+        }
+
+        else {
             path = exam_data.getDulle_7_2();
         }
 
@@ -733,7 +787,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         path_data();
 
 
-        parse_Location(path);
+         parse_Location(path);
 
 //        for (int i =0; i<latLngArrayList.size(); i++){
 //            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
@@ -806,15 +860,15 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         currentMarker = mMap.addMarker(markerOptions);
 
         //onMarkerClick(currentMarker);
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(@NonNull Marker marker) {
-                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
-                Bottom_SheetDialog bottomSheetDialog = new Bottom_SheetDialog();
-                bottomSheetDialog.show(getSupportFragmentManager(), "myBottomSheetDialog");
-
-            }
-        });
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+//            @Override
+//            public void onInfoWindowClick(@NonNull Marker marker) {
+//                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
+//                Bottom_SheetDialog bottomSheetDialog = new Bottom_SheetDialog();
+//                bottomSheetDialog.show(getSupportFragmentManager(), "myBottomSheetDialog");
+//
+//            }
+//        });
 
 //        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 //            @Nullable
@@ -901,6 +955,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
         startActivity(intent);  //인텐트 이동
         finish();   //현재 액티비티 종료
+
     }
 
 

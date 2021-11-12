@@ -20,6 +20,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +63,7 @@ public class ActivityMap extends AppCompatActivity
     LatLng START_LOCATION;
     LatLng END_LOCATION;
     ArrayList<LatLng> latLngArrayList = new ArrayList<LatLng>();
-
+    PolylineOptions options = new PolylineOptions();
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 60000;  // 10초
@@ -93,7 +94,7 @@ public class ActivityMap extends AppCompatActivity
     String dulle_end; //둘레길 도착점 이름
     String Lat_start; //둘레길 도착점 이름
     String Lat_end; //둘레길 도착점 이름
-
+    Button btn123;
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
@@ -104,35 +105,78 @@ public class ActivityMap extends AppCompatActivity
 
 
     //polyline을 그려주는 메소드
-    private void drawPath(){
+//    private void drawPath(){
+//
+//
+//        Exam_data exam_data = new Exam_data();
+//        String a = exam_data.getDulle_1_1();
+//        Log.e("CREATE!!!!",a);
+//        //parde_Location(a);
+//        //PolylineOptions options = new PolylineOptions();
+////        for (int i =0; i<latLngArrayList.size(); i++){
+////            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
+////            polylines.add(mMap.addPolyline(options));
+////        }
+//
+//        options.addAll(latLngArrayList);
+//        options.width(15);
+//        options.color(Color.BLACK);
+//
+//        polylines.add(mMap.addPolyline(options));
+//        Log.e("폴리라인","그려지나요?");
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+//    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.e(TAG, String.valueOf(checkPermission())+"여기는 START");
+//        Intent intent = new Intent(getApplicationContext(), Map_service.class);
+//        startService(intent);
 
 
-        Exam_data exam_data = new Exam_data();
-        String a = exam_data.getDulle_1_1();
-        Log.e("CREATE!!!!",a);
-        parde_Location(a);
-        PolylineOptions options = new PolylineOptions();
-//        for (int i =0; i<latLngArrayList.size(); i++){
-//            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
-//            polylines.add(mMap.addPolyline(options));
-//        }
+        if (checkPermission()) {
 
-        options.addAll(latLngArrayList);
-        options.width(15);
-        options.color(Color.BLACK);
+            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
+            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
 
-        polylines.add(mMap.addPolyline(options));
-        Log.e("폴리라인","그려지나요?");
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+            if (mMap!=null)
+                mMap.setMyLocationEnabled(true);
+
+        }
+
+
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
 
+        Intent intent = new Intent(getApplicationContext(), Map_service.class);
+        startService(intent);
+
+        Intent intent123 = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
+        startService(intent123);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
+
+
+
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        setContentView(R.layout.activity_maps);
+
+        mLayout = findViewById(R.id.layout_main);
+
+        btn123 = (Button)findViewById(R.id.button1111);
         dullegil_name = findViewById(R.id.dullegil_name);
         Intent intent = getIntent();
         dulle_start = intent.getStringExtra("dulle_start");
@@ -143,14 +187,6 @@ public class ActivityMap extends AppCompatActivity
         System.out.println(dulle_end+"-- : 도착점 값 확인");
         System.out.println(Lat_start+"-- : 시작점 좌표 값 확인");
         System.out.println(Lat_end+"-- : 도착점 좌표 값 확인");
-
-
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        setContentView(R.layout.activity_map);
-
-        mLayout = findViewById(R.id.layout_main);
 
         locationRequest = new LocationRequest()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -171,6 +207,15 @@ public class ActivityMap extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        btn123.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), Map_Kid_Receiver_Service.class);
+//                startService(intent);
+
+            }
+        });
+
 
     }
 
@@ -187,10 +232,10 @@ public class ActivityMap extends AppCompatActivity
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
 
-setDefaultLocation();
-//        setStartLocation();
-//        setEndLocation();
-//        drawPath();
+//setDefaultLocation();
+        setStartLocation();
+        setEndLocation();
+        drawPath();
         //런타임 퍼미션 처리
         // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -326,25 +371,7 @@ setDefaultLocation();
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        Log.e(TAG, String.valueOf(checkPermission())+"여기는 START");
-
-
-        if (checkPermission()) {
-
-            Log.e(TAG, "onStart : call mFusedLocationClient.requestLocationUpdates");
-            mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-
-            if (mMap!=null)
-                mMap.setMyLocationEnabled(true);
-
-        }
-
-
-    }
 
 
     @Override
@@ -423,8 +450,8 @@ setDefaultLocation();
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
-        mMap.moveCamera(cameraUpdate);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 13);
+        mMap.animateCamera(cameraUpdate);
 
     }
 
@@ -651,30 +678,161 @@ setDefaultLocation();
         }
     }
 
-    private void parde_Location(String response)
-    {
+    // TODO: 11/9/21 //Poly_Line_Draw
+    String path;
+
+    public void path_data() {
+        Exam_data exam_data = new Exam_data();
+        if (dulle_start.equals("도봉산역")&&dulle_end.equals("당고개공원 갈림길")) {
+            path = exam_data.getDulle_1_1();
+            options.color(Color.BLUE);
+        } else if (dulle_start.equals("당고개공원 갈림길")&&dulle_end.equals("철쭉동산")) {
+            path = exam_data.getDulle_1_2();
+            options.color(Color.BLUE);
+        } else if (dulle_start.equals("철쭉동산")&&dulle_end.equals("화랑대역")) {
+            path = exam_data.getDulle_1_3();
+            options.color(Color.BLUE);
+        } else if (dulle_start.equals("화랑대역")&&dulle_end.equals("깔딱고개 쉼터(사가정 역)")) {
+            path = exam_data.getDulle_2_1();
+            options.color(Color.RED);
+        } else if (dulle_start.equals("깔딱고개 쉼터(사가정 역)")&&dulle_end.equals("광나루역")) {
+            path = exam_data.getDulle_2_2();
+            options.color(Color.RED);
+        } else if (dulle_start.equals("광나루역")&&dulle_end.equals("명일근린공원 입구")) {
+            path = exam_data.getDulle_3_1();
+            options.color(Color.BLACK);
+        } else if (dulle_start.equals("명일근린공원 입구")&&dulle_end.equals("오금 1교")) {
+            path = exam_data.getDulle_3_2();
+            options.color(Color.BLACK);
+        } else if (dulle_start.equals("오금 1교")&&dulle_end.equals("오금 1교")) {
+            path = exam_data.getDulle_3_3();
+            options.color(Color.BLACK);
+        } else if (dulle_start.equals("수서역")&&dulle_end.equals("양재시민숲")) {
+            path = exam_data.getDulle_4_1();
+            options.color(Color.YELLOW);
+        } else if (dulle_start.equals("양재시민숲")&&dulle_end.equals("사당역 갈림길")) {
+            path = exam_data.getDulle_4_2();
+            options.color(Color.YELLOW);
+        } else if (dulle_start.equals("사당역 갈림길")&&dulle_end.equals("관악산 공원 입구")) {
+            path = exam_data.getDulle_5_1();
+            options.color(Color.LTGRAY);
+        } else if (dulle_start.equals("관악산 공원 입구")&&dulle_end.equals("석수역")) {
+            path = exam_data.getDulle_5_2();
+            options.color(Color.LTGRAY);
+        } else if (dulle_start.equals("석수역")&&dulle_end.equals("구일역")) {
+            path = exam_data.getDulle_6_1();
+            options.color(Color.GREEN);
+        } else if (dulle_start.equals("구일역")&&dulle_end.equals("가양대교 남단")) {
+            path = exam_data.getDulle_6_2();
+            options.color(Color.GREEN);
+        } else if (dulle_start.equals("가양대교 남단")&&dulle_end.equals("증산역 갈림길")) {
+            path = exam_data.getDulle_7_1();
+            options.color(Color.CYAN);
+        } else if (dulle_start.equals("증산역 갈림길")&&dulle_end.equals("구파발역")) {
+            path = exam_data.getDulle_7_2();
+            options.color(Color.CYAN);
+        } else if (dulle_start.equals("구파발역")&&dulle_end.equals("북한산 생태공원")) {
+            path = exam_data.getDulle_8_1();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("북한산 생태공원")&&dulle_end.equals("형제봉 입구")) {
+            path = exam_data.getDulle_8_2();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("형제봉 입구")&&dulle_end.equals("화계사 일주문")) {
+            path = exam_data.getDulle_8_3();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("화계사 일주문")&&dulle_end.equals("북한산 우이역")) {
+            path = exam_data.getDulle_8_4();
+            options.color(Color.MAGENTA);
+        } else if (dulle_start.equals("북한산 우이역")&&dulle_end.equals("도봉산역")) {
+            path = exam_data.getDulle_8_5();
+            options.color(Color.MAGENTA);
+
+
+            /** 여기서 부턴 코스별 구분*/
+        }else if (dulle_start.equals("도봉산역") && dulle_end.equals("화랑대역")){
+            path = exam_data.getDulle_1_1()+",0"+exam_data.getDulle_1_2()+",0"+exam_data.getDulle_1_3();
+            options.color(Color.BLUE);
+        }
+        else if (dulle_start.equals("화랑대역") && dulle_end.equals("광나루역")){
+            path = exam_data.getDulle_2_1()+",0"+exam_data.getDulle_2_2();
+            options.color(Color.RED);
+        }
+        else if (dulle_start.equals("광나루역") && dulle_end.equals("수서역")){
+            path = exam_data.getDulle_3_1()+",0"+exam_data.getDulle_3_2()+",0"+exam_data.getDulle_3_3();
+            options.color(Color.BLACK);
+        }
+        else if (dulle_start.equals("수서역") && dulle_end.equals("사당역 갈림길")){
+            path = exam_data.getDulle_4_1()+",0"+exam_data.getDulle_4_2();
+            options.color(Color.YELLOW);
+        }
+        else if (dulle_start.equals("사당역 갈림길") && dulle_end.equals("석수역")){
+            path = exam_data.getDulle_5_1()+",0"+exam_data.getDulle_5_2();
+            options.color(Color.GREEN);
+        }
+        else if (dulle_start.equals("석수역") && dulle_end.equals("가양대교 남단")){
+            path = exam_data.getDulle_6_1()+",0"+exam_data.getDulle_6_2();
+            options.color(Color.BLACK);
+        }
+        else if (dulle_start.equals("가양대교 남단") && dulle_end.equals("구파발역")){
+            path = exam_data.getDulle_7_1()+",0"+exam_data.getDulle_7_2();
+            options.color(Color.CYAN);
+        }
+        else if (dulle_start.equals("구파발역") && dulle_end.equals("도봉산역")){
+            path = exam_data.getDulle_8_1()+",0"+exam_data.getDulle_8_2()+",0"+exam_data.getDulle_8_3()+",0"+exam_data.getDulle_8_4()+",0"+exam_data.getDulle_8_5();
+            options.color(Color.MAGENTA);
+        }
+
+        else {
+            path = exam_data.getDulle_7_2();
+        }
+
+    }
+
+    private void drawPath() {
+
+        path_data();
+
+
+        parse_Location(path);
+
+//        for (int i =0; i<latLngArrayList.size(); i++){
+//            options.add(latLngArrayList.get(i)).width(15).color(Color.BLACK).geodesic(true);
+//            polylines.add(mMap.addPolyline(options));
+//        }
+
+        options.addAll(latLngArrayList);
+        options.width(15);
+        //options.color(Color.BLACK);
+
+        polylines.add(mMap.addPolyline(options));
+        Log.e("폴리라인", "그려지나요?");
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(START_LOCATION, 18));
+    }
+
+    // TODO: 11/9/21 위치 데이터 파싱
+    private void parse_Location(String response) {
 
         String[] filt1 = response.split(",0");
         ArrayList<String> arrayList = new ArrayList<>();
-        for (int i=0; i<filt1.length; i++){
+        for (int i = 0; i < filt1.length; i++) {
 
-            System.out.println(filt1[i]+"확인중"+i);
+            //System.out.println(filt1[i]+"확인중"+i);
             arrayList.add(filt1[i]);
 
         }
-        System.out.println("확인합니다 "+arrayList.size());
+        System.out.println("확인합니다 " + arrayList.size());
 
         ArrayList<String> arrayList2 = new ArrayList<>();
         ArrayList<String> arrayList3 = new ArrayList<>();
 
-        for (int i=0; i<arrayList.size(); i++){
-            System.out.println("array get i" + arrayList.get(i));
+        for (int i = 0; i < arrayList.size(); i++) {
+            //System.out.println("array get i" + arrayList.get(i));
             String[] filt2 = arrayList.get(i).split(",");
 
-            System.out.println("filt2" + filt2.length);
-
-            System.out.println(filt2[0]);
-            System.out.println(filt2[1]);
+            //System.out.println("filt2" + filt2.length);
+//
+//            System.out.println(filt2[0]);
+//            System.out.println(filt2[1]);
             arrayList2.add(filt2[0]);
             arrayList3.add(filt2[1]);
             double longitude = Double.parseDouble(arrayList2.get(i).toString());
