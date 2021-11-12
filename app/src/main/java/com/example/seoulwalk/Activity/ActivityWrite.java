@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +25,17 @@ import android.widget.Toast;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.YoutubeDialog;
 import com.example.seoulwalk.adapter.PostDataAdapter;
+import com.example.seoulwalk.data.CommunityData;
 import com.example.seoulwalk.data.PostData;
 import com.example.seoulwalk.retrofit.Dulle_Name;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +53,15 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
     private RecyclerView postRecyclerview;
     private String profilePath;
     Spinner write_spinner, write_course_spinner; // 전체글 카테고리, 후기쓸 때 코스별
-//
+    EditText post_title,post_content;
+    String user_idx, user_nickname;
+    String write_spinner_text,write_course_spinner_text;
+    ArrayList<CommunityData> post_list = new ArrayList<>();
+    Gson gson;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private static final String SHARED_PREF_NAME = "mypref";
+    String image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +75,19 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
         postRecyclerview = findViewById(R.id.post_Data);
         write_spinner = findViewById(R.id.write_spinner);
         write_course_spinner = findViewById(R.id.write_course_spinner);
+        post_title = findViewById(R.id.post_title);
+        post_content = findViewById(R.id.post_content);
         checkPermission();
+
+        sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        user_idx = sharedPreferences.getString("user_idx","");
+        user_nickname = sharedPreferences.getString("user_nickname","");
+
+        Type type = new TypeToken<ArrayList<CommunityData>>() {}.getType();
+        gson = new Gson();
+        post_list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+        //Log.e("post_lost",""+post_list.size());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         postRecyclerview.setLayoutManager(linearLayoutManager);
@@ -81,11 +108,13 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                write_course_spinner_text = write_course_spinner.getSelectedItem().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Toast.makeText(ActivityWrite.this,write_course_spinner.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
+                write_course_spinner_text = write_course_spinner.getSelectedItem().toString();
             }
         });
 
@@ -98,18 +127,35 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
                 }else{
                     write_course_spinner.setVisibility(View.GONE);
                 }
+                write_spinner_text = write_spinner.getSelectedItem().toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) { //선택이 안됐을 때
-
+                write_spinner_text = write_spinner.getSelectedItem().toString();
             }
         });
 
         write_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                gson = new Gson();
+                Log.e("gson",gson.toJson(contentsList));
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd HH:mm:ss");
+                String postDate = format.format(date);
 
+                CommunityData communityData = new CommunityData(post_title.getText().toString(),post_content.getText().toString(),image,user_nickname,postDate,"",user_idx
+                        ,gson.toJson(contentsList),write_spinner_text,write_course_spinner_text);
+                post_list.add(communityData);
+
+                editor.putString("POST",gson.toJson(post_list));
+                editor.apply();
+                Intent intent = new Intent(ActivityWrite.this,ActivityCommunity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -175,38 +221,43 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
 
             profilePath = data.getStringExtra("profilePath");
 
+            if(image == null){
+                image = profilePath;
+            }else{
+
+            }
 
             PostData item = new PostData(profilePath,null,null,null);
             contentsList.add(item);
             Log.e("profilePath", profilePath);
             postDataAdapter.notifyDataSetChanged();
 
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-
-            //레트로핏 테스트
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Dulle_Name.REGIST_URL)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
-                    .build();
-            Dulle_Name api = retrofit.create(Dulle_Name.class);
-            PostData postData = contentsList.get(contentsList.size()-1);
-            Log.e("test", postData.getImageData());
-            Log.e("Log",contentsList.size()+"");
-            Call<Integer> call = api.savePost(contentsList);
-            call.enqueue(new Callback<Integer>() {
-                @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    //Toast.makeText(getApplicationContext(),""+response.body(),Toast.LENGTH_SHORT).show();
-
-                }
-
-                @Override
-                public void onFailure(Call<Integer> call, Throwable t) {
-                    Log.e("에러",t.getLocalizedMessage());
-                }
-            });
+//            Gson gson = new GsonBuilder()
+//                    .setLenient()
+//                    .create();
+//
+//            //레트로핏 테스트
+//            Retrofit retrofit = new Retrofit.Builder()
+//                    .baseUrl(Dulle_Name.REGIST_URL)
+//                    .addConverterFactory(GsonConverterFactory.create(gson))
+//                    .build();
+//            Dulle_Name api = retrofit.create(Dulle_Name.class);
+//            PostData postData = contentsList.get(contentsList.size()-1);
+//            Log.e("test", postData.getImageData());
+//            Log.e("Log",contentsList.size()+"");
+//            Call<Integer> call = api.savePost(contentsList);
+//            call.enqueue(new Callback<Integer>() {
+//                @Override
+//                public void onResponse(Call<Integer> call, Response<Integer> response) {
+//                    //Toast.makeText(getApplicationContext(),""+response.body(),Toast.LENGTH_SHORT).show();
+//
+//                }
+//
+//                @Override
+//                public void onFailure(Call<Integer> call, Throwable t) {
+//                    Log.e("에러",t.getLocalizedMessage());
+//                }
+//            });
         }
     }
 }

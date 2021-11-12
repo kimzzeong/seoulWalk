@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         level_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(getApplicationContext(),ActivityLevelInfo.class);
                 startActivity(intent);
             }
