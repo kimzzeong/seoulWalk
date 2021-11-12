@@ -22,6 +22,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".Activity.ActivityTheme_Story"></activity>
+        <activity android:name=".Activity.ActivityTheme_Walk" />
+        <activity android:name=".Activity.ActivityTheme_Nature" />
+        <activity android:name=".Activity.ActivityTheme_Person" />
         <activity
             android:name=".Activity.ActivityResultAfterWalk"
             android:exported="false" />
@@ -41,6 +45,7 @@
             android:name=".Activity.Map_Kid_Receiver_Service"
             android:enabled="true"
             android:exported="true" />
+
         <meta-data
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count;com.samsung.shealth.step_daily_trend" />
