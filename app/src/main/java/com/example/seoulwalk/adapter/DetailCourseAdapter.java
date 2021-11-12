@@ -19,12 +19,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
+import com.example.seoulwalk.data.DetailCourse_Data;
 import com.example.seoulwalk.retrofit.ApiClient;
 import com.example.seoulwalk.retrofit.ApiInterface;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,23 +37,14 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
     private final String TAG = this.getClass().getSimpleName();
     private final Context context;
-    private final List<Video> lists;
+    private final List<DetailCourse_Data> lists;
     private final ItemClickListener itemClickListener;
-    private DetailCourseAdapter.onClickListener onClickListener;
 
     int idInt, yearFormatInt, viewInt;
     String titleString, descriptionString, dateString, videoPathString, locationString, userString, monthDateString, thumbnailString;
     Uri videoUri;
 
-    public interface onClickListener {
-        void onAddWatchLaterClick(Video video, int pos);
-    }
-
-    public void setOnClickListener(DetailCourseAdapter.onClickListener onClickListener) {
-        this.onClickListener = onClickListener;
-    }
-
-    public DetailCourseAdapter(Context context, List<Video> lists, ItemClickListener itemClickListener) {
+    public DetailCourseAdapter(Context context, List<DetailCourse_Data> lists, ItemClickListener itemClickListener) {
         this.context = context;
         this.lists = lists;
         this.itemClickListener = itemClickListener;
@@ -65,14 +59,16 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DetailCourseViewHolder holder, int position) {
-        Video video = lists.get(position);
-        holder.textViewTitle.setText(video.getTitle());
-        holder.textViewDatetime.setText(video.getDate());
-        holder.textViewDuration.setText(video.getDuration());
-        holder.textViewViews.setText(String.valueOf(video.getViews()).concat("회"));
+        DetailCourse_Data data = lists.get(position);
+        holder.textViewOriginalCourseName.setText(data.getCourse_fullName());
+        holder.textViewDetailCourseName.setText(data.getCourse_name());
+        holder.textViewLength.setText(String.valueOf(data.getCourse_length()).concat("km"));
+        holder.textViewTime.setText(String.valueOf(data.getCourse_time()).concat("분"));
+        holder.textViewStepCount.setText(String.valueOf(data.getCourse_stepcount()).concat("걸음"));
+        holder.textViewDifficulty.setText(data.getCourse_difficulty());
+        holder.textViewDistance.setText(String.valueOf(data.getDistance_to_me()).concat("km"));
 
-        // 영상 업로드 할 때 썸네일 이미지도 같이 업로드하는 걸로 바꿈
-        Glide.with(context).load(ApiClient.BASE_URL.concat(video.getThumbnail())).into(holder.thumbnailImageView);
+        Glide.with(context).load(ApiClient.BASE_URL.concat(data.getCourse_image())).into(holder.thumbnailImageView);
 
     }
 
@@ -83,8 +79,8 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
     public class DetailCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ConstraintLayout constraintLayout;
-        public TextView textViewOriginalCourseName, textViewDetailCourseName, textViewDuration, textViewViews;
-        public ImageView thumbnailImageView, moreIcon;
+        public TextView textViewOriginalCourseName, textViewDetailCourseName, textViewLength, textViewTime, textViewStepCount, textViewDifficulty, textViewDistance;
+        public ImageView thumbnailImageView;
         ItemClickListener itemClickListener;
 
         public DetailCourseViewHolder(@NonNull View view, ItemClickListener itemClickListener) {
@@ -93,70 +89,14 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
             thumbnailImageView = view.findViewById(R.id.course_detail_item_image);
             textViewOriginalCourseName = view.findViewById(R.id.course_detail_item_original_course_name);
             textViewDetailCourseName = view.findViewById(R.id.course_detail_item_name);
-
-            moreIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickMoreIcon();
-                }
-            });
+            textViewLength = view.findViewById(R.id.course_detail_item_length);
+            textViewTime = view.findViewById(R.id.course_detail_item_time);
+            textViewStepCount = view.findViewById(R.id.course_detail_item_step_count);
+            textViewDifficulty = view.findViewById(R.id.course_detail_item_difficulty);
+            textViewDistance = view.findViewById(R.id.course_detail_item_distance);
 
             this.itemClickListener = itemClickListener;
             constraintLayout.setOnClickListener(this);
-        }
-
-        private void clickMoreIcon() {
-            showMoreBottomDialog();
-        }
-
-        private void showMoreBottomDialog() {
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
-            bottomSheetDialog.setContentView(R.layout.channel_video_more_bottom_sheet_dialog_layout);
-
-            CardView later = bottomSheetDialog.findViewById(R.id.cardview_bottom_sheet_dialog_channel_later);
-            CardView addPlaylist = bottomSheetDialog.findViewById(R.id.cardview_bottom_sheet_dialog_channel_add_playlist);
-            CardView share = bottomSheetDialog.findViewById(R.id.cardview_bottom_sheet_dialog_channel_share);
-            CardView close = bottomSheetDialog.findViewById(R.id.cardview_bottom_sheet_dialog_channel_close);
-
-            // 나중에 볼 동영상에 저장
-            later.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    Toast.makeText(context, "나중에 볼 동영상에 저장 클릭: " + lists.get(getBindingAdapterPosition()).getTitle() + " / id: " + lists.get(getBindingAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-
-                    onClickListener.onAddWatchLaterClick(lists.get(getBindingAdapterPosition()), getBindingAdapterPosition());
-
-                    bottomSheetDialog.dismiss();
-                }
-            });
-
-            // 재생목록에 저장
-            addPlaylist.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "재생목록에 저장 클릭: " + lists.get(getBindingAdapterPosition()).getTitle() + " / id: " + lists.get(getBindingAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-                    bottomSheetDialog.dismiss();
-                }
-            });
-
-            // 공유
-            share.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "공유 클릭: " + lists.get(getBindingAdapterPosition()).getTitle() + " / id: " + lists.get(getBindingAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-                    bottomSheetDialog.dismiss();
-                }
-            });
-
-            // 닫기
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bottomSheetDialog.dismiss();
-                }
-            });
-
-            bottomSheetDialog.show();
         }
 
         @Override
