@@ -38,6 +38,7 @@ public class ActivityCommunity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private static final String SHARED_PREF_NAME = "mypref";
+    public static ActivityCommunity activityCommunity;
 
 
     @Override

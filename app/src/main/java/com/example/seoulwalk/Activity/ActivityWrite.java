@@ -64,6 +64,8 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
     private static final String SHARED_PREF_NAME = "mypref";
     String image = null;
 
+    ActivityCommunity activityCommunity = (ActivityCommunity)ActivityCommunity.activityCommunity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,8 +163,10 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
                 editor.putString("POST",gson.toJson(post_list));
                 editor.apply();
                 Intent intent = new Intent(ActivityWrite.this,ActivityCommunity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
+                if(activityCommunity!=null){
+                    activityCommunity.finish();
+                }
                 finish();
                 Toast.makeText(ActivityWrite.this,"글이 정상적으로 등록되었습니다.",Toast.LENGTH_SHORT).show();
             }
