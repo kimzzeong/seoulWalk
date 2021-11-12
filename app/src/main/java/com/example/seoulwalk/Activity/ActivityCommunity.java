@@ -68,10 +68,12 @@ public class ActivityCommunity extends AppCompatActivity {
 
         Type type = new TypeToken<ArrayList<CommunityData>>() {}.getType();
         gson = new Gson();
-        list = gson.fromJson(sharedPreferences.getString("POST",""),type);
-        //Log.e("post_lost",""+list.size());
-        Collections.sort(list,Collections.reverseOrder());
-        //Log.e("post_lost",""+list.size());
+        if(!sharedPreferences.getString("POST","").equals("")){
+            list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+            //Log.e("post_lost",""+list.size());
+            Collections.sort(list,Collections.reverseOrder());
+            //Log.e("post_lost",""+list.size());
+        }
 
         communityAdapter = new CommunityAdapter(list,this);
         community_list.setAdapter(communityAdapter);
@@ -87,8 +89,8 @@ public class ActivityCommunity extends AppCompatActivity {
 
                 ArrayList<CommunityData> sub_list = new ArrayList<>();
                 if(position == 0){
-                    list = gson.fromJson(sharedPreferences.getString("POST",""),type);
-                    Collections.sort(list,Collections.reverseOrder());
+//                    list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+//                    Collections.sort(list,Collections.reverseOrder());
                     communityAdapter = new CommunityAdapter(list,ActivityCommunity.this);
                     community_list.setAdapter(communityAdapter);
 

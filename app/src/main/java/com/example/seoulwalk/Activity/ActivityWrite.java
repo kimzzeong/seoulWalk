@@ -35,6 +35,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -86,7 +87,12 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
 
         Type type = new TypeToken<ArrayList<CommunityData>>() {}.getType();
         gson = new Gson();
-        post_list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+
+        if(!sharedPreferences.getString("POST","").equals("")){
+
+            post_list = gson.fromJson(sharedPreferences.getString("POST",""),type);
+        }
+
         //Log.e("post_lost",""+post_list.size());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
