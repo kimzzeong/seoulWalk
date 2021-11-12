@@ -1,6 +1,8 @@
 package com.example.seoulwalk.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.data.Dulle_Data;
+import com.example.seoulwalk.data.Dulle_theme_Data;
 
 import java.util.ArrayList;
 
 public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder> {
+    Context context;
+
 
     public interface OnItemClickListener{
         void onItemClick(View v, int position);
@@ -27,28 +33,29 @@ public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder
         this.mListener = listener ;
     }
 
-    private ArrayList<Dulle_Data> mData = null;
+    private ArrayList<Dulle_theme_Data> mData = null;
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
+        context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.dulle_item, parent,false);
+        View view = inflater.inflate(R.layout.dulle_theme_item, parent,false);
         Dulle1Adapter.ViewHolder vh = new Dulle1Adapter.ViewHolder(view);
         return vh;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Dulle_Data dulle_data = mData.get(position);
-        holder.textView.setText("시작점 :"+dulle_data.getDulle_name_start());
-        holder.textView_end.setText("도착점 :"+dulle_data.getDulle_name_end());
-        holder.textView_time.setText(dulle_data.getDulle_time());
-        Glide.with(holder.img_item)
-                .load("http://49.247.196.22/img/"+dulle_data.getImg_item())
-                .into(holder.img_item);
+        Dulle_theme_Data dulle_data = mData.get(position);
+        holder.textView.setText(dulle_data.getDulle_theme_name());
+//
+        holder.constraintLayout.setBackground(dulle_data.getDulle_theme_background());
+
+
+
 
     }
 
@@ -57,19 +64,22 @@ public class Dulle1Adapter extends RecyclerView.Adapter<Dulle1Adapter.ViewHolder
         return mData.size();
     }
 
-    public Dulle1Adapter(ArrayList<Dulle_Data> list) {
+    public Dulle1Adapter(ArrayList<Dulle_theme_Data> list) {
         mData = list;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView,textView_end,textView_time ;
-        ImageView img_item;
+        TextView textView;
+
+        ConstraintLayout constraintLayout;
+
+
+
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.text_start);
-            textView_end = itemView.findViewById(R.id.text_end);
-            textView_time = itemView.findViewById(R.id.text_time);
-            img_item = itemView.findViewById(R.id.img_item);
+            textView = itemView.findViewById(R.id.text_forWhat);
+            constraintLayout = itemView.findViewById(R.id.theme_picture);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
