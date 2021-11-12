@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main">#FF4CAF50</color>
     <color name="gray">#929292</color>
+    <color name="darker_gray">#565656</color>
     <color name="lightgray">#DCDCDC</color>
     <color name="sub">#3E4CAF50</color>
     <color name="light_sub">#CEDCFFDD</color>
