@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="이제 막 걷기 시작한"
-                android:textColor="@color/black"
+                android:textColor="#5E5E5E"
                 android:textSize="23sp"
                 app:layout_constraintLeft_toRightOf="@+id/main_profile_photo"
                 app:layout_constraintTop_toTopOf="@+id/main_profile_photo" />
@@ -116,6 +116,7 @@
                 android:layout_marginRight="20dp"
                 android:text="나의 활동 분석 >"
                 android:textSize="15sp"
+                android:textColor="@color/black"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/main_level" />
 

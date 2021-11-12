@@ -1,53 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="11"
     android:orientation="horizontal"
-    android:layout_marginTop="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    >
+    android:background="@drawable/history_rectangle"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="4"
-        android:background="@drawable/history_rectangle"
-        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="match_parent" >
+
         <TextView
+            android:id="@+id/history_datetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textColor="@color/gray"
+            android:textSize="14sp"
             android:text="2021-10-31 20:01:05"
-            android:padding="5dp"
-            android:id="@+id/history_time"
-            />
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
+            android:id="@+id/history_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:text="서울둘레길 2-1코스"
-            android:padding="5dp"
-            android:id="@+id/history_name"
-            />
-    </LinearLayout>
+            android:text="서울둘레길 3-1코스"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@+id/history_datetime"
+            app:layout_constraintTop_toBottomOf="@+id/history_datetime" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:text="후기\n보기"
-        android:padding="5dp"
-        android:gravity="center"
-        android:textStyle="bold|italic"
-        android:id="@+id/history_review"
-        android:background="@drawable/history_color_rectangle"
-        />
+        <TextView
+            android:id="@+id/course_name_detail_history_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="고덕·일자산코스"
+            android:layout_marginBottom="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/history_datetime"
+            app:layout_constraintTop_toBottomOf="@+id/history_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/time_icon_history_item"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_access_time_24"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/time_history_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toTopOf="@+id/time_icon_history_item"
+            app:layout_constraintStart_toEndOf="@+id/time_icon_history_item"
+            android:text="소요시간"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="2dp" />
+
+        <ImageView
+            android:id="@+id/distance_icon_history_item"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/distance"
+            app:layout_constraintTop_toBottomOf="@+id/time_icon_history_item"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/distance_history_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toTopOf="@+id/distance_icon_history_item"
+            app:layout_constraintStart_toEndOf="@+id/distance_icon_history_item"
+            android:text="이동거리"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="3dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/calorie_icon_history_item"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/calorie_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/calorie_history_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toTopOf="@+id/calorie_icon_history_item"
+            app:layout_constraintStart_toEndOf="@+id/calorie_icon_history_item"
+            android:text="칼로리"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="3dp" />
+
+        <ImageView
+            android:id="@+id/speed_icon_history_item"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_baseline_speed_24"
+            app:layout_constraintTop_toBottomOf="@+id/calorie_icon_history_item"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/speed_history_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toTopOf="@+id/speed_icon_history_item"
+            app:layout_constraintStart_toEndOf="@+id/speed_icon_history_item"
+            android:text="평균속도"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="3dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

@@ -71,7 +71,6 @@ import java.util.Locale;
 public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
 
-
     //탭 레이아웃을 레이아웃 보여줬다 안보여줬다로 만듦
     ConstraintLayout course_review_layout;
     ScrollView course_info_layout;
