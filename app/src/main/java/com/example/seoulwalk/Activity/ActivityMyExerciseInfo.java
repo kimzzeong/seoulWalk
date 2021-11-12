@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
@@ -61,6 +62,7 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
     RecyclerView recyclerViewWeeklyStepCount;
     WeeklyStepCountAdapter weeklyStepCountAdapter;
     List<StepCount> stepCountList = new ArrayList<>();
+    TextView stepCountStartDate, stepCountEndDate;
     
     int week_num = 0;
 
@@ -68,6 +70,9 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_exercise_info);
+
+        stepCountStartDate = findViewById(R.id.my_exercise_info_step_count_start_date);
+        stepCountEndDate = findViewById(R.id.my_exercise_info_step_count_end_date);
 
         barChartStepCount = (BarChart) findViewById(R.id.my_exercise_info_barchart_step_count);
 
@@ -228,6 +233,9 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             weeklyStepCountAdapter.notifyDataSetChanged();
 
             stepCountList = lists;
+
+            stepCountStartDate.setText(lists.get(0).getDate());
+            stepCountEndDate.setText(lists.get(listSize - 1).getDate());
 
 //        ArrayList<String> days = new ArrayList<>();
             ArrayList<Integer> days = new ArrayList<>();
