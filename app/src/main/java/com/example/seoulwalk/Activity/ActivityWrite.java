@@ -168,7 +168,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
             call.enqueue(new Callback<Integer>() {
                 @Override
                 public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    Toast.makeText(getApplicationContext(),""+response.body(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),""+response.body(),Toast.LENGTH_SHORT).show();
 
                 }
 
