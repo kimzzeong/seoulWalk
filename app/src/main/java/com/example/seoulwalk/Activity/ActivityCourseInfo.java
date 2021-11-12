@@ -38,7 +38,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
-import com.example.seoulwalk.adapter.Dulle1Adapter;
+//import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.ImageSliderAdapter;
 import com.example.seoulwalk.adapter.ReviewAdapter;
 import com.example.seoulwalk.data.Exam_data;
@@ -69,7 +69,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
+        ActivityCompat.OnRequestPermissionsResultCallback , GoogleMap.OnMarkerClickListener {
 
 
     //탭 레이아웃을 레이아웃 보여줬다 안보여줬다로 만듦
@@ -87,10 +87,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     private ViewPager2 sliderViewPager;
     private LinearLayout layoutIndicator;
     ImageView[] indicators;
-    Button btn_M_Start,btn_M_End,btn_M_Map;
-
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg", "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
+            "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img04.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub3_img.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img01.jpg", "https://gil.seoul.go.kr/walk/images/sub/sub1_1_img02.jpg"
     };
 
     //후기 리스트
@@ -125,6 +123,11 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     String dulle_end; //둘레길 도착점 이름
     String Lat_start; //둘레길 도착점 이름
     String Lat_end; //둘레길 도착점 이름
+
+
+    Button btn_M_Start;
+    Button btn_M_End;
+    Button btn_M_Map;
 
 
     @Override
@@ -258,7 +261,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
             Review_Data review_data = new Review_Data("aaaa" + i);
             review_list.add(review_data);
-            
         }
 
        // RecyclerView review = findViewById(R.id.course_review_list);
@@ -436,18 +438,18 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 currentPosition
                         = new LatLng(location.getLatitude(), location.getLongitude());
 
-                String markerTitle = "현 위치 : " + getCurrentAddress(currentPosition);
+                String markerTitle = "현 위치 : "+getCurrentAddress(currentPosition);
                 /** 필요 없을 거 같은데 --> 나중에 길찾기 넣은면 될 듯  */
                 String markerSnippet = "위도:" + String.valueOf(location.getLatitude())
                         + " 경도:" + String.valueOf(location.getLongitude());
 
                 Log.d(TAG, "onLocationResult : " + markerSnippet);
 
-//                String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
-//                System.out.println("Marker"+maker_title[1]);
+                String[] maker_title = getCurrentAddress(currentPosition).split("대한민국 서울특별시");
+               // System.out.println("Marker"+maker_title[1]);
 
                 //현재 위치에 마커 생성하고 이동
-                setCurrentLocation(location, "현위치", null);
+               // setCurrentLocation(location, maker_title[1], null);
 
                 mCurrentLocatiion = location;
             }
@@ -566,7 +568,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION,15);
         mMap.animateCamera(cameraUpdate);
         mMap.moveCamera(cameraUpdate);
 
@@ -728,7 +730,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         } else if (dulle_start.equals("증산역 갈림길")) {
             path = exam_data.getDulle_7_2();
             options.color(Color.CYAN);
-        } else {
+        }else {
             path = exam_data.getDulle_7_2();
         }
 
@@ -812,54 +814,52 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         currentMarker = mMap.addMarker(markerOptions);
 
         //onMarkerClick(currentMarker);
-        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(@NonNull Marker marker) {
-                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
-                Bottom_SheetDialog bottomSheetDialog = new Bottom_SheetDialog();
-                bottomSheetDialog.show(getSupportFragmentManager(), "myBottomSheetDialog");
-
-            }
-        });
-
-//        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-//            @Nullable
+//        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 //            @Override
-//            public View getInfoContents(@NonNull Marker marker) {
-//                return null;
-//
-//
-//
-//            }
-//
-//            @Nullable
-//            @Override
-//            public View getInfoWindow(@NonNull Marker marker) {
-//                View infoWindow = getLayoutInflater().inflate(R.layout.info_window,
-//                        findViewById(R.id.map), false);
-//
-//                ImageView info_img = ((ImageView) infoWindow.findViewById(R.id.img_info));
-//                info_img.setImageResource(R.drawable.course);
-//
-//                TextView title = ((TextView) infoWindow.findViewById(R.id.title));
-//                title.setText(marker.getTitle());
-//
-//                TextView snippet = ((TextView) infoWindow.findViewById(R.id.snippet));
-//                snippet.setText(marker.getSnippet());
-//
-////                Button btn_start = ((Button) infoWindow.findViewById(R.id.btn_start));
-////                btn_start.setOnClickListener(new View.OnClickListener() {
-////                    @Override
-////                    public void onClick(View view) {
-////                        Toast.makeText(ActivityCourseInfo.this, "Click", Toast.LENGTH_SHORT).show();
-////                    }
-////                });
-////                Button btn_end = ((Button) infoWindow.findViewById(R.id.btn_end));
-//
-//
-//                return infoWindow;
+//            public void onInfoWindowClick(@NonNull Marker marker) {
+//                //Toast.makeText(ActivityCourseInfo.this, "AAAAa", Toast.LENGTH_SHORT).show();
 //            }
 //        });
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Nullable
+            @Override
+            public View getInfoContents(@NonNull Marker marker) {
+                return null;
+
+
+            }
+
+            @Nullable
+            @Override
+            public View getInfoWindow(@NonNull Marker marker) {
+                View infoWindow = getLayoutInflater().inflate(R.layout.info_window,
+                        findViewById(R.id.map),false);
+
+                ImageView info_img = ( (ImageView)infoWindow.findViewById(R.id.img_info));
+                info_img.setImageResource(R.drawable.course);
+
+                TextView title =( (TextView)infoWindow.findViewById(R.id.title));
+                title.setText(marker.getTitle());
+
+                TextView snippet =( (TextView)infoWindow.findViewById(R.id.snippet));
+                snippet.setText(marker.getSnippet());
+
+                Button btn_start=( (Button)infoWindow.findViewById(R.id.btn_start));
+                btn_start.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(ActivityCourseInfo.this, "Click", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Button btn_end  =( (Button)infoWindow.findViewById(R.id.btn_end));
+
+
+
+
+                return infoWindow;
+            }
+        });
 
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 15);
@@ -958,7 +958,6 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 break;
         }
     }
-
     // TODO: 11/10/21 마커 클릭 이벤트
     @Override
     public boolean onMarkerClick(@NonNull Marker marker) {

@@ -2,12 +2,14 @@ package com.example.seoulwalk.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,11 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.seoulwalk.R;
+//import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.Dulle1Adapter;
 import com.example.seoulwalk.adapter.Dulle2Adapter;
 import com.example.seoulwalk.adapter.DulleDetailAdapter;
 import com.example.seoulwalk.data.DulleDetail_Data;
 import com.example.seoulwalk.data.Dulle_Data;
+import com.example.seoulwalk.data.Dulle_theme_Data;
 import com.example.seoulwalk.data.Exam_data;
 import com.example.seoulwalk.retrofit.Dulle_Name;
 import com.google.android.gms.maps.model.LatLng;
@@ -55,6 +59,9 @@ public class ActivityDulle extends AppCompatActivity {
     ArrayList<Dulle_Data> list1 = new ArrayList<>();
     ArrayList<Dulle_Data> list2 = new ArrayList<>();
     ArrayList<DulleDetail_Data> detail_list = new ArrayList<>();
+    ArrayList<Dulle_theme_Data> theme_list = new ArrayList<>();
+
+
     Dulle_Data dulle_data ;
     Dulle1Adapter dulle1Adapter;
     RecyclerView dulle1;
@@ -78,6 +85,12 @@ public class ActivityDulle extends AppCompatActivity {
 
         listing_spinner = findViewById(R.id.listing_spinner);
         shared = new PreferenceHelper(this);
+
+
+
+
+
+
 
 
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.dulleSpinner));
@@ -261,11 +274,33 @@ public class ActivityDulle extends AppCompatActivity {
 
                 //saveInfo(list1);
                 System.out.println("size입니다."+list1.size());
-                dulle1Adapter = new Dulle1Adapter(list1);
+
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman = ContextCompat.getDrawable(getApplicationContext(), R.drawable.forman);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman2 = ContextCompat.getDrawable(getApplicationContext(), R.drawable.fornature);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman3= ContextCompat.getDrawable(getApplicationContext(), R.drawable.forwalk);
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable forman4= ContextCompat.getDrawable(getApplicationContext(), R.drawable.forstory);
+
+
+                //하드로 theme 데이터들 넣어야함
+                Dulle_theme_Data dulle_theme_data = new Dulle_theme_Data("사람을 위한 길", forman);
+                Dulle_theme_Data dulle_theme_data1 = new Dulle_theme_Data("자연을 위한 길", forman2);
+                Dulle_theme_Data dulle_theme_data2 = new Dulle_theme_Data("산책을 위한 길", forman3);
+                Dulle_theme_Data dulle_theme_data3 = new Dulle_theme_Data("이야기가 있는 길", forman4);
+
+
+                theme_list.add(dulle_theme_data);
+                theme_list.add(dulle_theme_data1);
+                theme_list.add(dulle_theme_data2);
+                theme_list.add(dulle_theme_data3);
+
+
+                dulle1Adapter = new Dulle1Adapter(theme_list);
                 dulle1.setAdapter(dulle1Adapter);
 
-                dulle2Adapter = new Dulle2Adapter(list2);
-                dulle2.setAdapter(dulle1Adapter);
+
+                // TODO: 2021-11-13 오세왕 작업 이거 dulle2 adapter에 연결해야하는데 1에 되어있길래 2로 바꿈
+                dulle2Adapter = new Dulle2Adapter(list1);
+                dulle2.setAdapter(dulle2Adapter);
 
 
                 Log.e("확인",list1.get(0).getLatlng());
