@@ -159,6 +159,7 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
         dataVals.add(new Entry(6, 3));
         dataVals.add(new Entry(7, 4));
         dataVals.add(new Entry(8, 5));
+        dataVals.add(new Entry(9, 2));
 
         return dataVals;
     }

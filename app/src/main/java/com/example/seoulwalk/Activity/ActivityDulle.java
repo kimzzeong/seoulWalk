@@ -63,6 +63,7 @@ public class ActivityDulle extends AppCompatActivity {
     DulleDetailAdapter dulleDetailAdapter;
     RecyclerView dulle_detail;
     Spinner listing_spinner;
+    DulleDetail_Data dulleDetail_data;
 
     @Override
     protected void onStart() {
@@ -113,13 +114,12 @@ public class ActivityDulle extends AppCompatActivity {
         dulle2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         dulle_detail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
-        for (int i = 1; i <= 10; i++){
-            DulleDetail_Data dulleDetail_data = new DulleDetail_Data("시작점"+i,"시간"+i,"도착점"+i);
-            detail_list.add(dulleDetail_data);
-        }
+//        for (int i = 1; i <= 10; i++){
+//            DulleDetail_Data dulleDetail_data = new DulleDetail_Data("시작점"+i,"시간"+i,"도착점"+i);
+//            detail_list.add(dulleDetail_data);
+//        }
 
-        dulleDetailAdapter = new DulleDetailAdapter(detail_list);
-        dulle_detail.setAdapter(dulleDetailAdapter);
+
 
 
 
@@ -245,30 +245,55 @@ public class ActivityDulle extends AppCompatActivity {
                 Log.e("OK", String.valueOf(dataArray.length()));
                 for (int i = 0; i < dataArray.length(); i++)
                 {
-                    dulle_data = new Dulle_Data();
+
+                    dulleDetail_data = new DulleDetail_Data();
                     JSONObject dataobj = dataArray.getJSONObject(i);
-                    dulle_data.setDulle_name_start(dataobj.getString("dulle_start"));
-                    dulle_data.setDulle_name_end(dataobj.getString("dulle_end"));
-                    dulle_data.setDulle_time(dataobj.getString("dulle_time"));
-                    dulle_data.setLatlng(dataobj.getString("LatLng"));
-                    dulle_data.setLatlng_end(dataobj.getString("LatLng_End"));
-                    dulle_data.setImg_item(dataobj.getString("img_item"));
+                    dulleDetail_data.setDulle_name_start(dataobj.getString("dulle_start"));
+                    dulleDetail_data.setDulle_name_end(dataobj.getString("dulle_end"));
+                    dulleDetail_data.setDulle_time(dataobj.getString("dulle_time"));
+                    dulleDetail_data.setLatlng(dataobj.getString("LatLng"));
+                    dulleDetail_data.setLatlng_end(dataobj.getString("LatLng_End"));
+                    dulleDetail_data.setImg_item(dataobj.getString("img_item"));
                     //System.out.println(dataobj.getString("Latlng")+i+"번쨰");
-                    list1.add(dulle_data);
+
                     ///saveInfo(list1);
 
+                    detail_list.add(dulleDetail_data);
                 }
+                //dulle_data = new Dulle_Data("aaa","ASDAS","ASDASD","dulle_7_1.jpg");
 
+
+                /** 여기 코스별로 나누자 */
+                list1.add(new Dulle_Data("도봉산역","1코스-수락·불암산코스","화랑대역","dulle_1_1.jpg","37.68917268817206,  127.0468070568162","37.62057141019006, 127.0846233899846"));
+                list1.add(new Dulle_Data("화랑대역","2코스-용마·아차산코스","광나루역","dulle_2_1.jpg","37.62057141019006, 127.0846233899846","37.5453623012, 127.1044593584"));
+                list1.add(new Dulle_Data("광나루역","3코스-고덕·일자산코스","수서역","dulle_3_1.jpg","37.5453623012, 127.1044593584","37.48703092484752, 127.1014292535824"));
+                list1.add(new Dulle_Data("수서역","4코스-대모·우면산코스","사당역 갈림길","dulle_4_1.jpg","37.48703092484752, 127.1014292535824","37.47597056036504, 126.9818863213483"));
+                list1.add(new Dulle_Data("사당역 갈림길","5코스-관악산코스","석수역","dulle_5_1.jpg","37.47597056036504, 126.9818863213483","37.43428146926362, 126.9021778590784"));
+                list1.add(new Dulle_Data("석수역","6코스-안양천코스","가양대교 남단","dulle_6_1.jpg","37.43428146926362, 126.9021778590784","37.56137725367158, 126.8554687742643"));
+                list1.add(new Dulle_Data("가양대교 남단","7코스-봉산·앵봉산코스","구파발역","dulle_7_1.jpg","37.56137725367158, 126.8554687742643","37.6361699551611, 126.9189621745594"));
+                list1.add(new Dulle_Data("구파발역","8코스-북한산코스","도봉산역","dulle_8_1.jpg","37.6366754939268, 126.9189565646409","37.68900589242598, 127.0459151597205"));
+
+
+                list2.add(new Dulle_Data("테마별","데이터","넣어야 됌","dulle_7_1.jpg",null,null));
                 //saveInfo(list1);
                 System.out.println("size입니다."+list1.size());
-                dulle1Adapter = new Dulle1Adapter(list1);
-                dulle1.setAdapter(dulle1Adapter);
 
+                /** Adapter1 -> 코스별 추천 */
+                dulle1Adapter = new Dulle1Adapter(list1);
+                dulle1.setAdapter(dulle2Adapter);
+
+
+
+                /** Adapter2 -> 태마별별 추천 */
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle1Adapter);
 
+                dulleDetailAdapter = new DulleDetailAdapter(detail_list);
+                dulle_detail.setAdapter(dulleDetailAdapter);
 
-                Log.e("확인",list1.get(0).getLatlng());
+
+//                Log.e("확인",list1.get(0).getLatlng());
+                /** Adapter1 -> 코스별 추천 */
                 dulle1Adapter.setOnItemClickListener(new Dulle1Adapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
@@ -282,7 +307,7 @@ public class ActivityDulle extends AppCompatActivity {
                     }
                 });
 
-
+                /** Adapter2 -> 태마별별 추천 */
                 dulle2Adapter.setOnItemClickListener(new Dulle2Adapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
@@ -292,6 +317,17 @@ public class ActivityDulle extends AppCompatActivity {
                     }
                 });
 
+                dulleDetailAdapter.setOnItemClickListener(new DulleDetailAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
+                        intent.putExtra("dulle_start",detail_list.get(position).getDulle_name_start());
+                        intent.putExtra("dulle_end",detail_list.get(position).getDulle_name_end());
+                        intent.putExtra("LanLng",detail_list.get(position).getLatlng());
+                        intent.putExtra("LatLng_end",detail_list.get(position).getLatlng_end());
+                        startActivity(intent);
+                    }
+                });
 
             }
 

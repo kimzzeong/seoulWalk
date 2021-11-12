@@ -82,11 +82,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        week_goal_step = 56000; // 이번주 목표 걸음수
-        week_now_goal_step = 16800; // 이번주 걸음수
-        today_goal_step = 8000; // 오늘 목표 걸음수
-        today_step = 4000; // 오늘 걸음수
-
+        week_goal_step = 33362; // 이번주 목표 걸음수
+        week_now_goal_step = 19800; // 이번주 걸음수
+        today_goal_step = 4766; // 오늘 목표 걸음수
+        today_step = 3870; // 오늘 걸음수
 
         main_goal_step_count.setText(String.valueOf(week_goal_step));
         main_week_step_count.setText(String.valueOf(week_now_goal_step));
