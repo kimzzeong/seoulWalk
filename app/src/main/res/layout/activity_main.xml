@@ -25,7 +25,6 @@
             android:textColor="#000000"/>
     </androidx.appcompat.widget.Toolbar>
 
-
     <ScrollView
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
