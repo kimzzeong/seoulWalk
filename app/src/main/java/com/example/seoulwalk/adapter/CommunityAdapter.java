@@ -25,13 +25,15 @@ public class CommunityAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public ArrayList<CommunityData> post_list = null;
     private ArrayList<PostData> viewtype = new ArrayList<>();
     private int position;
-    private OnItemClickListener mListener = null ;
+
+
     public CommunityAdapter(ArrayList<CommunityData> post_list,Context context) {
         this.post_list = post_list;
         this.context = context;
     }
 
 
+    private OnItemClickListener mListener = null ;
     public interface OnItemClickListener {
         void onItemClick(View v, int position) ;
     }

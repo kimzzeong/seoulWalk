@@ -47,7 +47,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
         return vh;
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
+    //@SuppressLint("UseCompatLoadingForDrawables")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Dulle_theme_Data dulle_data = mData.get(position);
@@ -55,7 +55,34 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
 //
         holder.constraintLayout.setBackground(dulle_data.getDulle_theme_background());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (holder.getBindingAdapterPosition() == 0){
+                    //액티비티로 이동
+                    Intent intent = new Intent(context, ActivityTheme_Person.class);
+                    context.startActivity(intent);
+
+
+                }else if (holder.getBindingAdapterPosition() == 1){
+                    //액티비티로 이동
+                    Intent intent = new Intent(context, ActivityTheme_Nature.class);
+                    context.startActivity(intent);
+
+                }else if (holder.getBindingAdapterPosition() == 2){
+                    //액티비티로 이동
+                    Intent intent = new Intent(context, ActivityTheme_Walk.class);
+                    context.startActivity(intent);
+
+                }else {
+                    //액티비티로 이동
+                    Intent intent = new Intent(context, ActivityTheme_Story.class);
+                    context.startActivity(intent);
+
+                }
+            }
+        });
 
 
     }
@@ -81,35 +108,7 @@ public class ThemeAdapter extends RecyclerView.Adapter<ThemeAdapter.ViewHolder> 
             super(itemView);
             textView = itemView.findViewById(R.id.text_forWhat);
             constraintLayout = itemView.findViewById(R.id.theme_picture);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //
 
-                    if (getAdapterPosition() == 0){
-                        //액티비티로 이동
-                        Intent intent = new Intent(context, ActivityTheme_Person.class);
-                        context.startActivity(intent);
-
-
-                    }else if (getAdapterPosition() == 1){
-                        //액티비티로 이동
-                        Intent intent = new Intent(context, ActivityTheme_Nature.class);
-                        context.startActivity(intent);
-
-                    }else if (getAdapterPosition() == 2){
-                        //액티비티로 이동
-                        Intent intent = new Intent(context, ActivityTheme_Walk.class);
-                        context.startActivity(intent);
-
-                    }else {
-                        //액티비티로 이동
-                        Intent intent = new Intent(context, ActivityTheme_Story.class);
-                        context.startActivity(intent);
-
-                    }
-                }
-            });
         }
     }
 }

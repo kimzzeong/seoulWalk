@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.example.seoulwalk.R;
 import com.example.seoulwalk.adapter.DetailCourseAdapter;
@@ -28,6 +30,7 @@ public class ActivityTheme_Person extends AppCompatActivity {
     ArrayList<DetailCourse_Data> detailCourse_data;
 
     Theme_Detail_Adapter themeAdapter;
+    ActivityDulle activityDulle = (ActivityDulle)ActivityDulle.activityDulle;
 
 
 
@@ -35,13 +38,13 @@ public class ActivityTheme_Person extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_person);
+        Log.e("Theme_PERSON","1");
 
         theme_person_recycler = findViewById(R.id.theme_person_recycler);
 
         theme_person_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         String Theme_name = "Person";
-
 
 
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -62,6 +65,28 @@ public class ActivityTheme_Person extends AppCompatActivity {
 
                     themeAdapter.notifyDataSetChanged();
 
+
+                    themeAdapter.setOnItemClickListener(new Theme_Detail_Adapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View v, int position, int stepCountInt, int timeInt, double distanceDouble, double lengthDouble, String courseFullNameString, String courseNameString, String difficultyString, String startString, String endString, String latlngStart, String latlngEnd) {
+                            Intent intent = new Intent(ActivityTheme_Person.this,ActivityCourseInfo.class);
+                            intent.putExtra("stepCountInt", stepCountInt);
+                            intent.putExtra("timeInt", timeInt);
+                            intent.putExtra("distanceDouble", distanceDouble);
+                            intent.putExtra("lengthDouble", lengthDouble);
+                            intent.putExtra("courseFullNameString", courseFullNameString);
+                            intent.putExtra("courseNameString", courseNameString);
+                            intent.putExtra("difficultyString", difficultyString);
+                            intent.putExtra("dulle_start", startString);
+                            intent.putExtra("dulle_end", endString);
+                            intent.putExtra("LanLng", latlngStart);
+                            intent.putExtra("LatLng_end", latlngEnd);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                            startActivity(intent);
+                        }
+                    });
+
                 }
             }
 
@@ -71,11 +96,33 @@ public class ActivityTheme_Person extends AppCompatActivity {
             }
         });
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("Theme_PERSON","2");
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e("Theme_PERSON","3");
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("Theme_PERSON","4");
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("Theme_PERSON","5");
 
 
     }
+
+
 }

@@ -35,6 +35,17 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
     String courseFullNameString, courseNameString, difficultyString, startString, endString, latlngStart, latlngEnd;
 
 
+    private Theme_Detail_Adapter.OnItemClickListener mListener = null ;
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position, int stepCountInt, int timeInt, double distanceDouble, double lengthDouble, String courseFullNameString,
+                         String courseNameString, String difficultyString, String startString,String endString, String latlngStart, String latlngEnd) ;
+    }
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(Theme_Detail_Adapter.OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
+
+
     ArrayList<DetailCourse_Data> recyclerItemArr = new ArrayList<>();
     Context context;
 
@@ -57,6 +68,30 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
     @Override
     public void onBindViewHolder(@NonNull @NotNull Theme_Detail_Adapter.ThemeDetail_ViewHolder holder, int position) {
         holder.onBind(recyclerItemArr.get(position));
+
+
+
+        courseNameString = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_name();
+        // 원래코스명
+        courseFullNameString = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_fullName();
+        // 걸음수
+        stepCountInt = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_stepcount();
+        // 코스길이
+        lengthDouble = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_length();
+        // 나와의 거리
+        distanceDouble = recyclerItemArr.get(holder.getBindingAdapterPosition()).getDistance_to_me();
+        // 난이도
+        difficultyString = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_difficulty();
+        // 소요시간
+        timeInt = recyclerItemArr.get(holder.getBindingAdapterPosition()).getCourse_time();
+        // 시작점
+        startString = recyclerItemArr.get(holder.getBindingAdapterPosition()).getStart();
+        // 도착점
+        endString = recyclerItemArr.get(holder.getBindingAdapterPosition()).getEnd();
+        // 시작좌표
+        latlngStart = recyclerItemArr.get(holder.getBindingAdapterPosition()).getLatLng();
+        // 끝좌표
+        latlngEnd = recyclerItemArr.get(holder.getBindingAdapterPosition()).getLatLng_End();
 
     }
 
@@ -97,55 +132,15 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    courseNameString = recyclerItemArr.get(getAdapterPosition()).getCourse_name();
-                    // 원래코스명
-                    courseFullNameString = recyclerItemArr.get(getAdapterPosition()).getCourse_fullName();
-                    // 걸음수
-                    stepCountInt = recyclerItemArr.get(getAdapterPosition()).getCourse_stepcount();
-                    // 코스길이
-                    lengthDouble = recyclerItemArr.get(getAdapterPosition()).getCourse_length();
-                    // 나와의 거리
-                    distanceDouble = recyclerItemArr.get(getAdapterPosition()).getDistance_to_me();
-                    // 난이도
-                    difficultyString = recyclerItemArr.get(getAdapterPosition()).getCourse_difficulty();
-                    // 소요시간
-                    timeInt = recyclerItemArr.get(getAdapterPosition()).getCourse_time();
-                    // 시작점
-                    startString = recyclerItemArr.get(getAdapterPosition()).getStart();
-                    // 도착점
-                    endString = recyclerItemArr.get(getAdapterPosition()).getEnd();
-                    // 시작좌표
-                    latlngStart = recyclerItemArr.get(getAdapterPosition()).getLatLng();
-                    // 끝좌표
-                    latlngEnd = recyclerItemArr.get(getAdapterPosition()).getLatLng_End();
-
-                    //액티비티로 이동
-                    Intent intent = new Intent(context, ActivityCourseInfo.class);
-                    intent.putExtra("stepCountInt", stepCountInt);
-                    intent.putExtra("timeInt", timeInt);
-                    intent.putExtra("distanceDouble", distanceDouble);
-                    intent.putExtra("lengthDouble", lengthDouble);
-                    intent.putExtra("courseFullNameString", courseFullNameString);
-                    intent.putExtra("courseNameString", courseNameString);
-                    intent.putExtra("difficultyString", difficultyString);
-                    intent.putExtra("dulle_start", startString);
-                    intent.putExtra("dulle_end", endString);
-                    intent.putExtra("LanLng", latlngStart);
-                    intent.putExtra("LatLng_end", latlngEnd);
-                    Log.d("TAG", "stepCountInt: " + stepCountInt);
-                    Log.d("TAG", "timeInt: " + timeInt);
-                    Log.d("TAG", "distanceDouble: " + distanceDouble);
-                    Log.d("TAG", "lengthDouble: " + lengthDouble);
-                    Log.d("TAG", "courseFullNameString: " + courseFullNameString);
-                    Log.d("TAG", "courseNameString: " + courseNameString);
-                    Log.d("TAG", "difficultyString: " + difficultyString);
-                    Log.d("TAG", "dulle_start: " + startString);
-                    Log.d("TAG", "dulle_end: " + endString);
-                    Log.d("TAG", "LanLng: " + latlngStart);
-                    Log.d("TAG", "LatLng_end: " + latlngEnd);
-                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if(mListener!=null){
+                            //setPosition(pos);
+                            mListener.onItemClick(v,pos,stepCountInt,timeInt,distanceDouble,lengthDouble,courseFullNameString,courseNameString,difficultyString,
+                                    startString,endString,latlngStart,latlngEnd);
+                            notifyItemChanged(pos);
+                        }
+                    }
                 }
             });
 
@@ -169,6 +164,26 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
 
             Glide.with(context).load(ApiClient.BASE_URL.concat("img/").concat(detailCourse_data.getCourse_image())).into(imgurl);
 
+
+
+//                    //액티비티로 이동
+//                    Intent intent = new Intent(context, ActivityCourseInfo.class);
+//
+//                    intent.putExtra("LatLng_end", latlngEnd);
+//                    Log.d("TAG", "stepCountInt: " + stepCountInt);
+//                    Log.d("TAG", "timeInt: " + timeInt);
+//                    Log.d("TAG", "distanceDouble: " + distanceDouble);
+//                    Log.d("TAG", "lengthDouble: " + lengthDouble);
+//                    Log.d("TAG", "courseFullNameString: " + courseFullNameString);
+//                    Log.d("TAG", "courseNameString: " + courseNameString);
+//                    Log.d("TAG", "difficultyString: " + difficultyString);
+//                    Log.d("TAG", "dulle_start: " + startString);
+//                    Log.d("TAG", "dulle_end: " + endString);
+//                    Log.d("TAG", "LanLng: " + latlngStart);
+//                    Log.d("TAG", "LatLng_end: " + latlngEnd);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    context.startActivity(intent);
+            // }
 
 
         }
