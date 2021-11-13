@@ -95,6 +95,7 @@
             android:layout_marginTop="100dp"
             android:text="확인"
             android:textSize="20sp"
+            android:id="@+id/still_btn"
             />
     </LinearLayout>
 
@@ -164,6 +165,7 @@
             android:layout_marginTop="100dp"
             android:text="확인"
             android:textSize="20sp"
+            android:id="@+id/goal_btn"
             />
     </LinearLayout>
 

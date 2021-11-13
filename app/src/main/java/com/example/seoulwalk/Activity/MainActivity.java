@@ -36,13 +36,15 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar main_week_step_progressBar, main_today_step_progressBar; // 이번주 걸음수, 오늘 걸음수 그래프
     int week_goal_step, week_now_goal_step, today_step, today_goal_step; // 이번주 목표 걸음수, 이번주 걸음수, 오늘 걸음수, 오늘 목표 걸음수
     ImageView level_info,main_profile_photo;
-    TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,main_today_step_count,main_nickname;
+    TextView main_goal_info, main_my_exercise_info,main_goal_step_count,main_week_step_count,main_today_goal_step_count,
+            main_today_step_count,main_nickname,main_level,main_week_goal;
     ConstraintLayout main_course_good;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private static final String SHARED_PREF_NAME = "mypref";
-    String user_idx, user_nickname, user_profile;
+    String user_idx, user_nickname, user_profile, user_status;
+    int user_level,user_goal_level;
 
 
     @Override
@@ -66,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
         main_today_step_count = findViewById(R.id.main_today_step_count);
         main_course_good = findViewById(R.id.main_course_good);
         main_profile_photo = findViewById(R.id.main_profile_photo);
+        main_week_goal = findViewById(R.id.main_week_goal);
+
 
         main_nickname = findViewById(R.id.main_nickname);
-
+        main_level = findViewById(R.id.main_level);
 
         main_goal_info = findViewById(R.id.main_goal_info);
 
@@ -95,18 +99,15 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
+        //유저 정보 쉐어드 저장
         editor.putString("user_idx","1");
         editor.putString("user_nickname","지나지나");
+        editor.putInt("user_level",2);
+        editor.putString("user_status","유지");
+        editor.putInt("user_goal_level",3);
         //editor.putString("user_profile","");
         editor.apply();
-        user_idx = sharedPreferences.getString("user_idx","");
-        user_nickname = sharedPreferences.getString("user_nickname","");
 
-
-        main_nickname.setText(user_nickname);
-
-        Log.e("user_idx",user_idx);
-        Log.e("user_nickname",user_nickname);
 
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
@@ -116,11 +117,7 @@ public class MainActivity extends AppCompatActivity {
         main_week_step_progressBar = findViewById(R.id.main_week_step_progressBar);
         main_today_step_progressBar = findViewById(R.id.main_today_step_progressBar);
 
-        main_week_step_progressBar.setMax(week_goal_step);
-        main_week_step_progressBar.setProgress(week_now_goal_step);
 
-        main_today_step_progressBar.setMax(today_goal_step);
-        main_today_step_progressBar.setProgress(today_step);
 
         level_info = findViewById(R.id.level_info);
 
@@ -196,10 +193,41 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         user_profile = sharedPreferences.getString("user_profile","");
 
+
+        user_idx = sharedPreferences.getString("user_idx","");
+        user_nickname = sharedPreferences.getString("user_nickname","");
+        user_status = sharedPreferences.getString("user_status","");
+        user_level = sharedPreferences.getInt("user_level",0);
+        user_goal_level = sharedPreferences.getInt("user_goal_level",0);
+
+
+        main_nickname.setText(user_nickname);
+        main_level.setText("Lv."+user_level);
+
+        main_level.setText("Lv."+user_level);
+        main_week_step_progressBar.setMax(week_goal_step);
+        main_week_step_progressBar.setProgress(week_now_goal_step);
+
+        main_today_step_progressBar.setMax(today_goal_step);
+        main_today_step_progressBar.setProgress(today_step);
+        Log.e("user_idx",user_idx);
+        Log.e("user_nickname",user_nickname);
+        Log.e("user_status",user_status);
+        Log.e("user_level",""+user_level);
+
+        if(user_status.equals("증진")) {
+
+            main_week_goal.setText("Lv."+user_goal_level+user_status);
+        }else{
+
+            main_week_goal.setText("Lv."+user_level+user_status);
+        }
+
         if(user_profile.equals("")){
             Glide.with(this) .load(R.drawable.basic_profile) .into(main_profile_photo);
         }else{
             Glide.with(this) .load(R.drawable.stamp14_on) .into(main_profile_photo);
         }
     }
+
 }
