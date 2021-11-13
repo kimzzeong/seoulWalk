@@ -4,6 +4,7 @@
         <item>거리순</item>
         <item>코스길이순</item>
         <item>소요시간순</item>
+        <item>걸음수순</item>
     </string-array>
 
     <string-array name="communitySpinner">

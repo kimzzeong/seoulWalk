@@ -36,7 +36,7 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
     int stepCountInt, timeInt;
     double distanceDouble, lengthDouble;
-    String courseFullNameString, courseNameString, difficultyString;
+    String courseFullNameString, courseNameString, difficultyString, startString, endString, latlngStart, latlngEnd;
 
     public DetailCourseAdapter(Context context, List<DetailCourse_Data> lists, ItemClickListener itemClickListener) {
         this.context = context;
@@ -59,7 +59,7 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
         holder.textViewStepCount.setText(String.valueOf(data.getCourse_stepcount()).concat("걸음"));
         holder.textViewDifficulty.setText(data.getCourse_difficulty());
         holder.textViewDistance.setText(String.valueOf(data.getDistance_to_me()).concat("km"));
-        Glide.with(context).load(ApiClient.BASE_URL.concat(data.getCourse_image())).into(holder.thumbnailImageView);
+        Glide.with(context).load(ApiClient.BASE_URL.concat("img/").concat(data.getCourse_image())).into(holder.thumbnailImageView);
     }
     @Override
     public int getItemCount() {
@@ -104,9 +104,17 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
             difficultyString = lists.get(getBindingAdapterPosition()).getCourse_difficulty();
             // 소요시간
             timeInt = lists.get(getBindingAdapterPosition()).getCourse_time();
+            // 시작점
+            startString = lists.get(getBindingAdapterPosition()).getStart();
+            // 도착점
+            endString = lists.get(getBindingAdapterPosition()).getEnd();
+            // 시작좌표
+            latlngStart = lists.get(getBindingAdapterPosition()).getLatLng();
+            // 끝좌표
+            latlngEnd = lists.get(getBindingAdapterPosition()).getLatLng_End();
 
             if (pos != RecyclerView.NO_POSITION) {
-                Toast.makeText(view.getContext(), "pos: " + pos + " / courseNameString: " + courseNameString, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), "pos: " + pos + " / courseNameString: " + courseNameString, Toast.LENGTH_SHORT).show();
                 Context context = view.getContext();
                 Intent intent = new Intent(context, ActivityCourseInfo.class);
                 intent.putExtra("stepCountInt", stepCountInt);
@@ -116,6 +124,10 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
                 intent.putExtra("courseFullNameString", courseFullNameString);
                 intent.putExtra("courseNameString", courseNameString);
                 intent.putExtra("difficultyString", difficultyString);
+                intent.putExtra("dulle_start", startString);
+                intent.putExtra("dulle_end", endString);
+                intent.putExtra("LanLng", latlngStart);
+                intent.putExtra("LatLng_end", latlngEnd);
                 Log.d("TAG", "stepCountInt: " + stepCountInt);
                 Log.d("TAG", "timeInt: " + timeInt);
                 Log.d("TAG", "distanceDouble: " + distanceDouble);
@@ -123,6 +135,10 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
                 Log.d("TAG", "courseFullNameString: " + courseFullNameString);
                 Log.d("TAG", "courseNameString: " + courseNameString);
                 Log.d("TAG", "difficultyString: " + difficultyString);
+                Log.d("TAG", "dulle_start: " + startString);
+                Log.d("TAG", "dulle_end: " + endString);
+                Log.d("TAG", "LanLng: " + latlngStart);
+                Log.d("TAG", "LatLng_end: " + latlngEnd);
                 context.startActivity(intent);
             }
         }

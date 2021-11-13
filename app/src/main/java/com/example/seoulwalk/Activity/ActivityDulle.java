@@ -76,7 +76,7 @@ public class ActivityDulle extends AppCompatActivity {
 //    DulleDetailAdapter dulleDetailAdapter;
     DetailCourseAdapter detailCourseAdapter;
     DetailCourseAdapter.ItemClickListener detailCourseItemClickListener;
-    List<DetailCourse_Data> detailCourse_list = new ArrayList<>();
+    ArrayList<DetailCourse_Data> detailCourse_list = new ArrayList<>();
     RecyclerView dulle_detail;
 
     String sortString;
@@ -88,6 +88,9 @@ public class ActivityDulle extends AppCompatActivity {
         super.onStart();
 
         retrofit_dulle();
+
+        // 세부코스 데이터 가져오기
+        fetchDetailCourseData("거리순");
     }
 
     @Override
@@ -101,16 +104,17 @@ public class ActivityDulle extends AppCompatActivity {
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.dulleSpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listing_spinner.setAdapter(spinner_adapter);
-        listing_spinner.setSelection(0);
+//        listing_spinner.setSelection(0);
         listing_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //선택됐을 때
                 Log.e("Spinner",""+position);
-                ((TextView)parent.getChildAt(0)).setTextColor(Color.BLACK);
-                ((TextView)parent.getChildAt(0)).setTextSize(20);
+//                ((TextView)parent.getChildAt(0)).setTextColor(Color.BLACK);
+//                ((TextView)parent.getChildAt(0)).setTextSize(20);
 
                 String spinnerSelectedString = listing_spinner.getSelectedItem().toString();
                 fetchDetailCourseData(spinnerSelectedString);
+//                fetchDetailCourseData(position);
             }
 
             @Override
@@ -205,12 +209,20 @@ public class ActivityDulle extends AppCompatActivity {
     private void fetchDetailCourseData(String sort) {
         Log.d(TAG, "fetchDetailCourseData()");
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<List<DetailCourse_Data>> call = apiInterface.fetchDetailCourseData(sort);
-        call.enqueue(new Callback<List<DetailCourse_Data>>() {
+        Call<ArrayList<DetailCourse_Data>> call = apiInterface.fetchDetailCourseData(sort);
+        call.enqueue(new Callback<ArrayList<DetailCourse_Data>>() {
             @Override
-            public void onResponse(@NonNull Call<List<DetailCourse_Data>> call, @NonNull Response<List<DetailCourse_Data>> response) {
+            public void onResponse(@NonNull Call<ArrayList<DetailCourse_Data>> call, @NonNull Response<ArrayList<DetailCourse_Data>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d(TAG, "fetchDetailCourseData() onResponse(): successful and not null");
+                    Log.d(TAG, "fetchDetailCourseData() sort: " + sort);
+                    Log.d(TAG, "fetchDetailCourseData() response.body(): " + response.body());
+                    Log.d(TAG, "fetchDetailCourseData() response: " + response);
+
+                    if (detailCourse_list != null) {
+                        detailCourse_list.clear();
+                        Log.d(TAG, "fetchDetailCourseData() detailCourse_list.clear()");
+                    }
                     parseDetailCourseData(response.body());
                 } else {
                     Log.d(TAG, "fetchDetailCourseData() not successful");
@@ -218,20 +230,20 @@ public class ActivityDulle extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<DetailCourse_Data>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ArrayList<DetailCourse_Data>> call, @NonNull Throwable t) {
                 Log.d(TAG, "fetchDetailCourseData(): onFailure : " + t.getMessage());
             }
         });
     }
 
-    private void parseDetailCourseData(List<DetailCourse_Data> lists) {
+    private void parseDetailCourseData(ArrayList<DetailCourse_Data> lists) {
         Log.d(TAG, "parseDetailCourseData()");
         // 세부코스별 리사이클러뷰 어댑터
-        detailCourseAdapter = new DetailCourseAdapter(this, detailCourse_list, detailCourseItemClickListener);
-        detailCourseAdapter.notifyDataSetChanged();
-        dulle_detail.setAdapter(detailCourseAdapter);
-
         detailCourse_list = lists;
+        detailCourseAdapter = new DetailCourseAdapter(this, detailCourse_list, detailCourseItemClickListener);
+        dulle_detail.setAdapter(detailCourseAdapter);
+        detailCourseAdapter.notifyDataSetChanged();
+
     }
 
     // TODO: 11/8/21 레트로핏
@@ -382,7 +394,7 @@ public class ActivityDulle extends AppCompatActivity {
                         intent.putExtra("dulle_end",list2.get(position).getDulle_name_end());
                         intent.putExtra("LanLng",list2.get(position).getLatlng());
                         intent.putExtra("LatLng_end",list2.get(position).getLatlng_end());
-
+                        intent.putExtra("dulle_full_title",list2.get(position).getDulle_time());
                         startActivity(intent);
                     }
                 });
