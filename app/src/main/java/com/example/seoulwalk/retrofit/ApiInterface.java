@@ -38,6 +38,13 @@ public interface ApiInterface {
             @Query("sort") String sort
     );
 
+    @GET("tim_php/theme_data.php")
+    Call<List<DetailCourse_Data>> get_ThemeDetailCourse(
+            @Query("theme_name") String theme_name
+    );
+
+
+
 //    /** 로그인 **/
 //    @FormUrlEncoded
 //    @POST("login.php")
