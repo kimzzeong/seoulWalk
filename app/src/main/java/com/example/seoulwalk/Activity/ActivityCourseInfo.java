@@ -91,7 +91,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     Button btn_M_Start,btn_M_End,btn_M_Map;
 
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg", "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
+            "https://gil.seoul.go.kr/view/point/2013/09/03/19936752673232.jpg", "https://gil.seoul.go.kr/view/point/2013/09/03/16586534291142.jpg",
+            "https://gil.seoul.go.kr/view/point/2013/09/03/9397510540265.jpg", "https://gil.seoul.go.kr/view/point/2013/09/03/3769376943425.jpg"
     };
 
     //후기 리스트
