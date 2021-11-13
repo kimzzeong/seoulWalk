@@ -1,6 +1,7 @@
 package com.example.seoulwalk.retrofit;
 
 
+import com.example.seoulwalk.data.DetailCourse_Data;
 import com.example.seoulwalk.model.StepCount;
 
 import org.w3c.dom.Comment;
@@ -29,6 +30,12 @@ public interface ApiInterface {
     Call<List<StepCount>> fetchWeeklyStepCount(
             @Query("userid") String userid,
             @Query("week_num") int week_num
+    );
+
+    /** 세부코스별 리사이클러뷰 데이터 가져오기 **/
+    @GET("tim_php/fetch_detail_course_data.php")
+    Call<List<DetailCourse_Data>> fetchDetailCourseData(
+            @Query("sort") String sort
     );
 
 //    /** 로그인 **/

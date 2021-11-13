@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,12 +22,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.seoulwalk.R;
+import com.example.seoulwalk.adapter.DetailCourseAdapter;
+import com.example.seoulwalk.adapter.HistoryAdapter;
 import com.example.seoulwalk.adapter.ThemeAdapter;
 import com.example.seoulwalk.adapter.Dulle2Adapter;
 import com.example.seoulwalk.adapter.DulleDetailAdapter;
+import com.example.seoulwalk.data.DetailCourse_Data;
 import com.example.seoulwalk.data.DulleDetail_Data;
 import com.example.seoulwalk.data.Dulle_Data;
 import com.example.seoulwalk.data.Dulle_theme_Data;
+import com.example.seoulwalk.retrofit.ApiClient;
+import com.example.seoulwalk.retrofit.ApiInterface;
 import com.example.seoulwalk.retrofit.Dulle_Name;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,6 +43,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,9 +52,11 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ActivityDulle extends AppCompatActivity {
+
+    private final String TAG = this.getClass().getSimpleName();
+
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
 
     Button course_btn, mypage_btn, home_btn, community_btn;
     TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
@@ -62,8 +71,15 @@ public class ActivityDulle extends AppCompatActivity {
     RecyclerView dulle1;
     Dulle2Adapter dulle2Adapter;
     RecyclerView dulle2;
-    DulleDetailAdapter dulleDetailAdapter;
+
+    // 세부코스별
+//    DulleDetailAdapter dulleDetailAdapter;
+    DetailCourseAdapter detailCourseAdapter;
+    DetailCourseAdapter.ItemClickListener detailCourseItemClickListener;
+    List<DetailCourse_Data> detailCourse_list = new ArrayList<>();
     RecyclerView dulle_detail;
+
+    String sortString;
     Spinner listing_spinner;
     ArrayList<Dulle_theme_Data> theme_list = new ArrayList<>();
 
@@ -82,14 +98,19 @@ public class ActivityDulle extends AppCompatActivity {
         listing_spinner = findViewById(R.id.listing_spinner);
         shared = new PreferenceHelper(this);
 
-
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.dulleSpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         listing_spinner.setAdapter(spinner_adapter);
+        listing_spinner.setSelection(0);
         listing_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //선택됐을 때
                 Log.e("Spinner",""+position);
+                ((TextView)parent.getChildAt(0)).setTextColor(Color.BLACK);
+                ((TextView)parent.getChildAt(0)).setTextSize(20);
+
+                String spinnerSelectedString = listing_spinner.getSelectedItem().toString();
+                fetchDetailCourseData(spinnerSelectedString);
             }
 
             @Override
@@ -100,8 +121,6 @@ public class ActivityDulle extends AppCompatActivity {
 
         System.out.println("홗인준입니다."+list1.size());
 
-
-
         course_btn = findViewById(R.id.course_btn);
         home_btn = findViewById(R.id.home_btn);
         community_btn = findViewById(R.id.community_btn);
@@ -111,11 +130,14 @@ public class ActivityDulle extends AppCompatActivity {
         //loadData();
         dulle1 = findViewById(R.id.dulle_theme_list);
         dulle2 = findViewById(R.id.dulle_course_list);
-        dulle_detail = findViewById(R.id.dulle_detail);
         dulle1.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
         dulle2.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-        dulle_detail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
+//        dulle_detail.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
+        // 세부코스별 리사이클러뷰
+        dulle_detail = findViewById(R.id.dulle_detail);
+        dulle_detail.setHasFixedSize(true);
+        dulle_detail.setLayoutManager(new LinearLayoutManager(this));
 
         //홈 버튼 클릭 시 차트 액티비티로 이동
         home_btn.setOnClickListener(new View.OnClickListener() {
@@ -158,8 +180,6 @@ public class ActivityDulle extends AppCompatActivity {
             }
         });
 
-
-
 //        회원가입 액티비티로 이동
         test_text_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,11 +197,45 @@ public class ActivityDulle extends AppCompatActivity {
 
             }
         });
+
+//        fetchDetailCourseData(sortString);
+    }
+
+    // 세부코스별 리사이클러뷰 데이터 가져오기
+    private void fetchDetailCourseData(String sort) {
+        Log.d(TAG, "fetchDetailCourseData()");
+        ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<List<DetailCourse_Data>> call = apiInterface.fetchDetailCourseData(sort);
+        call.enqueue(new Callback<List<DetailCourse_Data>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<DetailCourse_Data>> call, @NonNull Response<List<DetailCourse_Data>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d(TAG, "fetchDetailCourseData() onResponse(): successful and not null");
+                    parseDetailCourseData(response.body());
+                } else {
+                    Log.d(TAG, "fetchDetailCourseData() not successful");
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<DetailCourse_Data>> call, @NonNull Throwable t) {
+                Log.d(TAG, "fetchDetailCourseData(): onFailure : " + t.getMessage());
+            }
+        });
+    }
+
+    private void parseDetailCourseData(List<DetailCourse_Data> lists) {
+        Log.d(TAG, "parseDetailCourseData()");
+        // 세부코스별 리사이클러뷰 어댑터
+        detailCourseAdapter = new DetailCourseAdapter(this, detailCourse_list, detailCourseItemClickListener);
+        detailCourseAdapter.notifyDataSetChanged();
+        dulle_detail.setAdapter(detailCourseAdapter);
+
+        detailCourse_list = lists;
     }
 
     // TODO: 11/8/21 레트로핏
-    private void retrofit_dulle()
-    {
+    private void retrofit_dulle() {
 
         String username = "둘레길";
 
@@ -294,8 +348,13 @@ public class ActivityDulle extends AppCompatActivity {
 
                 dulle2Adapter = new Dulle2Adapter(list2);
                 dulle2.setAdapter(dulle2Adapter);
-                dulleDetailAdapter = new DulleDetailAdapter(detail_list);
-                dulle_detail.setAdapter(dulleDetailAdapter);
+
+
+//                // 세부코스별 리사이클러뷰 어댑터
+////                dulleDetailAdapter = new DulleDetailAdapter(detail_list);
+////                dulle_detail.setAdapter(dulleDetailAdapter);
+//                detailCourseAdapter = new DetailCourseAdapter(this, detailCourse_list, detailCourseItemClickListener);
+//                dulle_detail.setAdapter(detailCourseAdapter);
 
                 ThemeAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
                     @Override
@@ -327,19 +386,19 @@ public class ActivityDulle extends AppCompatActivity {
                 });
 
 
-                dulleDetailAdapter.setOnItemClickListener(new DulleDetailAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-
-                        Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
-                        intent.putExtra("dulle_start",detail_list.get(position).getDulle_name_start());
-                        intent.putExtra("dulle_end",detail_list.get(position).getDulle_name_end());
-                        intent.putExtra("LanLng",detail_list.get(position).getLatlng());
-                        intent.putExtra("LatLng_end",detail_list.get(position).getLatlng_end());
-                        startActivity(intent);
-
-                    }
-                });
+//                dulleDetailAdapter.setOnItemClickListener(new DulleDetailAdapter.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View v, int position) {
+//
+//                        Intent intent = new Intent(getApplicationContext(),ActivityCourseInfo.class);
+//                        intent.putExtra("dulle_start",detail_list.get(position).getDulle_name_start());
+//                        intent.putExtra("dulle_end",detail_list.get(position).getDulle_name_end());
+//                        intent.putExtra("LanLng",detail_list.get(position).getLatlng());
+//                        intent.putExtra("LatLng_end",detail_list.get(position).getLatlng_end());
+//                        startActivity(intent);
+//
+//                    }
+//                });
 
 
             }
