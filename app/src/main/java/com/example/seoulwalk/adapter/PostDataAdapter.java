@@ -35,7 +35,8 @@ public class PostDataAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     String editLinkText;
     String editImageText;
     String cut = null;
-    private OnLongClickListener mListener = null ;    private Context context;
+    private OnLongClickListener mListener = null ;
+    private Context context;
 
     public ArrayList<PostData> getContentsList() {
         return contentsList;

@@ -57,6 +57,7 @@ public class ActivityDulle extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    public static ActivityDulle activityDulle;
 
     Button course_btn, mypage_btn, home_btn, community_btn;
     TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
@@ -100,6 +101,8 @@ public class ActivityDulle extends AppCompatActivity {
 
         listing_spinner = findViewById(R.id.listing_spinner);
         shared = new PreferenceHelper(this);
+
+        activityDulle = ActivityDulle.this;
 
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.dulleSpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

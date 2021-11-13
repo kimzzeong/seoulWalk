@@ -33,6 +33,7 @@ public class ActivityGoal extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private static final String SHARED_PREF_NAME = "mypref";
     String user_status;
+    int week_goal_step, today_goal_step;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class ActivityGoal extends AppCompatActivity {
         user_level = sharedPreferences.getInt("user_level",0);
         user_goal_level = sharedPreferences.getInt("user_goal_level",0);
         user_status = sharedPreferences.getString("user_status","");
+        week_goal_step = sharedPreferences.getInt("goal_week_step_count",0);
+        today_goal_step = sharedPreferences.getInt("goal_day_step_count",0);
 
         goal_maintenance_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,21 +116,23 @@ public class ActivityGoal extends AppCompatActivity {
               //  Log.e("Log",items.get(position));
                 if(position == 0){
                     level_text.setText("Lv.3 도전 한다면?");
-                    level_week_goal_step.setText("주간 목표 걸음 수 : 70,000 걸음");
-                    level_day_goal_step.setText("일간 권장 걸음 수 : 10,000 걸음");
                     user_goal_level = 3;
+                    week_goal_step = 44268;
+                    today_goal_step = 6324;
                 }else if(position == 1){
                     level_text.setText("Lv.4 도전 한다면?");
-                    level_week_goal_step.setText("주간 목표 걸음 수 : 80,000 걸음");
-                    level_day_goal_step.setText("일간 권장 걸음 수 : 12,000 걸음");
                     user_goal_level = 4;
+                    week_goal_step = 54474;
+                    today_goal_step = 7782;
                 }else{
                     level_text.setText("Lv.5 도전 한다면?");
-                    level_week_goal_step.setText("주간 목표 걸음 수 : 90,000 걸음");
-                    level_day_goal_step.setText("일간 권장 걸음 수 : 14,000 걸음");
                     user_goal_level = 5;
+                    week_goal_step = 64680;
+                    today_goal_step = 9240;
                 }
 
+                level_week_goal_step.setText("주간 목표 걸음 수 : "+week_goal_step+" 걸음");
+                level_day_goal_step.setText("일간 권장 걸음 수 : "+today_goal_step+" 걸음");
                 user_status = "증진";
             }
 
@@ -136,8 +141,11 @@ public class ActivityGoal extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
                 Log.e("Log","ㅎㅇㅎㅇ");
                 level_text.setText("Lv.3 도전 한다면?");
-                level_week_goal_step.setText("주간 목표 걸음 수 : 70,000 걸음");
-                level_day_goal_step.setText("일간 권장 걸음 수 : 10,000 걸음");
+
+                week_goal_step = 44268;
+                today_goal_step = 6324;
+                level_week_goal_step.setText("주간 목표 걸음 수 : "+week_goal_step+" 걸음");
+                level_day_goal_step.setText("일간 권장 걸음 수 : "+today_goal_step+" 걸음");
                 user_goal_level = 3;
             }
         });
@@ -148,6 +156,10 @@ public class ActivityGoal extends AppCompatActivity {
             public void onClick(View v) {
                 editor.putInt("user_goal_level",user_goal_level);
                 editor.putString("user_status",user_status);
+                editor.putInt("goal_week_step_count",week_goal_step);
+                editor.putInt("goal_day_step_count",today_goal_step);
+                Log.e("week_goal_step",""+week_goal_step);
+                Log.e("today_goal_step",""+today_goal_step);
                 editor.apply();
                 Log.e("user_status",user_status);
                 finish();
@@ -160,6 +172,8 @@ public class ActivityGoal extends AppCompatActivity {
             public void onClick(View v) {
 
                 editor.putString("user_status","유지");
+                editor.putInt("goal_week_step_count",week_goal_step);
+                editor.putInt("goal_day_step_count",today_goal_step);
                 editor.apply();
                 finish();
                 Toast.makeText(ActivityGoal.this,"목표가 설정되었습니다.",Toast.LENGTH_SHORT).show();

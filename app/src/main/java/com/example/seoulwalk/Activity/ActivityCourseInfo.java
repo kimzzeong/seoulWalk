@@ -1002,9 +1002,9 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2.5초를 더해 현재 시간과 비교 후
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간이 2.5초가 지났으면 Toast 출력
         // 2500 milliseconds = 2.5 seconds
-        Intent intent = new Intent(ActivityCourseInfo.this, ActivityDulle.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
-        startActivity(intent);  //인텐트 이동
+//        Intent intent = new Intent(ActivityCourseInfo.this, ActivityDulle.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
+//        startActivity(intent);  //인텐트 이동
         finish();   //현재 액티비티 종료
 
     }

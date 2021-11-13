@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String SHARED_PREF_NAME = "mypref";
     String user_idx, user_nickname, user_profile, user_status;
     int user_level,user_goal_level;
-
+    TextView percent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         main_course_good = findViewById(R.id.main_course_good);
         main_profile_photo = findViewById(R.id.main_profile_photo);
         main_week_goal = findViewById(R.id.main_week_goal);
+        percent = findViewById(R.id.percent);
 
 
         main_nickname = findViewById(R.id.main_nickname);
@@ -90,12 +91,6 @@ public class MainActivity extends AppCompatActivity {
         week_now_goal_step = 19800; // 이번주 걸음수
         today_goal_step = 4766; // 오늘 목표 걸음수
         today_step = 3870; // 오늘 걸음수
-
-        main_goal_step_count.setText(String.valueOf(week_goal_step));
-        main_week_step_count.setText(String.valueOf(week_now_goal_step));
-        main_today_goal_step_count.setText(String.valueOf(today_goal_step));
-        main_today_step_count.setText(String.valueOf(today_step));
-
         sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
         editor = sharedPreferences.edit();
 
@@ -105,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("user_level",2);
         editor.putString("user_status","유지");
         editor.putInt("user_goal_level",3);
+        editor.putInt("goal_week_step_count",week_goal_step);
+        editor.putInt("goal_day_step_count",today_goal_step);
         //editor.putString("user_profile","");
         editor.apply();
 
@@ -199,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
         user_status = sharedPreferences.getString("user_status","");
         user_level = sharedPreferences.getInt("user_level",0);
         user_goal_level = sharedPreferences.getInt("user_goal_level",0);
+        week_goal_step = sharedPreferences.getInt("goal_week_step_count",0);
+        today_goal_step = sharedPreferences.getInt("goal_day_step_count",0);
 
 
         main_nickname.setText(user_nickname);
@@ -210,10 +209,21 @@ public class MainActivity extends AppCompatActivity {
 
         main_today_step_progressBar.setMax(today_goal_step);
         main_today_step_progressBar.setProgress(today_step);
+
+        main_goal_step_count.setText(String.valueOf(week_goal_step));
+        main_today_goal_step_count.setText(String.valueOf(today_goal_step));
+        main_week_step_count.setText(String.valueOf(week_now_goal_step));
+        main_today_step_count.setText(String.valueOf(today_step));
+
+
+        percent.setText((int) Math.floor((double) week_now_goal_step / (double) week_goal_step * 100.0) + "%");
+
         Log.e("user_idx",user_idx);
         Log.e("user_nickname",user_nickname);
         Log.e("user_status",user_status);
         Log.e("user_level",""+user_level);
+        Log.e("week_goal_step",""+week_goal_step);
+        Log.e("today_goal_step",""+today_goal_step);
 
         if(user_status.equals("증진")) {
 
