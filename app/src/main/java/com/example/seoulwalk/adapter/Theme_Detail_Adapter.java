@@ -149,8 +149,8 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
             level.setText(detailCourse_data.getCourse_difficulty());
             home.setText(String.valueOf(detailCourse_data.getDistance_to_me()).concat("km"));
 
+            Glide.with(context).load(ApiClient.BASE_URL.concat("img/").concat(detailCourse_data.getCourse_image())).into(imgurl);
 
-            Glide.with(context).load(ApiClient.BASE_URL.concat(detailCourse_data.getCourse_image())).into(imgurl);
 
 
         }
