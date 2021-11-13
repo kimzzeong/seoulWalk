@@ -1,5 +1,6 @@
 package com.example.seoulwalk.Activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -104,6 +106,14 @@ public class ActivityMypage extends AppCompatActivity {
         historyAdapter = new HistoryAdapter(history_list);
         history.setAdapter(historyAdapter);
 
+
+        historyAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(ActivityMypage.this,ActivityResultAfterWalk.class);
+                startActivity(intent);
+            }
+        });
 
 
         //도장 컬렉션

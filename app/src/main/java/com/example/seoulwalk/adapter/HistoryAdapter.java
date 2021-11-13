@@ -18,6 +18,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private ArrayList<History_Data> mData = null;
 
+
+    private HistoryAdapter.OnItemClickListener mListener = null ;
+    public interface OnItemClickListener {
+        void onItemClick(View v, int position) ;
+    }
+    // OnItemClickListener 리스너 객체 참조를 어댑터에 전달하는 메서드
+    public void setOnItemClickListener(HistoryAdapter.OnItemClickListener listener) {
+        this.mListener = listener ;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,6 +76,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             history_distance = itemView.findViewById(R.id.distance_history_item);
             history_calorie = itemView.findViewById(R.id.calorie_history_item);
             history_speed = itemView.findViewById(R.id.speed_history_item);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition() ;
+                    if (pos != RecyclerView.NO_POSITION) {
+                        if(mListener!=null){
+                            //setPosition(pos);
+                            mListener.onItemClick(v,pos);
+                            notifyItemChanged(pos);
+                        }
+                    }
+                }
+            });
         }
     }
 }

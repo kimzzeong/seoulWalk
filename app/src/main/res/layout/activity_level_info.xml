@@ -248,7 +248,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/gray"
-        android:text="※ 위 기준표는 카조리의 5단계 어쩌구를 어쩌구 해서 어쭤구 어쭤구 어쭤구 어쭤구 어쭤구 어쭤구 어쭤구"
+        android:text="※ 위 기준표는 스포츠활동 평가 중 '상대평가' 기준에 해당함"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
