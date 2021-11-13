@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,10 +23,15 @@ public class ActivityGoal extends AppCompatActivity {
 
     LinearLayout goal_maintenance_layout, goal_step_up_layout;
     boolean goal_layout_flag = false;
-    Button goal_maintenance_btn, goal_step_up_btn;
-    int user_level = 2; //현재 유저의 레벨
+    Button goal_maintenance_btn, goal_step_up_btn, still_btn, goal_btn;
+    int user_level = 2, user_goal_level; //현재 유저의 레벨
     ArrayList<String> items = new ArrayList<>();
     TextView level_text,level_week_goal_step,level_day_goal_step;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private static final String SHARED_PREF_NAME = "mypref";
+    String user_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,9 @@ public class ActivityGoal extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(false); //뒤로가기 아이콘 없앰
 
+        sharedPreferences =getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         //탭 레이아웃처럼 변환 위한 정의
         goal_maintenance_layout = findViewById(R.id.goal_maintenance_layout);
         goal_step_up_layout = findViewById(R.id.goal_step_up_layout);
@@ -50,6 +59,12 @@ public class ActivityGoal extends AppCompatActivity {
         level_text = findViewById(R.id.level_text);
         level_week_goal_step = findViewById(R.id.level_week_goal_step);
         level_day_goal_step = findViewById(R.id.level_day_goal_step);
+        still_btn = findViewById(R.id.still_btn);
+        goal_btn = findViewById(R.id.goal_btn);
+
+        user_level = sharedPreferences.getInt("user_level",0);
+        user_goal_level = sharedPreferences.getInt("user_goal_level",0);
+        user_status = sharedPreferences.getString("user_status","");
 
         goal_maintenance_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +82,11 @@ public class ActivityGoal extends AppCompatActivity {
             }
         });
 
-        items.add("Lv 1"); //0 포지션값임
-        items.add("Lv 2"); //1
-        items.add("Lv 3"); //2
-        items.add("Lv 4"); //3
-        items.add("Lv 5"); //4
+        items.add("Lv.1"); //0 포지션값임
+        items.add("Lv.2"); //1
+        items.add("Lv.3"); //2
+        items.add("Lv.4"); //3
+        items.add("Lv.5"); //4
 
 
         for (int i = 0; i < user_level; i++){
@@ -99,25 +114,54 @@ public class ActivityGoal extends AppCompatActivity {
                     level_text.setText("Lv.3 도전 한다면?");
                     level_week_goal_step.setText("주간 목표 걸음 수 : 70,000 걸음");
                     level_day_goal_step.setText("일간 권장 걸음 수 : 10,000 걸음");
+                    user_goal_level = 3;
                 }else if(position == 1){
                     level_text.setText("Lv.4 도전 한다면?");
                     level_week_goal_step.setText("주간 목표 걸음 수 : 80,000 걸음");
                     level_day_goal_step.setText("일간 권장 걸음 수 : 12,000 걸음");
+                    user_goal_level = 4;
                 }else{
                     level_text.setText("Lv.5 도전 한다면?");
                     level_week_goal_step.setText("주간 목표 걸음 수 : 90,000 걸음");
                     level_day_goal_step.setText("일간 권장 걸음 수 : 14,000 걸음");
+                    user_goal_level = 5;
                 }
+
+                user_status = "증진";
             }
 
             // 아무것도 선택되지 않은 상태일 때
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 Log.e("Log","ㅎㅇㅎㅇ");
+                level_text.setText("Lv.3 도전 한다면?");
+                level_week_goal_step.setText("주간 목표 걸음 수 : 70,000 걸음");
+                level_day_goal_step.setText("일간 권장 걸음 수 : 10,000 걸음");
+                user_goal_level = 3;
             }
         });
 
 
+        goal_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putInt("user_goal_level",user_goal_level);
+                editor.putString("user_status",user_status);
+                editor.apply();
+                Log.e("user_status",user_status);
+                finish();
+            }
+        });
+
+        still_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                editor.putString("user_status","유지");
+                editor.apply();
+                finish();
+            }
+        });
 
     }
 

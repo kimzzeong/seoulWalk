@@ -5,18 +5,63 @@ public class DetailCourse_Data {
     // 나와의 거리
     double distance_to_me;
 
-
     //소요시간 , 걸음 수 , 이미지 경로
     int course_time;
     int course_stepcount;
     String course_image;
 
+    // 시작점, 끝점, 시작좌표, 끝좌표
+    String start;
+    String end;
+    String LatLng;
+    String LatLng_End;
 
-    //세부코스 이름, 전체코스 이름 ,코스 길이, 코스 난이도
+    //세부코스 이름, 전체코스 이름 , 전체코스 몇코스인지 숫자, 코스 길이, 코스 난이도
     String course_name;
     String course_fullName;
+    int original_course_number;
     double course_length;
     String course_difficulty;
+
+    public String getLatLng() {
+        return LatLng;
+    }
+
+    public void setLatLng(String latLng) {
+        LatLng = latLng;
+    }
+
+    public String getLatLng_End() {
+        return LatLng_End;
+    }
+
+    public void setLatLng_End(String latLng_End) {
+        LatLng_End = latLng_End;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
+    }
+
+    public int getOriginal_course_number() {
+        return original_course_number;
+    }
+
+    public void setOriginal_course_number(int original_course_number) {
+        this.original_course_number = original_course_number;
+    }
 
     public double getDistance_to_me() {
         return distance_to_me;

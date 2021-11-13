@@ -91,7 +91,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     Button btn_M_Start,btn_M_End,btn_M_Map;
 
     private String[] images = new String[]{
-            "https://i.imgur.com/36Bivob.jpeg", "https://i.imgur.com/oyFRppX_d.webp?maxwidth=1520&fidelity=grand", "https://i.imgur.com/wWNDVp6.jpeg", "https://i.imgur.com/GH67Dwj.jpeg"
+            "https://gil.seoul.go.kr/view/point/2013/09/03/19936752673232.jpg", "https://gil.seoul.go.kr/view/point/2013/09/03/16586534291142.jpg",
+            "https://gil.seoul.go.kr/view/point/2013/09/03/9397510540265.jpg", "https://gil.seoul.go.kr/view/point/2013/09/03/3769376943425.jpg"
     };
 
     //후기 리스트
@@ -126,7 +127,12 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     String dulle_end; //둘레길 도착점 이름
     String Lat_start; //둘레길 도착점 이름
     String Lat_end; //둘레길 도착점 이름
+    int stepInt, timeInt;
+    double lengthDouble;
+    String difficultyString, courseNameString;
+    String dulleFullTitle;
 
+    TextView textViewTime, textViewDistance, textViewStep, textViewDifficulty, textViewCourseName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,16 +143,49 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         setContentView(R.layout.activity_course_info);
 
+        textViewTime = findViewById(R.id.time_text);
+        textViewDistance = findViewById(R.id.distance_text);
+        textViewStep = findViewById(R.id.step_text);
+        textViewDifficulty = findViewById(R.id.course_level);
+        textViewCourseName = findViewById(R.id.course_name_textview_course_info);
+
         /** 여기는 인테트로 시작점 끝점 받는 구간 */
         Intent intent = getIntent();
-        dulle_start = intent.getStringExtra("dulle_start");
-        dulle_end = intent.getStringExtra("dulle_end");
-        Lat_start = intent.getStringExtra("LanLng");
-        Lat_end = intent.getStringExtra("LatLng_end");
-        System.out.println(dulle_start + "-- : 시작점 값 확인");
-        System.out.println(dulle_end + "-- : 도착점 값 확인");
-        System.out.println(Lat_start + "-- : 시작점 좌표 값 확인");
-        System.out.println(Lat_end + "-- : 도착점 좌표 값 확인");
+
+        if (intent != null && intent.getStringExtra("difficultyString") != null) {
+            dulle_start = intent.getStringExtra("dulle_start");
+            dulle_end = intent.getStringExtra("dulle_end");
+            Lat_start = intent.getStringExtra("LanLng");
+            Lat_end = intent.getStringExtra("LatLng_end");
+            stepInt = intent.getIntExtra("stepCountInt", 0);
+            lengthDouble = intent.getDoubleExtra("lengthDouble", 0.0);
+            difficultyString = intent.getStringExtra("difficultyString");
+            timeInt = intent.getIntExtra("timeInt", 0);
+            courseNameString = intent.getStringExtra("courseNameString");
+            System.out.println(dulle_start + "-- : 시작점 값 확인");
+            System.out.println(dulle_end + "-- : 도착점 값 확인");
+            System.out.println(Lat_start + "-- : 시작점 좌표 값 확인");
+            System.out.println(Lat_end + "-- : 도착점 좌표 값 확인");
+
+            textViewTime.setText(String.valueOf(timeInt).concat("분"));
+            textViewDistance.setText(String.valueOf(lengthDouble).concat("km"));
+            textViewDifficulty.setText("난이도 ".concat(difficultyString));
+            textViewCourseName.setText(courseNameString);
+            textViewStep.setText(String.valueOf(stepInt).concat("걸음"));
+        } else {
+            dulle_start = intent.getStringExtra("dulle_start");
+            dulle_end = intent.getStringExtra("dulle_end");
+            Lat_start = intent.getStringExtra("LanLng");
+            Lat_end = intent.getStringExtra("LatLng_end");
+            dulleFullTitle = intent.getStringExtra("dulle_full_title");
+            textViewCourseName.setText(dulleFullTitle);
+            System.out.println(dulle_start + "-- : 시작점 값 확인");
+            System.out.println(dulle_end + "-- : 도착점 값 확인");
+            System.out.println(Lat_start + "-- : 시작점 좌표 값 확인");
+            System.out.println(Lat_end + "-- : 도착점 좌표 값 확인");
+
+        }
+
 
         /** 버튼 정의 */
 

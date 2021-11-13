@@ -34,7 +34,7 @@ public interface ApiInterface {
 
     /** 세부코스별 리사이클러뷰 데이터 가져오기 **/
     @GET("tim_php/fetch_detail_course_data.php")
-    Call<List<DetailCourse_Data>> fetchDetailCourseData(
+    Call<ArrayList<DetailCourse_Data>> fetchDetailCourseData(
             @Query("sort") String sort
     );
 
