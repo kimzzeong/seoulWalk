@@ -36,8 +36,6 @@ public class ActivityTheme_Nature extends AppCompatActivity {
         // 리스트 초기화 후 레트로핏통신
         detailCourse_data = new ArrayList<>();
 
-
-
         themeAdapter = new Theme_Detail_Adapter(getApplicationContext(), detailCourse_data);
 
 

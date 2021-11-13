@@ -8,16 +8,15 @@
     android:background="@drawable/forman"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <!-- A CardView that contains a TextView -->
     <androidx.cardview.widget.CardView
-
         android:id="@+id/card_view"
         android:layout_width="230dp"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:elevation="10dp"
         android:padding="10dp"
-        app:cardUseCompatPadding="true"
-        card_view:cardBackgroundColor="#00FFFFFF"
+        card_view:cardBackgroundColor="@color/gray_transparent"
         card_view:cardCornerRadius="5dp"
         card_view:layout_constraintBottom_toBottomOf="parent"
         card_view:layout_constraintLeft_toLeftOf="parent"
