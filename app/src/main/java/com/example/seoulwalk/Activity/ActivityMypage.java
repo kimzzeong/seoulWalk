@@ -52,7 +52,7 @@ public class ActivityMypage extends AppCompatActivity {
         history.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         History_Data history_data1 = new History_Data(
-                "서울둘레길 5-1코스",
+                "서울둘레길 5-2코스",
                 "2021-11-13 05:20",
                 "관악산코스",
                 "2시간 40분",
