@@ -80,7 +80,7 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
 
         Exam_data exam_data = new Exam_data();
         String abc =exam_data.getDulle_1_1();
-        parse_Location(abc);
+        //parse_Location(abc);
 
 
         return START_STICKY;
@@ -214,22 +214,29 @@ public class Map_service extends Service implements GoogleApiClient.ConnectionCa
 
                     if (lat != 0.0 && longt != 0.0) {
                         System.out.println("실행되는지 좀 보자");
-                        for (int i =0; i<latLngArrayList.size(); i++){
-                            String a=String.valueOf(latLngArrayList.get(i).latitude);
-                            String b=String.valueOf(latLngArrayList.get(i).longitude);
-                            address = a+","+b;
-                           // Thread.sleep(10000);
-                            outstream.writeUTF(String.valueOf(address));
-                            editor.putString("Kid_Locaion", String.valueOf(address));
-                            editor.apply();
-                            Log.e("DDDD", "서버로 보내는 값 :" + String.valueOf(address));
-                            Thread.sleep(1000);
-                        }
-//                        address = getCurrentAddress(lat, longt);
+//                        for (int i =0; i<latLngArrayList.size(); i++){
+//                            String a=String.valueOf(latLngArrayList.get(i).latitude);
+//                            String b=String.valueOf(latLngArrayList.get(i).longitude);
+//                            address = a+","+b;
+//                            Thread.sleep(10000);
+//                            outstream.writeUTF(String.valueOf(address));
+//                            editor.putString("Kid_Locaion", String.valueOf(address));
+//                            editor.apply();
+//                            Log.e("DDDD", "서버로 보내는 값 :" + String.valueOf(address));
+//                            Thread.sleep(1000);
+//                        }
+                        address = getCurrentAddress(lat, longt);
                     } else {
                         address = "";
                         System.out.println("여기가 나오나?");
                     }
+
+                    outstream.writeUTF(String.valueOf(address));
+                    editor.putString("Kid_Locaion", String.valueOf(address));
+                    editor.apply();
+                    Log.e("DDDD", "서버로 보내는 값 :" + String.valueOf(address));
+                    Thread.sleep(10000);
+
 
                 }
 

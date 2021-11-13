@@ -1,5 +1,4 @@
 package com.example.seoulwalk.adapter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -24,18 +22,13 @@ import com.example.seoulwalk.data.DetailCourse_Data;
 import com.example.seoulwalk.retrofit.ApiClient;
 import com.example.seoulwalk.retrofit.ApiInterface;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapter.DetailCourseViewHolder> {
-
     private final String TAG = this.getClass().getSimpleName();
     private final Context context;
     private final List<DetailCourse_Data> lists;
@@ -50,14 +43,12 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
         this.lists = lists;
         this.itemClickListener = itemClickListener;
     }
-
     @NonNull
     @Override
     public DetailCourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.course_detail_item, parent, false);
         return new DetailCourseViewHolder(view, itemClickListener);
     }
-
     @Override
     public void onBindViewHolder(@NonNull DetailCourseViewHolder holder, int position) {
         DetailCourse_Data data = lists.get(position);
@@ -68,22 +59,17 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
         holder.textViewStepCount.setText(String.valueOf(data.getCourse_stepcount()).concat("걸음"));
         holder.textViewDifficulty.setText(data.getCourse_difficulty());
         holder.textViewDistance.setText(String.valueOf(data.getDistance_to_me()).concat("km"));
-
         Glide.with(context).load(ApiClient.BASE_URL.concat(data.getCourse_image())).into(holder.thumbnailImageView);
-
     }
-
     @Override
     public int getItemCount() {
         return lists.size();
     }
-
     public class DetailCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ConstraintLayout constraintLayout;
         public TextView textViewOriginalCourseName, textViewDetailCourseName, textViewLength, textViewTime, textViewStepCount, textViewDifficulty, textViewDistance;
         public ImageView thumbnailImageView;
         ItemClickListener itemClickListener;
-
         public DetailCourseViewHolder(@NonNull View view, ItemClickListener itemClickListener) {
             super(view);
             constraintLayout = view.findViewById(R.id.constraint_course_detail_item);
@@ -95,11 +81,9 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
             textViewStepCount = view.findViewById(R.id.course_detail_item_step_count);
             textViewDifficulty = view.findViewById(R.id.course_detail_item_difficulty);
             textViewDistance = view.findViewById(R.id.course_detail_item_distance);
-
             this.itemClickListener = itemClickListener;
             constraintLayout.setOnClickListener(this);
         }
-
         @Override
         public void onClick(View view) {
 //            itemClickListener.onItemClick(view, getAdapterPosition());
@@ -143,7 +127,6 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
             }
         }
     }
-
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }

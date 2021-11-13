@@ -326,18 +326,17 @@ public class ActivityDulle extends AppCompatActivity {
                 @SuppressLint("UseCompatLoadingForDrawables") Drawable forman4= ContextCompat.getDrawable(getApplicationContext(), R.drawable.forstory);
 
 
-                //하드로 theme 데이터들 넣어야함
-                Dulle_theme_Data dulle_theme_data = new Dulle_theme_Data("사람을 위한 길", forman);
-                Dulle_theme_Data dulle_theme_data1 = new Dulle_theme_Data("자연을 위한 길", forman2);
-                Dulle_theme_Data dulle_theme_data2 = new Dulle_theme_Data("산책을 위한 길", forman3);
-                Dulle_theme_Data dulle_theme_data3 = new Dulle_theme_Data("이야기가 있는 길", forman4);
-
-
-                theme_list.add(dulle_theme_data);
-                theme_list.add(dulle_theme_data1);
-                theme_list.add(dulle_theme_data2);
-                theme_list.add(dulle_theme_data3);
-
+                if (theme_list.size() == 0) {
+                    //하드로 theme 데이터들 넣어야함
+                    Dulle_theme_Data dulle_theme_data = new Dulle_theme_Data("사람을 위한 길", forman);
+                    Dulle_theme_Data dulle_theme_data1 = new Dulle_theme_Data("자연을 위한 길", forman2);
+                    Dulle_theme_Data dulle_theme_data2 = new Dulle_theme_Data("산책을 위한 길", forman3);
+                    Dulle_theme_Data dulle_theme_data3 = new Dulle_theme_Data("이야기가 있는 길", forman4);
+                    theme_list.add(dulle_theme_data);
+                    theme_list.add(dulle_theme_data1);
+                    theme_list.add(dulle_theme_data2);
+                    theme_list.add(dulle_theme_data3);
+                }
 
                 ThemeAdapter = new ThemeAdapter(theme_list);
 
@@ -368,6 +367,9 @@ public class ActivityDulle extends AppCompatActivity {
                         startActivity(intent);
                     }
                 });
+//                dulleDetailAdapter = new DulleDetailAdapter(detail_list);
+//                dulle_detail.setAdapter(dulleDetailAdapter);
+//
 
 
                 dulle2Adapter.setOnItemClickListener(new Dulle2Adapter.OnItemClickListener() {
