@@ -25,12 +25,14 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adapter.ThemeDetail_ViewHolder> {
 
 
     int stepCountInt, timeInt;
     double distanceDouble, lengthDouble;
-    String courseFullNameString, courseNameString, difficultyString;
+    String courseFullNameString, courseNameString, difficultyString, startString, endString, latlngStart, latlngEnd;
 
 
     ArrayList<DetailCourse_Data> recyclerItemArr = new ArrayList<>();
@@ -96,20 +98,27 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
                 @Override
                 public void onClick(View v) {
 
-                    Toast.makeText(context, getBindingAdapterPosition(), Toast.LENGTH_SHORT).show();
-                    courseNameString = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_name();
+                    courseNameString = recyclerItemArr.get(getAdapterPosition()).getCourse_name();
                     // 원래코스명
-                    courseFullNameString = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_fullName();
+                    courseFullNameString = recyclerItemArr.get(getAdapterPosition()).getCourse_fullName();
                     // 걸음수
-                    stepCountInt = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_stepcount();
+                    stepCountInt = recyclerItemArr.get(getAdapterPosition()).getCourse_stepcount();
                     // 코스길이
-                    lengthDouble = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_length();
+                    lengthDouble = recyclerItemArr.get(getAdapterPosition()).getCourse_length();
                     // 나와의 거리
-                    distanceDouble = recyclerItemArr.get(getBindingAdapterPosition()).getDistance_to_me();
+                    distanceDouble = recyclerItemArr.get(getAdapterPosition()).getDistance_to_me();
                     // 난이도
-                    difficultyString = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_difficulty();
+                    difficultyString = recyclerItemArr.get(getAdapterPosition()).getCourse_difficulty();
                     // 소요시간
-                    timeInt = recyclerItemArr.get(getBindingAdapterPosition()).getCourse_time();
+                    timeInt = recyclerItemArr.get(getAdapterPosition()).getCourse_time();
+                    // 시작점
+                    startString = recyclerItemArr.get(getAdapterPosition()).getStart();
+                    // 도착점
+                    endString = recyclerItemArr.get(getAdapterPosition()).getEnd();
+                    // 시작좌표
+                    latlngStart = recyclerItemArr.get(getAdapterPosition()).getLatLng();
+                    // 끝좌표
+                    latlngEnd = recyclerItemArr.get(getAdapterPosition()).getLatLng_End();
 
                     //액티비티로 이동
                     Intent intent = new Intent(context, ActivityCourseInfo.class);
@@ -120,6 +129,10 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
                     intent.putExtra("courseFullNameString", courseFullNameString);
                     intent.putExtra("courseNameString", courseNameString);
                     intent.putExtra("difficultyString", difficultyString);
+                    intent.putExtra("dulle_start", startString);
+                    intent.putExtra("dulle_end", endString);
+                    intent.putExtra("LanLng", latlngStart);
+                    intent.putExtra("LatLng_end", latlngEnd);
                     Log.d("TAG", "stepCountInt: " + stepCountInt);
                     Log.d("TAG", "timeInt: " + timeInt);
                     Log.d("TAG", "distanceDouble: " + distanceDouble);
@@ -127,6 +140,11 @@ public class Theme_Detail_Adapter extends RecyclerView.Adapter<Theme_Detail_Adap
                     Log.d("TAG", "courseFullNameString: " + courseFullNameString);
                     Log.d("TAG", "courseNameString: " + courseNameString);
                     Log.d("TAG", "difficultyString: " + difficultyString);
+                    Log.d("TAG", "dulle_start: " + startString);
+                    Log.d("TAG", "dulle_end: " + endString);
+                    Log.d("TAG", "LanLng: " + latlngStart);
+                    Log.d("TAG", "LatLng_end: " + latlngEnd);
+                    intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });
