@@ -97,13 +97,12 @@ public class MainActivity extends AppCompatActivity {
         //유저 정보 쉐어드 저장
         editor.putString("user_idx","1");
         editor.putString("user_nickname","지나지나");
-        editor.putString("user_profile","");
+        //editor.putString("user_profile","");
         editor.putInt("user_level",2);
         editor.putString("user_status","유지");
         editor.putInt("user_goal_level",3);
         editor.putInt("goal_week_step_count",week_goal_step);
         editor.putInt("goal_day_step_count",today_goal_step);
-        //editor.putString("user_profile","");
         editor.apply();
 
 
@@ -237,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         if(user_profile.equals("")){
             Glide.with(this) .load(R.drawable.basic_profile) .into(main_profile_photo);
         }else{
-            Glide.with(this) .load(R.drawable.stamp14_on) .into(main_profile_photo);
+            Glide.with(this) .load(R.drawable.stamp15_on) .into(main_profile_photo);
         }
     }
 

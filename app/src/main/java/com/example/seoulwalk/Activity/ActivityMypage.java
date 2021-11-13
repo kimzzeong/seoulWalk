@@ -190,7 +190,7 @@ String a,b,c,d,e,f;
         if(user_profile.equals("")){
             Glide.with(this) .load(R.drawable.basic_profile) .into(mypage_profile_photo);
         }else{
-            Glide.with(this) .load(R.drawable.stamp14_on) .into(mypage_profile_photo);
+            Glide.with(this) .load(R.drawable.stamp15_on) .into(mypage_profile_photo);
         }
     }
 

@@ -36,9 +36,6 @@ SharedPreferences sharedPreferences;
 
         /** 길찾기에서 넘어온 값 */
         Intent intent = getIntent();
-        String courseNameString = intent.getStringExtra("courseNameString");
-        String time_results = intent.getStringExtra("time_results");
-
 
 
         sharedPreferences= getSharedPreferences("dulle_result", MODE_PRIVATE);    // test 이름의 기본모드 설정
@@ -53,12 +50,20 @@ SharedPreferences sharedPreferences;
         textViewTime = findViewById(R.id.time_result_after_walk);
         String time  = sharedPreferences.getString("time_results","");
         System.out.println("time 이비나입니디아닙다" + time);
-
+        String courseNameString;
+        String time_results;
 
         if (intent.getStringExtra("time_results") == null){
             textViewTime.setText(time);
             textViewCourseName.setText(textViewCourseName1);
+
+            time_results = time;
+            courseNameString = textViewCourseName1;
+
         }else {
+             courseNameString = intent.getStringExtra("courseNameString");
+             time_results= intent.getStringExtra("time_results");
+
 
 
             textViewCourseName.setText(courseNameString);
@@ -69,10 +74,13 @@ SharedPreferences sharedPreferences;
 
         // 소모 칼로리
         textViewCalorie = findViewById(R.id.calorie_result_after_walk);
+        textViewCalorie.setText("15kcal");
         // 평균 속도
         textViewSpeed = findViewById(R.id.speed_result_after_walk);
+        textViewSpeed.setText("2.1km/h");
         // 이동 거리
         textViewDistance = findViewById(R.id.distance_result_after_walk);
+        textViewDistance.setText("0.5km");
         // 맨 밑에 확인 버튼
         buttonOkay = findViewById(R.id.button_okay_result_after_walk);
 
