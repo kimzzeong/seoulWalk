@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textColor="@color/black"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="코스 :  " />
@@ -188,5 +189,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="377dp"
+        android:layout_height="261dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_result_after_walk_contents"
+        app:srcCompat="@drawable/dulle_result_5_2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

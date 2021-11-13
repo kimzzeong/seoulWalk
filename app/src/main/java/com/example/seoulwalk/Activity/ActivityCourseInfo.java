@@ -298,6 +298,8 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
                 intent1.putExtra("dulle_end",dulle_end);
                 intent1.putExtra("LanLng",Lat_start);
                 intent1.putExtra("LatLng_end",Lat_end);
+                intent1.putExtra("courseNameString",courseNameString);
+
                 startActivity(intent1);
             }
         });
@@ -758,18 +760,20 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         } else if (dulle_start.equals("양재시민숲")&&dulle_end.equals("사당역 갈림길")) {
             path = exam_data.getDulle_4_2();
             options.color(Color.YELLOW);
-        } else if (dulle_start.equals("사당역 갈림길")&&dulle_end.equals("관악산 공원 입구")) {
+        }
+        // TODO: 11/13/21 실시간 위치 보여주기
+        else if (dulle_start.equals("사당역 갈림길")&&dulle_end.equals("관악산 공원 입구")) {
             path = exam_data.getDulle_5_1();
-            options.color(Color.LTGRAY);
+            options.color(Color.GREEN);
         } else if (dulle_start.equals("관악산 공원 입구")&&dulle_end.equals("석수역")) {
             path = exam_data.getDulle_5_2();
-            options.color(Color.LTGRAY);
+            options.color(Color.GREEN);
         } else if (dulle_start.equals("석수역")&&dulle_end.equals("구일역")) {
             path = exam_data.getDulle_6_1();
-            options.color(Color.GREEN);
+            options.color(Color.BLACK);
         } else if (dulle_start.equals("구일역")&&dulle_end.equals("가양대교 남단")) {
             path = exam_data.getDulle_6_2();
-            options.color(Color.GREEN);
+            options.color(Color.BLACK);
         } else if (dulle_start.equals("가양대교 남단")&&dulle_end.equals("증산역 갈림길")) {
             path = exam_data.getDulle_7_1();
             options.color(Color.CYAN);

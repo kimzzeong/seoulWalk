@@ -38,7 +38,7 @@ public class ActivityMypage extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private static final String SHARED_PREF_NAME = "mypref";
     String user_profile;
-
+String a,b,c,d,e,f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +53,26 @@ public class ActivityMypage extends AppCompatActivity {
         history = findViewById(R.id.walking_history_list);
         history.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
+        sharedPreferences = getSharedPreferences("dulle_result",MODE_PRIVATE);
+
+        a = sharedPreferences.getString("textViewCourseName","");
+        b = sharedPreferences.getString("time_results","");
+        c = sharedPreferences.getString("cal","");
+        d = sharedPreferences.getString("km/h","");
+        e = sharedPreferences.getString("walk_distance","");
+        f = sharedPreferences.getString("date","");
+
+
+
+
         History_Data history_data1 = new History_Data(
-                "서울둘레길 5-2코스",
-                "2021-11-13 05:20",
+                a,
+                f,
                 "관악산코스",
-                "2시간 40분",
-                "5.7km",
-                "477kcal",
-                "2.91km/h");
+                b,
+                e,
+                c,
+                d);
         history_list.add(history_data1);
 
         History_Data history_data2 = new History_Data(
