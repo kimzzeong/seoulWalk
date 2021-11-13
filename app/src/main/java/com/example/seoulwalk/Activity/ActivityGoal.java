@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.seoulwalk.R;
 
@@ -150,6 +151,7 @@ public class ActivityGoal extends AppCompatActivity {
                 editor.apply();
                 Log.e("user_status",user_status);
                 finish();
+                Toast.makeText(ActivityGoal.this,"목표가 설정되었습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -160,6 +162,7 @@ public class ActivityGoal extends AppCompatActivity {
                 editor.putString("user_status","유지");
                 editor.apply();
                 finish();
+                Toast.makeText(ActivityGoal.this,"목표가 설정되었습니다.",Toast.LENGTH_SHORT).show();
             }
         });
 
