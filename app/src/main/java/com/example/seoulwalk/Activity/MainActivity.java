@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         //유저 정보 쉐어드 저장
         editor.putString("user_idx","1");
         editor.putString("user_nickname","지나지나");
-        //editor.putString("user_profile","");
+//        editor.putString("user_profile","");
         editor.putInt("user_level",2);
         editor.putString("user_status","유지");
         editor.putInt("user_goal_level",3);

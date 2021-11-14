@@ -51,33 +51,33 @@
             app:civ_border_color="@color/gray"
             android:src="@color/white"
             app:civ_border_width="1dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/mypage_profile_photo"
-            app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo"
-            android:text="수식어"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            android:textStyle="bold"
-            android:id="@+id/mypage_level_title"
-            android:layout_marginTop="15dp"
-            />
 
         <TextView
+            android:id="@+id/mypage_level_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/mypage_profile_photo"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="이제 막 걷기 시작한"
+           android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo"
-            android:text="닉네임"
+            app:layout_constraintTop_toTopOf="@id/mypage_profile_photo" />
+
+        <TextView
+            android:id="@+id/mypage_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="지나지나"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:layout_marginLeft="20dp"
             android:textStyle="bold"
-            android:id="@+id/mypage_nickname"
-            android:layout_marginBottom="15dp"
-            />
+            app:layout_constraintBottom_toBottomOf="@id/mypage_profile_photo"
+            app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo" />
+
         <androidx.appcompat.widget.AppCompatImageButton
             android:layout_width="40dp"
             android:layout_height="30dp"
