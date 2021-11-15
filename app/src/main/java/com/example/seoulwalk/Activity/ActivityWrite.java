@@ -103,7 +103,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
         postRecyclerview.setAdapter(postDataAdapter);
 
         //전체글 카테고리
-        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.communitySpinner));
+        ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.writeSpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         write_spinner.setAdapter(spinner_adapter);
 

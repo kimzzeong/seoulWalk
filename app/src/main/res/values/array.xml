@@ -16,6 +16,14 @@
         <item>자유글</item>
     </string-array>
 
+    <string-array name="writeSpinner">
+
+        <item>후기글</item>
+        <item>인증글</item>
+        <item>정보공유글</item>
+        <item>자유글</item>
+    </string-array>
+
     <string-array name="courseSpinner">
 
         <item>1-1 코스</item>
