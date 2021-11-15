@@ -125,6 +125,16 @@
                 android:textColor="@color/black"
                 />
 
+            <CheckBox
+                android:id="@+id/myway"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="걸은 길 제외"
+                app:layout_constraintRight_toRightOf="@+id/listing_spinner"
+                app:layout_constraintTop_toBottomOf="@+id/listing_spinner"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                />
             <Spinner
                 android:id="@+id/listing_spinner"
                 android:layout_width="wrap_content"
@@ -140,7 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/dulle_all_title"
+                app:layout_constraintTop_toBottomOf="@+id/myway"
                 tools:layout_editor_absoluteX="0dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

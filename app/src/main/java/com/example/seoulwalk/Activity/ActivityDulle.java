@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -58,6 +59,7 @@ public class ActivityDulle extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     public static ActivityDulle activityDulle;
+    CheckBox myway;
 
     Button course_btn, mypage_btn, home_btn, community_btn;
     TextView test_text_btn; // 테스트용 텍스트뷰, 클릭하면 회원가입 창으로 감
@@ -67,6 +69,8 @@ public class ActivityDulle extends AppCompatActivity {
     ArrayList<DulleDetail_Data> detail_list = new ArrayList<>();
     Dulle_Data dulle_data ;
     DulleDetail_Data dulleDetail_data;
+    String check = "";
+    String spinnerSelectedString;
 
     ThemeAdapter ThemeAdapter;
     RecyclerView dulle1;
@@ -91,7 +95,7 @@ public class ActivityDulle extends AppCompatActivity {
         retrofit_dulle();
 
         // 세부코스 데이터 가져오기
-        fetchDetailCourseData("거리순");
+        fetchDetailCourseData("거리순",check);
     }
 
     @Override
@@ -101,8 +105,23 @@ public class ActivityDulle extends AppCompatActivity {
 
         listing_spinner = findViewById(R.id.listing_spinner);
         shared = new PreferenceHelper(this);
+        myway = findViewById(R.id.myway);
 
         activityDulle = ActivityDulle.this;
+
+        myway.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(myway.isChecked()){ //체크박스가 체크 되었을 때
+                    check = "check";
+                    fetchDetailCourseData(spinnerSelectedString,check);
+
+                }else{ // 체크 안됐을 때
+                    check = "";
+                    fetchDetailCourseData(spinnerSelectedString,check);
+                }
+            }
+        });
 
         ArrayAdapter<String> spinner_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,(String[])getResources().getStringArray(R.array.dulleSpinner));
         spinner_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,8 +134,8 @@ public class ActivityDulle extends AppCompatActivity {
 //                ((TextView)parent.getChildAt(0)).setTextColor(Color.BLACK);
 //                ((TextView)parent.getChildAt(0)).setTextSize(20);
 
-                String spinnerSelectedString = listing_spinner.getSelectedItem().toString();
-                fetchDetailCourseData(spinnerSelectedString);
+                spinnerSelectedString = listing_spinner.getSelectedItem().toString();
+                fetchDetailCourseData(spinnerSelectedString,check);
 //                fetchDetailCourseData(position);
             }
 
@@ -209,10 +228,10 @@ public class ActivityDulle extends AppCompatActivity {
     }
 
     // 세부코스별 리사이클러뷰 데이터 가져오기
-    private void fetchDetailCourseData(String sort) {
+    private void fetchDetailCourseData(String sort, String check) {
         Log.d(TAG, "fetchDetailCourseData()");
         ApiInterface apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<DetailCourse_Data>> call = apiInterface.fetchDetailCourseData(sort);
+        Call<ArrayList<DetailCourse_Data>> call = apiInterface.fetchDetailCourseData(sort,check);
         call.enqueue(new Callback<ArrayList<DetailCourse_Data>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<DetailCourse_Data>> call, @NonNull Response<ArrayList<DetailCourse_Data>> response) {
