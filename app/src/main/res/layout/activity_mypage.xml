@@ -60,7 +60,7 @@
             android:layout_marginTop="16dp"
             android:text="이제 막 걷기 시작한"
            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toRightOf="@id/mypage_profile_photo"
             app:layout_constraintTop_toTopOf="@id/mypage_profile_photo" />

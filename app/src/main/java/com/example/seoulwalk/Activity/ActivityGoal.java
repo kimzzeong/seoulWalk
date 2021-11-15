@@ -133,7 +133,7 @@ public class ActivityGoal extends AppCompatActivity {
 
                 level_week_goal_step.setText("주간 목표 걸음 수 : "+week_goal_step+" 걸음");
                 level_day_goal_step.setText("일간 권장 걸음 수 : "+today_goal_step+" 걸음");
-                user_status = "증진";
+                user_status = "도전";
             }
 
             // 아무것도 선택되지 않은 상태일 때

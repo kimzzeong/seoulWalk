@@ -23,6 +23,18 @@ public class DetailCourse_Data {
     double course_length;
     String course_difficulty;
 
+    //걸은 상태인지 아닌지 확인
+    int status;
+
+    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     public String getLatLng() {
         return LatLng;
     }

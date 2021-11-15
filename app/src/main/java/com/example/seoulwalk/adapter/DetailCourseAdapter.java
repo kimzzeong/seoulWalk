@@ -60,6 +60,12 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
         holder.textViewDifficulty.setText(data.getCourse_difficulty());
         holder.textViewDistance.setText(String.valueOf(data.getDistance_to_me()).concat("km"));
         Glide.with(context).load(ApiClient.BASE_URL.concat("img/").concat(data.getCourse_image())).into(holder.thumbnailImageView);
+
+        if(data.getStatus() == 1){
+            Glide.with(context).load(R.drawable.stamp_color).into(holder.course_detail_status);
+        }else{
+            holder.course_detail_status.setVisibility(View.INVISIBLE);
+        }
     }
     @Override
     public int getItemCount() {
@@ -68,7 +74,7 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
     public class DetailCourseViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ConstraintLayout constraintLayout;
         public TextView textViewOriginalCourseName, textViewDetailCourseName, textViewLength, textViewTime, textViewStepCount, textViewDifficulty, textViewDistance;
-        public ImageView thumbnailImageView;
+        public ImageView thumbnailImageView, course_detail_status;
         ItemClickListener itemClickListener;
         public DetailCourseViewHolder(@NonNull View view, ItemClickListener itemClickListener) {
             super(view);
@@ -81,6 +87,7 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
             textViewStepCount = view.findViewById(R.id.course_detail_item_step_count);
             textViewDifficulty = view.findViewById(R.id.course_detail_item_difficulty);
             textViewDistance = view.findViewById(R.id.course_detail_item_distance);
+            course_detail_status = view.findViewById(R.id.course_detail_status);
             this.itemClickListener = itemClickListener;
             constraintLayout.setOnClickListener(this);
         }

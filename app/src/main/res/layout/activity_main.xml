@@ -10,19 +10,36 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="@color/white"
         android:elevation="2dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="25sp"
-            android:text="둘레돌래"
-            android:textColor="#000000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:text="둘레돌래"
+                android:textColor="#000000"
+                android:layout_weight="5"/>
+            <ImageView
+                android:id="@+id/point_shop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:src="@drawable/point2"
+                android:layout_weight="1"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
@@ -163,11 +180,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/main_week_goal" />
 
             <TextView
-                android:id="@+id/percent"
+                android:id="@+id/week_percent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="59%"
+                android:text="%"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/main_week_step_progressBar"
@@ -245,6 +262,17 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_line2" />
+
+            <TextView
+                android:id="@+id/day_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="%"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/main_today_step_progressBar"
+                app:layout_constraintRight_toRightOf="@+id/main_today_step_progressBar" />
 
             <ProgressBar
                 android:id="@+id/main_today_step_progressBar"

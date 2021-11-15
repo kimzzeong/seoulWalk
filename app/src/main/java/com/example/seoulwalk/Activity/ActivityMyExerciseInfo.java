@@ -226,6 +226,8 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
 
         int listSize = lists.size();
 
+        Log.e("listSize",listSize+"");
+
         if (listSize > 0) {
 
             weeklyStepCountAdapter = new WeeklyStepCountAdapter(ActivityMyExerciseInfo.this, lists);

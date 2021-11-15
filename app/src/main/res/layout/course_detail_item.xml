@@ -82,6 +82,18 @@
         android:textColor="@color/black" />
 
     <ImageView
+        android:id="@+id/course_detail_status"
+        android:layout_width="50sp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintLeft_toRightOf="@+id/course_detail_item_name"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/course_detail_item_image"
+        app:layout_constraintBottom_toTopOf="@+id/course_detail_item_length_icon"
+        />
+
+
+    <ImageView
         android:id="@+id/course_detail_item_length_icon"
         android:layout_width="20dp"
         android:layout_height="20dp"
