@@ -50,7 +50,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/theme_nature_recycler"
-        android:layout_margin="20dp"/>
+        android:id="@+id/theme_nature_recycler"/>
 
 </LinearLayout>
