@@ -130,7 +130,7 @@ public class ActivityWrite extends AppCompatActivity implements YoutubeDialog.Yo
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { //선택됐을 때
                 Log.e("Spinner",""+position);
-                if(position == 1){
+                if(position == 0){
                     write_course_spinner.setVisibility(View.VISIBLE);
                 }else{
                     write_course_spinner.setVisibility(View.GONE);

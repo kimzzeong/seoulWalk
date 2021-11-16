@@ -64,12 +64,12 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
         if(stampList_data.getStampTitle().equals("수락·불암산")){
             Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp01_off,"코스1");
             stamp_list.add(stamp_data1);
-            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp02_on,"코스2");
+            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp02_off,"코스2");
             stamp_list.add(stamp_data2);
-            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp03_on,"코스3");
+            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp03_off,"코스3");
             stamp_list.add(stamp_data3);
         }else if(stampList_data.getStampTitle().equals("용마·아차산")){
-            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp04_off,"코스1");
+            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp04_on,"코스1");
             stamp_list.add(stamp_data1);
             Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp05_on,"코스2");
             stamp_list.add(stamp_data2);
@@ -77,9 +77,9 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
             stamp_list.add(stamp_data3);
 
         }else if(stampList_data.getStampTitle().equals("고덕·일자산")){
-            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp07_on,"코스1");
+            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp07_off,"코스1");
             stamp_list.add(stamp_data1);
-            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp08_on,"코스2");
+            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp08_off,"코스2");
             stamp_list.add(stamp_data2);
             Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp09_off,"코스3");
             stamp_list.add(stamp_data3);
@@ -89,9 +89,9 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
         }else if(stampList_data.getStampTitle().equals("대모·우면산")){
             Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp11_off,"코스1");
             stamp_list.add(stamp_data1);
-            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp12_on,"코스2");
+            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp12_off,"코스2");
             stamp_list.add(stamp_data2);
-            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp13_on,"코스3");
+            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp13_off,"코스3");
             stamp_list.add(stamp_data3);
 
         }else if(stampList_data.getStampTitle().equals("관악산")){
@@ -103,7 +103,7 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
             stamp_list.add(stamp_data3);
 
         }else if(stampList_data.getStampTitle().equals("안양천")){
-            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp17_off,"코스1");
+            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp17_on,"코스1");
             stamp_list.add(stamp_data1);
             Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp18_on,"코스2");
             stamp_list.add(stamp_data2);
@@ -113,15 +113,15 @@ public class StampListAdapter extends RecyclerView.Adapter<StampListAdapter.View
         }else if(stampList_data.getStampTitle().equals("봉산·앵봉산")){
             Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp20_off,"코스1");
             stamp_list.add(stamp_data1);
-            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp21_on,"코스2");
+            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp21_off,"코스2");
             stamp_list.add(stamp_data2);
-            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp22_on,"코스3");
+            Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp22_off,"코스3");
             stamp_list.add(stamp_data3);
 
         }else{ //북한산
-            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp23_on,"코스1");
+            Stamp_Data stamp_data1 = new Stamp_Data(R.drawable.stamp23_off,"코스1");
             stamp_list.add(stamp_data1);
-            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp24_on,"코스2");
+            Stamp_Data stamp_data2 = new Stamp_Data(R.drawable.stamp24_off,"코스2");
             stamp_list.add(stamp_data2);
             Stamp_Data stamp_data3 = new Stamp_Data(R.drawable.stamp25_off,"코스3");
             stamp_list.add(stamp_data3);

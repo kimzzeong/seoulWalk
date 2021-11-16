@@ -95,6 +95,14 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             "https://gil.seoul.go.kr/view/point/2013/09/03/9397510540265.jpg", "https://gil.seoul.go.kr/view/point/2013/09/03/3769376943425.jpg"
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        course_address.setText("");
+//        course_content.setText(timeInt);
+//        course_detail.setText(courseNameString);
+    }
+
     //후기 리스트
     ArrayList<Review_Data> review_list = new ArrayList<>();
 
@@ -133,7 +141,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
     String dulleFullTitle;
 
     TextView textViewTime, textViewDistance, textViewStep, textViewDifficulty, textViewCourseName;
-
+    TextView course_address,course_content,course_detail,course_traffic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +156,12 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
         textViewStep = findViewById(R.id.step_text);
         textViewDifficulty = findViewById(R.id.course_level);
         textViewCourseName = findViewById(R.id.course_name_textview_course_info);
+        course_address = findViewById(R.id.course_address);
+        course_content = findViewById(R.id.course_content);
+        course_detail = findViewById(R.id.course_detail);
+
+
+
 
         /** 여기는 인테트로 시작점 끝점 받는 구간 */
         Intent intent = getIntent();
@@ -211,7 +225,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 String a = getCurrentAddress(currentPosition);
-                System.out.println("현위치입니다.--> 지울것"+currentPosition);
+                System.out.println("현위치입니다.--> 지울것"+a);
                 String b = getCurrentAddress(START_LOCATION);
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                 Uri.parse("http://maps.google.com/maps?saddr="+a+"&daddr="+b+""));
@@ -617,7 +631,7 @@ public class ActivityCourseInfo extends AppCompatActivity implements OnMapReadyC
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 13);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(START_LOCATION, 11);
         mMap.animateCamera(cameraUpdate);
 
     }

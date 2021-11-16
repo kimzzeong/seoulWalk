@@ -200,11 +200,13 @@ public class ActivityMyExerciseInfo extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<StepCount>> call, @NonNull Response<List<StepCount>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     Log.d(TAG, "fetchWeeklyStepCount() onResponse(): successful and not null");
-                    Log.d(TAG, "fetchWeeklyStepCount() response.body(): " + response.body());
+                    Log.d(TAG, "fetchWeeklyStepCount() response.body(): " + response.body().toString());
                     Log.d(TAG, "fetchWeeklyStepCount() response: " + response);
                     parseFetchedWeeklyStepCount(response.body());
                 } else {
                     Log.d(TAG, "fetchWeeklyStepCount() onResponse() : not successful");
+                    Log.d(TAG, String.valueOf(response.body()));
+                    Log.d(TAG, String.valueOf(response.isSuccessful()));
                 }
             }
 
