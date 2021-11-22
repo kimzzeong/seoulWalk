@@ -1,10 +1,12 @@
 package com.example.seoulwalk.data;
 
+import android.graphics.drawable.Drawable;
+
 public class Store_Data {
 
 
     String store_title;
-    String img;
+    int img;
     String num;
     String point;
 
@@ -16,11 +18,11 @@ public class Store_Data {
         this.store_title = store_title;
     }
 
-    public String getImg() {
+    public int getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(int img) {
         this.img = img;
     }
 
@@ -40,7 +42,7 @@ public class Store_Data {
         this.point = point;
     }
 
-    public Store_Data(String store_title, String img, String num, String point){
+    public Store_Data(String store_title, int img, String num, String point){
         this.store_title = store_title;
         this.point = point;
         this.img = img;

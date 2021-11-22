@@ -72,8 +72,10 @@ public class ActivityPoint extends AppCompatActivity {
         mData.add(point_data14);
         Point_Data point_data15 = new Point_Data("하루 목표 달성!","40 포인트","2021-09-09");
         mData.add(point_data15);
-        Point_Data point_data16 = new Point_Data("하루 목표 달성!","220 포인트","2021-09-10");
+        Point_Data point_data16 = new Point_Data("주간 목표 달성!","220 포인트","2021-09-10");
         mData.add(point_data16);
+        Point_Data point_data17 = new Point_Data("하루 목표 달성!","40 포인트","2021-11-23");
+        mData.add(point_data17);
 
         mypoint_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
@@ -105,6 +107,8 @@ public class ActivityPoint extends AppCompatActivity {
 
             pointstore_recyclerview.setVisibility(View.GONE);
             mypoint_recyclerview.setVisibility(View.VISIBLE);
+
+
             Point_Data point_data1 = new Point_Data("하루 목표 달성!","40 포인트","2021-08-26");
             mData.add(point_data1);
             Point_Data point_data2 = new Point_Data("하루 목표 달성!","40 포인트","2021-08-27");
@@ -135,8 +139,11 @@ public class ActivityPoint extends AppCompatActivity {
             mData.add(point_data14);
             Point_Data point_data15 = new Point_Data("하루 목표 달성!","40 포인트","2021-09-09");
             mData.add(point_data15);
-            Point_Data point_data16 = new Point_Data("하루 목표 달성!","220 포인트","2021-09-10");
+            Point_Data point_data16 = new Point_Data("주간 목표 달성!","220 포인트","2021-09-10");
             mData.add(point_data16);
+            Point_Data point_data17 = new Point_Data("하루 목표 달성!","40 포인트","2021-11-23");
+            mData.add(point_data17);
+
 
             mypoint_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
@@ -147,21 +154,21 @@ public class ActivityPoint extends AppCompatActivity {
             mypoint_recyclerview.setVisibility(View.GONE);
             pointstore_recyclerview.setVisibility(View.VISIBLE);
 
-            Store_Data store_data1 = new Store_Data("닭상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","4.9","닭가슴살");
+            Store_Data store_data1 = new Store_Data("닭가슴살상점",R.drawable.shops,"4.9","닭가슴살");
             mData2.add(store_data1);
-            Store_Data store_data2 = new Store_Data("단백질상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","3.5","단백질 쉐이크");
+            Store_Data store_data2 = new Store_Data("스포츠의류상점",R.drawable.shops,"3.5","트레이닝복");
             mData2.add(store_data2);
-            Store_Data store_data3 = new Store_Data("보호대상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","4.2","무릎보호대");
+            Store_Data store_data3 = new Store_Data("보호대상점",R.drawable.shops,"4.2","무릎보호대");
             mData2.add(store_data3);
-            Store_Data store_data4 = new Store_Data("헤어밴드상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","4.0","헤어밴드");
+            Store_Data store_data4 = new Store_Data("헤어밴드상점",R.drawable.shops,"4.0","헤어밴드");
             mData2.add(store_data4);
-            Store_Data store_data5 = new Store_Data("런닝화상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","2.1","런닝화");
+            Store_Data store_data5 = new Store_Data("런닝화상점",R.drawable.shops,"2.1","런닝화");
             mData2.add(store_data5);
-            Store_Data store_data6 = new Store_Data("스포츠의류상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","5.0","스포츠의류");
+            Store_Data store_data6 = new Store_Data("스포츠용품상점",R.drawable.shops,"5.0","스포츠 안경");
             mData2.add(store_data6);
-            Store_Data store_data7 = new Store_Data("곤약상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","4.7","곤약");
+            Store_Data store_data7 = new Store_Data("양말상점",R.drawable.shops,"4.7","발가락 양말");
             mData2.add(store_data7);
-            Store_Data store_data8 = new Store_Data("물상점","https://img.etimg.com/thumb/width-1200,height-900,imgsize-122620,resizemode-1,msid-75214721/industry/services/retail/future-group-negotiates-rents-for-its-1700-stores.jpg","4.3","물");
+            Store_Data store_data8 = new Store_Data("다이어트식품상점",R.drawable.shops,"4.3","곤약");
             mData2.add(store_data8);
             pointstore_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 

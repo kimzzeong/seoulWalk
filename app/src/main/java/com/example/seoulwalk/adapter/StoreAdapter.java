@@ -51,7 +51,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
         Store_Data point_data = mData.get(position);
 
-        holder.point.setText(point_data.getStore_title());
+        holder.point.setText(point_data.getPoint());
         holder.num.setText(point_data.getNum());
         holder.store_title.setText(point_data.getStore_title());
 
