@@ -299,8 +299,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(check.equals("확인")){
             //여기에 동일한 걸음수를 넣어서 목표 이뤄지게
-            week_now_goal_step += 2682;
-            today_step += 2682;
+//            week_now_goal_step += 2682;
+//            today_step += 2682;
+
+            week_now_goal_step += 3954;
+            today_step += 3954;
 
             main_today_step_progressBar.setMax(today_goal_step);
             main_today_step_progressBar.setProgress(today_step);
