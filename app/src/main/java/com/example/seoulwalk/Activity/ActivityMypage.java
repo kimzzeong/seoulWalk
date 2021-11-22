@@ -123,6 +123,7 @@ String a,b,c,d,e,f;
             @Override
             public void onItemClick(View v, int position) {
                 Intent intent = new Intent(ActivityMypage.this,ActivityResultAfterWalk.class);
+                intent.putExtra("아이템","아이템");
                 startActivity(intent);
             }
         });

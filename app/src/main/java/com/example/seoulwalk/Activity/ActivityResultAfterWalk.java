@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -107,19 +108,26 @@ SharedPreferences sharedPreferences;
         buttonOkay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 버튼 누르면 마이페이지로 이동해서 하드코딩 된 걷기내역 보여주기
-                editor.putString("textViewCourseName",courseNameString);
-                editor.putString("time_results",time_results);
-                editor.putString("cal","15kcal");
-                editor.putString("km/h","2.1km/h");
-                editor.putString("walk_distance","0.5km");
-                editor.putString("date",getTime());
-                // key,value 형식으로 저장
-                editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
 
-                Intent intent = new Intent(ActivityResultAfterWalk.this, MainActivity.class);
-                intent.putExtra("확인","확인"); // 걷기 후 메인으로 갔을 때 확인 인텐트가 오면 걸음수 퍼센테이지가 100퍼센트 되게
-               startActivity(intent);
+                Intent intent1 = getIntent();
+                if(!TextUtils.isEmpty(intent1.getStringExtra("아이템"))){
+                            onBackPressed();
+                }else{
+
+                    // 버튼 누르면 마이페이지로 이동해서 하드코딩 된 걷기내역 보여주기
+                    editor.putString("textViewCourseName",courseNameString);
+                    editor.putString("time_results",time_results);
+                    editor.putString("cal","15kcal");
+                    editor.putString("km/h","2.1km/h");
+                    editor.putString("walk_distance","0.5km");
+                    editor.putString("date",getTime());
+                    // key,value 형식으로 저장
+                    editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
+
+                    Intent intent = new Intent(ActivityResultAfterWalk.this, MainActivity.class);
+                    intent.putExtra("확인","확인"); // 걷기 후 메인으로 갔을 때 확인 인텐트가 오면 걸음수 퍼센테이지가 100퍼센트 되게
+                    startActivity(intent);
+                }
             }
         });
     }
