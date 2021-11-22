@@ -77,7 +77,14 @@ public class ActivityPoint extends AppCompatActivity {
         Point_Data point_data17 = new Point_Data("하루 목표 달성!","40 포인트","2021-11-23");
         mData.add(point_data17);
 
-        mypoint_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
+        mypoint_recyclerview.setLayoutManager(mLayoutManager);
+
+        //mypoint_recyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         pointAdapter = new PointAdapter(mData,ActivityPoint.this);
         mypoint_recyclerview.setAdapter(pointAdapter);
