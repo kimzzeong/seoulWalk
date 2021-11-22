@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     int user_level,user_goal_level;
     TextView week_percent,day_percent;
 
+    String check; // 걷기 완료 후 메인으로 돌아오는거 확인하는 변수(인텐트로 넘어옴)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
 
         main_goal_info = findViewById(R.id.main_goal_info);
 
+
+        Intent intent = getIntent();
+        if(!TextUtils.isEmpty(intent.getStringExtra("확인"))){
+            check = intent.getStringExtra("확인");
+            Log.e("Main intent",check);
+        }else{
+            check = "비어있음";
+        }
+        Log.e("Main intent",check);
+
         // 나의 활동 분석으로 이동
         main_my_exercise_info = findViewById(R.id.main_my_exercise_info);
         main_my_exercise_info.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +119,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(MainActivity.this,"여기에 다이얼로그",Toast.LENGTH_SHORT).show();
-                Dialog dialog = new Dialog(MainActivity.this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.point_dialog);
-
-                Button ok = (Button)dialog.findViewById(R.id.comment_set_ok);
-                dialog.show();
-
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
+                //커스텀 다이얼로그가 있던 자리인데 완주 액티비티로 옮김.
             }
         });
 
@@ -252,9 +252,21 @@ public class MainActivity extends AppCompatActivity {
         main_today_step_count.setText(String.valueOf(today_step));
 
 
+
         //목표 걸음수 퍼센트
-        week_percent.setText((int) Math.floor((double) week_now_goal_step / (double) week_goal_step * 100.0) + "%");
-        day_percent.setText((int) Math.floor((double) today_step / (double) today_goal_step * 100.0) + "%");
+        int week_percent_num, day_percent_num;
+        week_percent_num = (int) Math.floor((double) week_now_goal_step / (double) week_goal_step * 100.0);
+        if(week_percent_num > 100){
+            week_percent_num = 100;
+        }
+
+        day_percent_num = (int) Math.floor((double) today_step / (double) today_goal_step * 100.0);
+        if(day_percent_num > 100){
+            day_percent_num = 100;
+        }
+        week_percent.setText(week_percent_num + "%");
+        day_percent.setText( day_percent_num+ "%");
+
 
         Log.e("user_idx",user_idx);
         Log.e("user_nickname",user_nickname);
@@ -262,6 +274,9 @@ public class MainActivity extends AppCompatActivity {
         Log.e("user_level",""+user_level);
         Log.e("week_goal_step",""+week_goal_step);
         Log.e("today_goal_step",""+today_goal_step);
+
+
+
 
         if(user_status.equals("도전")) {
 
@@ -278,4 +293,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(check.equals("확인")){
+            //여기에 동일한 걸음수를 넣어서 목표 이뤄지게
+            week_now_goal_step += 2682;
+            today_step += 2682;
+
+            main_today_step_progressBar.setMax(today_goal_step);
+            main_today_step_progressBar.setProgress(today_step);
+        }
+    }
 }

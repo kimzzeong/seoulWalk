@@ -2,11 +2,13 @@ package com.example.seoulwalk.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +72,20 @@ SharedPreferences sharedPreferences;
 
             textViewTime.setText(time_results);
 
+            Dialog dialog = new Dialog(ActivityResultAfterWalk.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.point_dialog);
+
+            Button ok = (Button)dialog.findViewById(R.id.comment_set_ok);
+            dialog.show();
+
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
         }
 
         // 소모 칼로리
@@ -101,7 +117,9 @@ SharedPreferences sharedPreferences;
                 // key,value 형식으로 저장
                 editor.commit();    //최종 커밋. 커밋을 해야 저장이 된다.
 
-                startActivity(new Intent(ActivityResultAfterWalk.this, ActivityMypage.class));
+                Intent intent = new Intent(ActivityResultAfterWalk.this, MainActivity.class);
+                intent.putExtra("확인","확인"); // 걷기 후 메인으로 갔을 때 확인 인텐트가 오면 걸음수 퍼센테이지가 100퍼센트 되게
+               startActivity(intent);
             }
         });
     }
