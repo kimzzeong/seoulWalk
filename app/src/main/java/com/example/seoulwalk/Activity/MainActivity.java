@@ -302,8 +302,8 @@ public class MainActivity extends AppCompatActivity {
 //            week_now_goal_step += 2682;
 //            today_step += 2682;
 
-            week_now_goal_step += 3954;
-            today_step += 3954;
+            week_now_goal_step += 5372;
+            today_step += 5372;
 
             main_today_step_progressBar.setMax(today_goal_step);
             main_today_step_progressBar.setProgress(today_step);
