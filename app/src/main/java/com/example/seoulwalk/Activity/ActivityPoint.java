@@ -78,6 +78,7 @@ public class ActivityPoint extends AppCompatActivity {
         mData.add(point_data17);
 
 
+        //최근순으로 출력
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         mLayoutManager.setReverseLayout(true);
         mLayoutManager.setStackFromEnd(true);
